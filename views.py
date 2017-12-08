@@ -498,6 +498,9 @@ def cvs():
 	all_other_users = getAllUsersDetails(session.get('p2irc_user_email'))
 
 
+	pineline_modules = os.listdir("app_collaborative_sci_workflow/pipeline_modules/")
+
+
 
 
 
@@ -515,7 +518,8 @@ def cvs():
 	user_role = user_role,
 	saved_pipelines = saved_pipelines,
 	shared_pipelines = shared_pipelines,
-    all_other_users=all_other_users)
+    all_other_users=all_other_users,
+    pineline_modules=pineline_modules)
 
 
 
@@ -1076,24 +1080,24 @@ def uploader():
 		new_tool_location =  new_tool_name
 		success = False
 		if not os.path.exists(new_tool_location):
-			os.makedirs('pipeline_modules/'+new_tool_location)
+			os.makedirs('app_collaborative_sci_workflow/pipeline_modules/'+new_tool_location)
 			success = True
 
 		if success == True:
 			file_tool_doc = request.files['tool_doc']
-			file_tool_doc.save(os.path.join('pipeline_modules/'+str(new_tool_location)+'/',secure_filename(new_tool_name+'_doc.txt')))
+			file_tool_doc.save(os.path.join('app_collaborative_sci_workflow/pipeline_modules/'+str(new_tool_location)+'/',secure_filename(new_tool_name+'_doc.txt')))
 
 			file_tool_script = request.files['tool_script']
-			file_tool_script.save(os.path.join('pipeline_modules/'+str(new_tool_location)+'/',secure_filename(new_tool_name+'_main.py')))
+			file_tool_script.save(os.path.join('app_collaborative_sci_workflow/pipeline_modules/'+str(new_tool_location)+'/',secure_filename(new_tool_name+'_main.py')))
 
 			file_tool_setting = request.files['tool_setting']
-			file_tool_setting.save(os.path.join('pipeline_modules/'+str(new_tool_location)+'/',secure_filename(new_tool_name+'_settings.py')))
+			file_tool_setting.save(os.path.join('app_collaborative_sci_workflow/pipeline_modules/'+str(new_tool_location)+'/',secure_filename(new_tool_name+'_settings.py')))
 
 			file_tool_setting_ui = request.files['tool_setting_ui']
-			file_tool_setting_ui.save(os.path.join('pipeline_modules/'+str(new_tool_location)+'/',secure_filename(new_tool_name+'_html.txt')))
+			file_tool_setting_ui.save(os.path.join('app_collaborative_sci_workflow/pipeline_modules/'+str(new_tool_location)+'/',secure_filename(new_tool_name+'_html.txt')))
 
 			file_tool_additional_file = request.files['tool_additional_file']
-			file_tool_additional_file.save(os.path.join('pipeline_modules/'+str(new_tool_location)+'/',secure_filename(file_tool_additional_file.filename)))
+			file_tool_additional_file.save(os.path.join('app_collaborative_sci_workflow/pipeline_modules/'+str(new_tool_location)+'/',secure_filename(file_tool_additional_file.filename)))
 
 	return 'file uploaded successfully'
 
@@ -1102,6 +1106,35 @@ def uploader():
 ################################################################
 ################# TOOL INTIGRATION ENDS HERE ###################
 ################################################################
+
+
+
+
+
+
+
+
+###############################################################
+######## OUTPUT VISUALIZATION and DOWNLODS STARTS #############
+###############################################################
+
+from flask import send_file
+
+#output file downloads
+@app_collaborative_sci_workflow.route('/file_download/')
+def file_download():
+	file_path_to_download = request.form['file_path_to_download']
+	try:
+		return send_file(file_path_to_download, as_attachment=True)
+	except Exception as e:
+		return str(e)
+	  
+
+
+
+
+
+
 
 
 

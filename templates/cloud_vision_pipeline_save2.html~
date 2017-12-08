@@ -545,11 +545,17 @@
                           <span>Bioinformatics</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="#" id="design_pipelines_menu_biodatacleaning_id">Bio Data Cleaning</a></li>
+                         <!-- <li><a  href="#" id="design_pipelines_menu_biodatacleaning_id">Bio Data Cleaning</a></li>
                           <li><a  href="#" id="design_pipelines_menu_biocalc_id">Bio Brome</a></li>
 			  <li><a  href="#" id="design_pipelines_menu_fastqc_id">Fastqc</a></li>
 			  <li><a  href="#" id="design_pipelines_menu_flash_id">Flash</a></li>
-			  <li><a  href="#" id="design_pipelines_menu_fastqcGroomer_id">Fastqc Groomer</a></li>
+			  <li><a  href="#" id="design_pipelines_menu_fastqcGroomer_id">Fastqc Groomer</a></li> -->
+
+                          {% for aModule in pineline_modules %}
+                              <li><a href="#" class="pipeline_modules" id="{{aModule}}"> {{aModule}}</a></li>
+                          {% endfor %}
+
+
                       </ul>
                   </li>
                   <li class="sub-menu">
