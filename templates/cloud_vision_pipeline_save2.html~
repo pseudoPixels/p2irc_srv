@@ -877,6 +877,15 @@ $('.letuschat').on('click', function() {
 
 
 
+	<h3 style="background:#222222;color:#CCCCCC;">Execution History</h3>
+	<div id="execution_history"></div>
+
+
+
+
+
+
+
                        <!--COMPLETED ACTIONS DONUTS CHART-->
             <h3 style="background:#222222;color:#CCCCCC;">Data Set</h3>
                                         

@@ -819,7 +819,7 @@ $(".setting_param").live('change',function () {
 });
 
 $("#run_pipeline").click(function () {
-    $("#pr_status").html("Running Pipeline...");
+    $("#pr_status").html("<pre style='color:green;'>Running Pipeline...</pre>");
 
     var sourceCode = ''
     $('textarea').each(
@@ -841,8 +841,10 @@ $("#run_pipeline").click(function () {
         url: "/pythoncom/",
         data: 'textarea_source_code=' + sourceCode,
         success: function (option) {
-            alert(option);
-            $("#pr_status").html("Pipeline Completed Running Successfully.");
+            //alert(option);
+            $("#pr_status").html("<pre style='color:green;'>Pipeline Completed Running Successfully.</pre>");
+	    get_workflow_outputs_list('test_workflow');
+	    
         },
         error: function (xhr, status, error) {
             alert(xhr.responseText);
@@ -1322,6 +1324,82 @@ $('#signup_btn').click(function () {
 //========================================================
 //================== WORKFLOW CONTROL CODE ENDS ==========
 //========================================================
+
+
+
+
+
+
+
+//======================================================
+//= WORKFLOW Visualization AND Outputs STARTS ==========
+//======================================================
+function get_workflow_outputs_list(workflow_id){
+	var thisWorkflowID = workflow_id;
+
+	//get the ouput list via async call
+    	$.ajax({
+		type: "POST",
+		cache: false,
+		url: "/get_workflow_outputs_list/",
+		data: "workflow_id="+thisWorkflowID,
+		success: function (option) {
+			for(var i=0;i<option['workflow_outputs_list'].length;i++){
+				var k = i+1;
+				$("#workflow_outputs").append("<a href='/file_download?workflow_id=" + thisWorkflowID +"&file_id=" + option['workflow_outputs_list'][i]+"' class='a_workflow_output' id='"+option['workflow_outputs_list'][i] +"'>" + k + ". " + option['workflow_outputs_list'][i] + "</a><br/>");			
+			}
+	    		
+		},
+		error: function (xhr, status, error) {
+	    		alert(xhr.responseText);
+		}
+
+    	});
+
+
+}
+
+get_workflow_outputs_list('test_workflow');
+
+/*
+$(".a_workflow_output").live('click', function(){
+	var output_id = $(this).attr('id');
+	var thisWorkflowID = 'test_workflow';
+	//alert(output_id);
+
+	//let user download the selected file
+    	$.ajax({
+		type: "GET",
+		cache: false,
+		url: "/file_download/",
+		data: "workflow_id="+thisWorkflowID+'&file_id='+output_id,
+		success: function (option) {
+	    		alert("Done");
+		},
+		error: function (xhr, status, error) {
+	    		alert(xhr.responseText);
+		}
+
+    	});
+
+
+
+
+});
+*/
+
+
+
+
+//======================================================
+//= WORKFLOW Visualization AND Outputs ENDS ============
+//======================================================
+
+
+
+
+
+
 
 
 

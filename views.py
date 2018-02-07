@@ -1121,17 +1121,23 @@ def uploader():
 from flask import send_file
 
 #output file downloads
-@app_collaborative_sci_workflow.route('/file_download/')
+@app_collaborative_sci_workflow.route('/file_download/', methods=['GET'])
 def file_download():
-	file_path_to_download = request.form['file_path_to_download']
+	workflow_id = request.args.get('workflow_id') #unique workflow name
+	file_id = request.args.get('file_id')
+	filePath_to_download = '/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/'+str(workflow_id)+'/'+str(file_id)#+ workflow_id + '/' + file_id
 	try:
-		return send_file(file_path_to_download, as_attachment=True)
+		return send_file(filePath_to_download, as_attachment=True)
 	except Exception as e:
 		return str(e)
 	  
 
-
-
+#list of workflow outputs
+@app_collaborative_sci_workflow.route('/get_workflow_outputs_list/',  methods=['POST'])
+def get_workflow_outputs_list():
+	workflow_id = request.form['workflow_id'] #the unique workflow name 
+	workflow_outputs_list = os.listdir("app_collaborative_sci_workflow/workflow_outputs/"+workflow_id)
+	return jsonify({'workflow_outputs_list':workflow_outputs_list})
 
 
 
