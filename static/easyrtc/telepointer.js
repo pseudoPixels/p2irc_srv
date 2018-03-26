@@ -1085,6 +1085,7 @@ function performCall(otherEasyrtcid) {
   var failureCB = function() {
     enable("otherClients");
   };
+//alert("Attempting to call...!");
   easyrtc.call(otherEasyrtcid, successCB, failureCB, acceptedCB);
   enable("hangupButton");
 }
@@ -2517,7 +2518,8 @@ $(document).on('click', ".minimizeChatBox" ,function(){//here
 
 $(document).on('click',".chatBoxCall" ,function(){//here
     //alert("Call->" + $(this).attr('chatboxtitle') + "<-");
-    performCall(getEasyRtcidFromEmail($.trim($(this).attr('chatboxtitle'))));
+    //alert("EasyRTCid->"+getEasyRtcidFromEmail($.trim($(this).attr('chatboxtitle')))+"<-");
+    performCall(getEasyRtcidFromEmail( $.trim($(this).attr('chatboxtitle')) ));
 });
 
 

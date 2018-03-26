@@ -62,7 +62,22 @@ views_by_saved_pipeline = ViewDefinition('hello', 'saved_pipeline', '''
     }
     ''')
 
+views_by_workflow_locking_turn = ViewDefinition('hello', 'workflow_locking_turn', '''
+    function (doc) {
+         if (doc.the_doc_type && doc.the_doc_type == 'workflow_locking_turn') {
+            emit(doc.workfow_id, doc._id)
+        };
+    }
+    ''')
 
+
+views_by_workflow_locking_module = ViewDefinition('hello', 'workflow_locking_module', '''
+    function (doc) {
+         if (doc.the_doc_type && doc.the_doc_type == 'workflow_locking_module') {
+            emit(doc.workflow_id, doc._id)
+        };
+    }
+    ''')
 
 
 from flask import current_app as app
@@ -77,7 +92,7 @@ app.config.update(
 manager = CouchDBManager()
 with app.app_context():
 	manager.setup(app)
-	manager.add_viewdef([views_by_user, views_by_non_validated_clones, views_by_pipeline_module, views_by_email, views_by_saved_pipeline])
+	manager.add_viewdef([views_by_user, views_by_non_validated_clones, views_by_pipeline_module, views_by_email, views_by_saved_pipeline, views_by_workflow_locking_turn, views_by_workflow_locking_module])
 	manager.sync(app)
 
 
@@ -1148,7 +1163,157 @@ def get_workflow_outputs_list():
 
 
 
+################################################################
+######## COLLABORATIVE LOCKING MACHANISMS ######################
+################ STARTS HERE ###################################
+################ TURN BASED ####################################
+################################################################
 
+
+#Model for request management of turn based floor access.
+class WorkflowLockingTurn(Document):
+	the_doc_type = TextField(default='workflow_locking_turn')
+	workflow_id = TextField()
+	floor_flag = TextField(default='unoccupied')
+	request_queue = ListField(TextField())
+	current_floor_owner = TextField(default='NONE')
+
+
+@app_collaborative_sci_workflow.route('/init_locking_server/',  methods=['GET'])
+def init_locking_server():
+	turnBasedLocking = WorkflowLockingTurn()
+	turnBasedLocking.workflow_id = 'workflow_turn_id_1'
+	turnBasedLocking.request_queue = []
+	turnBasedLocking.current_floor_owner = 'NONE'
+	turnBasedLocking.store()
+
+	return jsonify({'success': 1})
+
+
+locking_turn_current_floor_owner = 'NONESRV'
+
+@app_collaborative_sci_workflow.route('/locking_turn_request_floor/',  methods=['GET', 'POST'])
+def locking_turn_request_floor():
+	#get the request details
+	workflow_id = 'workflow_turn_id_1'#request.form['workflow_id']
+	floor_requestor = 'gm_gmail_com'#request.form['floor_requestor']
+
+	haveIGotTheFloor = False
+	curOwner = ''
+	docFound = False
+	#get the request key for the corresponding workflow id
+	for row in views_by_workflow_locking_turn(g.couch):
+		if row.key == workflow_id:
+			workflow_locking_doc = WorkflowLockingTurn.load(row.value)
+			docFound = True
+			if workflow_locking_doc.floor_flag == "unoccupied":
+				workflow_locking_doc.floor_flag = "occupied"
+				workflow_locking_doc.current_floor_owner = floor_requestor
+				#locking_turn_current_floor_owner = floor_requestor
+				workflow_locking_doc.store()
+				locking_turn_current_floor_owner = floor_requestor
+				haveIGotTheFloor = True
+			elif workflow_locking_doc.floor_flag == "occupied":
+				#queue the request and update db
+				workflow_locking_doc.request_queue.append(floor_requestor)
+				curOwner = workflow_locking_doc.current_floor_owner
+				workflow_locking_doc.store()#storing first for ensuring consistency
+				haveIGotTheFloor = False
+			break
+	workflow_locking_doc = WorkflowLockingTurn.load(row.value)
+	workflow_locking_doc.workflow_id = 'workflow_turn_id_1'
+	workflow_locking_doc.floor_flag = 'unoccupied'
+	workflow_locking_doc.current_floor_owner = 'NONE'
+	workflow_locking_doc.store()
+
+	#return as the status of the requested user.
+	return jsonify({'haveIGotTheFloor':haveIGotTheFloor, 'currentFloorOwner':curOwner, "isDocFound": docFound })
+
+
+@app_collaborative_sci_workflow.route('/locking_turn_release_floor/',  methods=['POST'])
+def locking_turn_release_floor():
+	#get the request details
+	workflow_id = request.form['workflow_id']
+	#floor_releaser = request.form['floor_releaser']
+
+
+	#get the request key for the corresponding workflow id
+	for row in views_by_workflow_locking_turn(g.couch):
+		if row.key == workflow_id:
+			workflow_locking_doc = WorkflowLockingTurn.load(row.value)
+
+			if len(workflow_locking_doc.request_queue)>= 1:
+				#new floor owner
+				locking_turn_current_floor_owner = workflow_locking_doc.request_queue[0]
+				workflow_locking_doc.current_floor_owner = locking_turn_current_floor_owner
+				#pop the new owner from the request Q
+				workflow_locking_doc.request_queue.pop(0)
+				workflow_locking_doc.store()
+			else: #no one waiting in the Q
+				locking_turn_current_floor_owner = 'NONE'
+				workflow_locking_doc.floor_flag = 'unoccupied'
+				workflow_locking_doc.store()
+			break
+
+
+	#return as the status of the requested user.
+	return jsonify({'newFloorOwner':locking_turn_current_floor_owner})
+
+
+
+
+
+
+
+
+@app_collaborative_sci_workflow.route('/locking_turn_get_request_queue/',  methods=['POST'])
+def locking_turn_get_request_queue():
+	#get the request details
+	workflow_id = request.form['workflow_id']
+
+	request_queue = []
+
+	#get the request key for the corresponding workflow id
+	for row in views_by_workflow_locking_turn(g.couch):
+		if row.key == workflow_id:
+			workflow_locking_doc = WorkflowLockingTurn.load(row.value)
+			request_queue = workflow_locking_doc.request_queue
+			break
+
+
+	#return as the current owner
+	return jsonify({'floor_requests_queue':request_queue})
+
+
+
+@app_collaborative_sci_workflow.route('/locking_turn_get_current_floor_owner/',  methods=['POST'])
+def locking_turn_get_current_floor_owner():
+	#get the request details
+	#workflow_id = request.form['workflow_id']
+	#get the request details
+	workflow_id = 'workflow_turn_id_1'
+
+	cOwner = ''
+
+	#get the request key for the corresponding workflow id
+	for row in views_by_workflow_locking_turn(g.couch):
+		if row.key == workflow_id:
+			workflow_locking_doc = WorkflowLockingTurn.load(row.value)
+			cOwner = workflow_locking_doc.current_floor_owner
+			break
+
+
+	#return as the current owner
+	return jsonify({'current_floor_owner_srv':cOwner})
+
+
+
+
+################################################################
+################ TURN BASED ####################################
+######## COLLABORATIVE LOCKING MACHANISMS ######################
+################ ENDS HERE #####################################
+################################################################
 
 
 
