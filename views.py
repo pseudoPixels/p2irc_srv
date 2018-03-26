@@ -65,7 +65,7 @@ views_by_saved_pipeline = ViewDefinition('hello', 'saved_pipeline', '''
 views_by_workflow_locking_turn = ViewDefinition('hello', 'workflow_locking_turn', '''
     function (doc) {
          if (doc.the_doc_type && doc.the_doc_type == 'workflow_locking_turn') {
-            emit(doc.workfow_id, doc._id)
+            emit(doc.workflow_id, doc._id)
         };
     }
     ''')
@@ -1181,13 +1181,21 @@ class WorkflowLockingTurn(Document):
 
 @app_collaborative_sci_workflow.route('/init_locking_server/',  methods=['GET'])
 def init_locking_server():
-	turnBasedLocking = WorkflowLockingTurn()
-	turnBasedLocking.workflow_id = 'workflow_turn_id_1'
-	turnBasedLocking.request_queue = []
-	turnBasedLocking.current_floor_owner = 'NONE'
+
+	#Remove all existing documents
+	for row in views_by_workflow_locking_turn(g.couch):
+		tmp = WorkflowLockingTurn.load(row.value)
+		g.couch.delete(tmp)
+
+	#Add one doc
+	turnBasedLocking = WorkflowLockingTurn(workflow_id='workflow_turn_id_1')
 	turnBasedLocking.store()
 
-	return jsonify({'success': 1})
+	return jsonify({'success': 'OK'})
+
+
+
+
 
 
 locking_turn_current_floor_owner = 'NONESRV'
@@ -1199,35 +1207,29 @@ def locking_turn_request_floor():
 	floor_requestor = 'gm_gmail_com'#request.form['floor_requestor']
 
 	haveIGotTheFloor = False
-	curOwner = ''
-	docFound = False
+
+
 	#get the request key for the corresponding workflow id
 	for row in views_by_workflow_locking_turn(g.couch):
 		if row.key == workflow_id:
 			workflow_locking_doc = WorkflowLockingTurn.load(row.value)
-			docFound = True
+
 			if workflow_locking_doc.floor_flag == "unoccupied":
 				workflow_locking_doc.floor_flag = "occupied"
 				workflow_locking_doc.current_floor_owner = floor_requestor
-				#locking_turn_current_floor_owner = floor_requestor
-				workflow_locking_doc.store()
-				locking_turn_current_floor_owner = floor_requestor
+				workflow_locking_doc.store() #store the updated doc
+				#return variable state
 				haveIGotTheFloor = True
 			elif workflow_locking_doc.floor_flag == "occupied":
 				#queue the request and update db
 				workflow_locking_doc.request_queue.append(floor_requestor)
-				curOwner = workflow_locking_doc.current_floor_owner
 				workflow_locking_doc.store()#storing first for ensuring consistency
+				#return variable state
 				haveIGotTheFloor = False
 			break
-	workflow_locking_doc = WorkflowLockingTurn.load(row.value)
-	workflow_locking_doc.workflow_id = 'workflow_turn_id_1'
-	workflow_locking_doc.floor_flag = 'unoccupied'
-	workflow_locking_doc.current_floor_owner = 'gm_gmail_com'
-	workflow_locking_doc.store()
 
 	#return as the status of the requested user.
-	return jsonify({'haveIGotTheFloor':haveIGotTheFloor, 'currentFloorOwner':curOwner, "isDocFound": docFound })
+	return jsonify({'haveIGotTheFloor':haveIGotTheFloor})
 
 
 @app_collaborative_sci_workflow.route('/locking_turn_release_floor/',  methods=['POST'])

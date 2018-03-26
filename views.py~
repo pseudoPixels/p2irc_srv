@@ -1182,12 +1182,12 @@ class WorkflowLockingTurn(Document):
 @app_collaborative_sci_workflow.route('/init_locking_server/',  methods=['GET'])
 def init_locking_server():
 	turnBasedLocking = WorkflowLockingTurn()
-	turnBasedLocking.workflow_id = 'workflow_turn_id_1'
+	turnBasedLocking.workflow_id = 'workflow_turn_id_2'
 	turnBasedLocking.request_queue = []
 	turnBasedLocking.current_floor_owner = 'NONE'
 	turnBasedLocking.store()
 
-	return jsonify({'success': 1})
+	return jsonify({'success': 2})
 
 
 locking_turn_current_floor_owner = 'NONESRV'
@@ -1195,7 +1195,7 @@ locking_turn_current_floor_owner = 'NONESRV'
 @app_collaborative_sci_workflow.route('/locking_turn_request_floor/',  methods=['GET', 'POST'])
 def locking_turn_request_floor():
 	#get the request details
-	workflow_id = 'workflow_turn_id_1'#request.form['workflow_id']
+	workflow_id = 'workflow_turn_id_2'#request.form['workflow_id']
 	floor_requestor = 'gm_gmail_com'#request.form['floor_requestor']
 
 	haveIGotTheFloor = False
@@ -1223,7 +1223,7 @@ def locking_turn_request_floor():
 	workflow_locking_doc = WorkflowLockingTurn.load(row.value)
 	workflow_locking_doc.workflow_id = 'workflow_turn_id_1'
 	workflow_locking_doc.floor_flag = 'unoccupied'
-	workflow_locking_doc.current_floor_owner = 'NONE'
+	workflow_locking_doc.current_floor_owner = 'gm_gmail_com'
 	workflow_locking_doc.store()
 
 	#return as the status of the requested user.
