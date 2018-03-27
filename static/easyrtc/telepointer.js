@@ -355,15 +355,16 @@ $(document).ready(function(){
 
     });
 
-    $('#whiteBoard_color').on('change', function(){
+    $(document).on('change', '#whiteBoard_color' ,function(){
         var selectedColor = $(this).val();
+        //alert(selectedColor);
         if(selectedColor=='Green')curColor = colorGreen;
         else if(selectedColor=='Purple')curColor = colorPurple;
         else if(selectedColor=='Brown')curColor = colorBrown;
         else curColor = colorYellow;
     });
 
-    $('#whiteBoard_brushSize').on('change', function(){
+    $(document).on('change', '#whiteBoard_brushSize' ,function(){
         var selectedSize = $(this).val();
 
         if(selectedSize=='Small')curSize = 3;
@@ -373,7 +374,7 @@ $(document).ready(function(){
 
     });
 
-    $('#whiteBoard_tool').on('change', function(){
+    $(document).on('change', '#whiteBoard_tool' ,function(){
         var selectedTool = $(this).val();
 
         if(selectedTool=='Eraser')curTool = 'Eraser';

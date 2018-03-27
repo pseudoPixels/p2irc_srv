@@ -891,7 +891,7 @@ html, body {
         Choose Tool: <select id="whiteBoard_tool">
                             <option>Marker</option>
                             <option>Eraser</option>
-                     </select><br/>
+                     </select><br/><br/>
   <canvas id="mycanvas" width="800" height="300" style="background-color:#EEE;"></canvas>
     </div>
 </div>
@@ -1480,7 +1480,7 @@ $('.letuschat').on('click', function() {
   <script>
   $( function() {
     $( "#myModal" ).draggable({
-                opacity: 0.85, snap:true, cancel:"canvas"
+                opacity: 0.85, snap:true, cancel:"select, #mycanvas"
     });
     $("#availableUsers").draggable({
                 opacity: 0.85, snap:true
