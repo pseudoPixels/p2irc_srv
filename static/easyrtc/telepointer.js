@@ -69,7 +69,7 @@ $(document).ready(function(){
     //User requests for floor...
     function requestFloor(requestor_id){
         workflow_id = 'workflow_turn_id_1';
-        //requestor =
+        requestor_id = 'gm_gmail_com';
 
         $.ajax({
             type: "POST",
@@ -80,11 +80,11 @@ $(document).ready(function(){
                 haveIGotTheFloor = option['haveIGotTheFloor'];
                 //alert(haveIGotTheFloor);
                 if(haveIGotTheFloor == true){
-                    alert("GOT THE FLOOR");
+                    alert("Got the Floor.");
                     onFloorOwnerChanged(user_email);
                     notifyAll("floor_owner_changed", user_email);
                 }else{
-                    alert("DID NOT GET THE FLOOR");
+                    alert("Wating for the Floor...");
                     onNewFloorRequest(user_email);
                     notifyAll("new_floor_request", user_email);
                 }
@@ -174,6 +174,9 @@ $(document).ready(function(){
 
     //checks if its my turn currently and allowed for changes
     function isItMyFloor(){
+        if(current_floor_owner == user_email)return true;
+        return false;
+        /*
         //alert("Current Floor Owner: " + current_floor_owner);
         //alert("My Email: " + user_email);
         $.ajax({
@@ -192,7 +195,7 @@ $(document).ready(function(){
             },
             async:false
 
-        });
+        });*/
 
 
 
@@ -1403,23 +1406,23 @@ function loginFailure(errorCode, message) {
 //==========================================================================
 
 //source code in pre tag... toggle show/hide
-$(".code_show_hide").on('click', function () {//here
+$(document).on('click', ".code_show_hide", function () {//here
     $(this).siblings('.pre_highlighted_code').children(".highlighted_code").toggle(1000);
 });
 
-$(".documentation_show_hide").on('click', function () {//here
+$(document).on('click', ".documentation_show_hide", function () {//here
     $(this).siblings('.documentation').toggle(300);
 });
 
-$(".settings_show_hide").on('click', function () {//here
+$(document).on('click', ".settings_show_hide" ,function () {//here
     $(this).siblings('.settings').toggle(300);
 });
 
-$(".btn_edit_code").on('click',function () {//here
+$(document).on('click', ".btn_edit_code" ,function () {//here
     $(this).siblings('.edit_code').toggle(1000);
 });
 
-$(".setting_param").on('change',function () {//here
+$(document).on('change', ".setting_param" ,function () {//here
     //alert("you changed my value");
     //var prev_code = $(this).parent().parent().siblings(".setting_section").children(".edit_code").find(".code_settings").val();
     //alert(prev_code);
@@ -1673,7 +1676,7 @@ function addModuleToPipeline(moduleID, moduleName){
             url: "/get_module_details",
             data: 'p_module_key=' + moduleName,
             success: function (option) {
-
+                //alert("@ success");
                 module_name = option.module_name
                 documentation = option.documentation
                 moduleSourceCode_settings = option.moduleSourceCode_settings
@@ -1746,6 +1749,29 @@ function addModuleToPipeline(moduleID, moduleName){
 }
 
 
+
+
+
+//handling any pipeline module addition on click using
+//class for generalisation
+$(document).on("click", ".pipeline_modules" ,function(){
+    //alert($(this).attr("id"));
+
+    //allowed iff the user has the floor currently...
+    if(isItMyFloor() == true){
+        var newModuleID = getNextUniqueModuleID();
+        var newModuleName = $(this).attr("id"); //'biodatacleaning';
+        addModuleToPipeline(newModuleID, newModuleName);
+
+        //prepare the next valid unique module id
+        updateNextUniqueModuleID();
+
+        //add the module to all remote clients as well...
+        var moduleInfo = {"newModuleID": newModuleID, "newModuleName": newModuleName};
+        notifyAll("remote_module_addition", moduleInfo);
+    }
+
+});
 
 
 
