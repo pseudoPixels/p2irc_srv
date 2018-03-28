@@ -1482,11 +1482,13 @@ $("#run_pipeline").click(function () {
         url: "/pythoncom/",
         data: 'textarea_source_code=' + sourceCode,
         success: function (option) {
-            alert(option);
+            alert('Pipeline Completed Running Successfully.');
+            get_workflow_outputs_list('test_workflow');
             $("#pr_status").html("Pipeline Completed Running Successfully.");
+
         },
         error: function (xhr, status, error) {
-            alert(xhr.responseText);
+            //alert(xhr.responseText);
             $("#pr_status").html("Pipeline Running Failed!!!");
         }
 
@@ -2351,7 +2353,8 @@ function get_workflow_outputs_list(workflow_id){
 		success: function (option) {
 			for(var i=0;i<option['workflow_outputs_list'].length;i++){
 				var k = i+1;
-				$("#workflow_outputs").append("<a href='/file_download?workflow_id=" + thisWorkflowID +"&file_id=" + option['workflow_outputs_list'][i]+"' class='a_workflow_output' id='"+option['workflow_outputs_list'][i] +"'>" + k + ". " + option['workflow_outputs_list'][i] + "</a><br/>");			
+				//$("#workflow_outputs").html("");
+				$("#workflow_outputs").append("<a href='/file_download?workflow_id=" + thisWorkflowID +"&file_id=" + option['workflow_outputs_list'][i]+"' class='a_workflow_output' id='"+option['workflow_outputs_list'][i] +"'>"  + option['workflow_outputs_list'][i] + "</a><br/>");
 			}
 	    		
 		},
@@ -2365,6 +2368,32 @@ function get_workflow_outputs_list(workflow_id){
 }
 
 get_workflow_outputs_list('test_workflow');
+
+
+
+
+//AJAX file upload
+$('#upload-file-btn').click(function() {
+        var form_data = new FormData($('#upload-file')[0]);
+        $.ajax({
+            type: 'POST',
+            url: '/uploadajax',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            async: false,
+            success: function(data) {
+                console.log('Success!');
+                alert("dataset upload success");
+            },
+        });
+});
+
+
+
+
+
 
 /*
 $(".a_workflow_output").live('click', function(){

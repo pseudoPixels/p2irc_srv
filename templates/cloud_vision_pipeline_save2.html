@@ -765,8 +765,8 @@ html, body {
                           <span>Bioinformatics</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="#" id="design_pipelines_menu_biodatacleaning_id">Bio Data Cleaning</a></li>
-                          <li><a  href="#" id="design_pipelines_menu_biocalc_id">Bio Brome</a></li>
+                         <!-- <li><a  href="#" id="design_pipelines_menu_biodatacleaning_id">Bio Data Cleaning</a></li>
+                          <li><a  href="#" id="design_pipelines_menu_biocalc_id">Bio Brome</a></li> -->
 
                           {% for aModule in pineline_modules %}
                               <li><a href="#" class="pipeline_modules" id="{{aModule}}"> {{aModule}}</a></li>
@@ -1107,7 +1107,7 @@ document.getElementById("defaultOpen").click();
 
 
 <button id="run_pipeline" >Run Pipeline</button>  
-<span id="pr_status" style="color:#FFFFFF;"></span>
+<span id="pr_status" style="color:#000;"></span>
 <button id="save_pipeline" style="float:right;" >Save Pipeline</button>
 <input type="text" id="save_pipeline_name"  style="float:right;">
 <span style="float:right;">Pipeline Name: </span>
@@ -1122,6 +1122,10 @@ document.getElementById("defaultOpen").click();
 <p id="user_name" style="display:none;">{{first_name + " " +last_name}} </p>
 <p id="user_email" style="display:none;">{{email}} </p>
  <div id="telepointer_spawn_point"></div>
+
+
+
+
 
 
 
@@ -1331,6 +1335,12 @@ $('.letuschat').on('click', function() {
 
                        <!--COMPLETED ACTIONS DONUTS CHART-->
             <h3 style="background:#222222;color:#CCCCCC;">Data Set</h3>
+                       <!-- For AJAX File Upload -->
+ <form id="upload-file" method="post" enctype="multipart/form-data">
+        <label for="file">Upload</label>
+        <input name="file" type="file">
+        <button id="upload-file-btn" type="button">Upload</button>
+</form>
                                         
                       <!-- First Action -->
                       <div class="desc">

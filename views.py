@@ -1118,6 +1118,16 @@ def uploader():
 
 
 
+
+
+@app_collaborative_sci_workflow.route('/uploadajax', methods = ['GET', 'POST'])
+def uploadajax():
+	file = request.files['file']
+	file.save(os.path.join('app_collaborative_sci_workflow/pipeline_modules/', secure_filename(file.filename)))
+	return "Ajax file upload success"
+
+
+
 ################################################################
 ################# TOOL INTIGRATION ENDS HERE ###################
 ################################################################
