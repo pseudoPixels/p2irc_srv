@@ -826,7 +826,7 @@ html, body {
   <button class="tablinks" onclick="openTab(event, 'tab_whiteBoard')">Collab. White Board</button>
   <button class="tablinks" onclick="openTab(event, 'tab_audio')">Audio Streaming</button>
   <button class="tablinks" onclick="openTab(event, 'tab_video')">Video Streaming</button>
-
+  <button class="tablinks" onclick="openTab(event, 'tab_tool_integration')">Plug-in Workflow Tools</button>
 
 </div>
 
@@ -863,6 +863,21 @@ html, body {
   </div>
 -->
 
+
+</div>
+
+<div id="tab_tool_integration" class="tabcontent">
+      <div id="file_upload_div" >
+      <form id="form_tool_plugin" method = "POST" enctype = "multipart/form-data">
+          Tool Name: <input type="text" id="id_tool_name_inp" name="tool_name_inp"/> <br/>
+          Tool Documentation : <input type = "file" id="id_tool_plugin_doc" class="tool_plugin" name = "tool_doc" /> <br/>
+          Tool Script : <input type = "file" id="id_tool_plugin_script" class="tool_plugin" name = "tool_script" /> <br/>
+          Tool Setting : <input type = "file" id="id_tool_plugin_setting" name = "tool_setting" /> <br/>
+          Tool Setting UI Control : <input type = "file" id="id_tool_plugin_ui" name = "tool_setting_ui" /> <br/>
+          <!-- Additional File/Program (optional) : <input type = "file" name = "tool_additional_file" /> <br/><br/> -->
+         <button id="add_tool_plugin" type="button">Add</button>
+      </form>
+    </div>
 
 </div>
 
@@ -1490,7 +1505,7 @@ $('.letuschat').on('click', function() {
   <script>
   $( function() {
     $( "#myModal" ).draggable({
-                opacity: 0.85, snap:true, cancel:"select, #mycanvas"
+                opacity: 0.85, snap:true, cancel:"select, #mycanvas, #id_tool_name_inp"
     });
     $("#availableUsers").draggable({
                 opacity: 0.85, snap:true

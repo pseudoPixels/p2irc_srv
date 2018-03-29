@@ -486,6 +486,17 @@ def getAllUsersDetails(thisUserEmail):
 import html
 @app_collaborative_sci_workflow.route('/cvs')
 def cvs():
+
+	#TODO: REMOVE WHEN DEBUGGLING FOR LOCKING DONE
+	#Remove all existing documents
+	for row in views_by_workflow_locking_turn(g.couch):
+		tmp = WorkflowLockingTurn.load(row.value)
+		g.couch.delete(tmp)
+
+	#Add one doc
+	turnBasedLocking = WorkflowLockingTurn(workflow_id='workflow_turn_id_1')
+	turnBasedLocking.store()
+
 	module = ''
 	for row in views_by_pipeline_module(g.couch):
 		if row.key == 'rgb2gray':
@@ -1111,8 +1122,8 @@ def uploader():
 			file_tool_setting_ui = request.files['tool_setting_ui']
 			file_tool_setting_ui.save(os.path.join('app_collaborative_sci_workflow/pipeline_modules/'+str(new_tool_location)+'/',secure_filename(new_tool_name+'_html.txt')))
 
-			file_tool_additional_file = request.files['tool_additional_file']
-			file_tool_additional_file.save(os.path.join('app_collaborative_sci_workflow/pipeline_modules/'+str(new_tool_location)+'/',secure_filename(file_tool_additional_file.filename)))
+			#file_tool_additional_file = request.files['tool_additional_file']
+			#file_tool_additional_file.save(os.path.join('app_collaborative_sci_workflow/pipeline_modules/'+str(new_tool_location)+'/',secure_filename(file_tool_additional_file.filename)))
 
 	return 'file uploaded successfully'
 

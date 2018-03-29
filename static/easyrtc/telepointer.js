@@ -1432,10 +1432,10 @@ $(document).on('change', ".setting_param" ,function () {//here
     $(this).siblings(".setting_param").each(function () {
         //alert($(this).val());
         var prev_code = $(this).parent().parent().siblings(".setting_section").children(".edit_code").find(".code_settings").val();
-        $(this).parent().parent().siblings(".setting_section").children(".edit_code").find(".code_settings").val(prev_code + "\n" + $(this).val());
+        $(this).parent().parent().siblings(".setting_section").children(".edit_code").find(".code_settings").val("\n"+prev_code + "\n\n" + $(this).val());
     });
     var prev_code = $(this).parent().parent().siblings(".setting_section").children(".edit_code").find(".code_settings").val();
-    $(this).parent().parent().siblings(".setting_section").children(".edit_code").find(".code_settings").val(prev_code + "\n" + $(this).val());
+    $(this).parent().parent().siblings(".setting_section").children(".edit_code").find(".code_settings").val("\n"+prev_code + "\n\n" + $(this).val());
 
 
 
@@ -1466,7 +1466,7 @@ $("#run_pipeline").click(function () {
     $('textarea').each(
         function () {
             //alert($(this).val());
-            sourceCode = sourceCode + $(this).val();
+            sourceCode = sourceCode + "\n" +$(this).val();
         }
     );
 
@@ -2392,6 +2392,36 @@ $('#upload-file-btn').click(function() {
 
 
 
+$('#add_tool_plugin').click(function(){
+            var formdata = new FormData(); //FormData object
+            //console.log($("#form_tool_plugin"));
+            //console.log($("#id_tool_p_doc")[0].files[0].name);
+            formdata.append('tool_name_inp', $("#id_tool_name_inp").val());
+            formdata.append('tool_doc', $("#id_tool_plugin_doc")[0].files[0], $("#id_tool_plugin_doc")[0].files[0].name);
+            formdata.append('tool_script', $("#id_tool_plugin_script")[0].files[0], $("#id_tool_plugin_script")[0].files[0].name);
+            formdata.append('tool_setting', $("#id_tool_plugin_setting")[0].files[0], $("#id_tool_plugin_setting")[0].files[0].name);
+            formdata.append('tool_setting_ui', $("#id_tool_plugin_ui")[0].files[0], $("#id_tool_plugin_ui")[0].files[0].name);
+
+
+        //console.log(form_data);
+        $.ajax({
+            type: 'POST',
+            url: '/uploader',
+            data: formdata,
+            contentType: false,
+            cache: false,
+            processData: false,
+            async: false,
+            success: function(data) {
+                //console.log('Success!');
+                alert("Tool Plugged-in Successfully.");
+            },
+		error: function (xhr, status, error) {
+	    		alert(xhr.responseText);
+		}
+        });
+
+});
 
 
 
