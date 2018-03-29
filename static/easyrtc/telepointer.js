@@ -2414,6 +2414,7 @@ $('#add_tool_plugin').click(function(){
             async: false,
             success: function(data) {
                 //console.log('Success!');
+                $("#bio_tools").append('<li><a href="#" class="pipeline_modules" id="' + $("#id_tool_name_inp").val() +'"> '+ $("#id_tool_name_inp").val() +'</a></li>');
                 alert("Tool Plugged-in Successfully.");
             },
 		error: function (xhr, status, error) {

@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d67430e-b95a-44a6-ae46-52e63d6cf157" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/fastqc/fastqc_settings.py" afterPath="$PROJECT_DIR$/pipeline_modules/fastqc/fastqc_settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/std2sol/std2sol_main.py" afterPath="$PROJECT_DIR$/pipeline_modules/std2sol/std2sol_main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/std2sol/std2sol_settings.py" afterPath="$PROJECT_DIR$/pipeline_modules/std2sol/std2sol_settings.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/easyrtc/telepointer.js" afterPath="$PROJECT_DIR$/static/easyrtc/telepointer.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2.html" afterPath="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views.py" afterPath="$PROJECT_DIR$/views.py" />
     </list>
     <ignored path="app_collaborative_sci_workflow.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -68,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="telepointer.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="telepointer.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="2378" column="25" selection-start-line="2378" selection-start-column="25" selection-end-line="2378" selection-end-column="25" />
+            <state relative-caret-position="361">
+              <caret line="2393" column="0" selection-start-line="2393" selection-start-column="0" selection-end-line="2393" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -90,11 +85,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cloud_vision_pipeline_save2.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="cloud_vision_pipeline_save2.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/cloud_vision_pipeline_save2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="836" column="0" selection-start-line="836" selection-start-column="0" selection-end-line="836" selection-end-column="0" />
+            <state relative-caret-position="386">
+              <caret line="771" column="109" selection-start-line="771" selection-start-column="30" selection-end-line="771" selection-end-column="109" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -151,9 +146,9 @@
         <option value="$PROJECT_DIR$/pipeline_modules/std2sol/std2sol_settings.py" />
         <option value="$PROJECT_DIR$/pipeline_modules/std2sol/std2sol_main.py" />
         <option value="$PROJECT_DIR$/pipeline_modules/fastqc/fastqc_settings.py" />
+        <option value="$PROJECT_DIR$/views.py" />
         <option value="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2.html" />
         <option value="$PROJECT_DIR$/static/easyrtc/telepointer.js" />
-        <option value="$PROJECT_DIR$/views.py" />
       </list>
     </option>
   </component>
@@ -735,14 +730,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="2378" column="25" selection-start-line="2378" selection-start-column="25" selection-end-line="2378" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="151">
@@ -755,12 +742,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/cloud_vision_pipeline_save2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="836" column="0" selection-start-line="836" selection-start-column="0" selection-end-line="836" selection-end-column="0" />
+        <state relative-caret-position="386">
+          <caret line="771" column="109" selection-start-line="771" selection-start-column="30" selection-end-line="771" selection-end-column="109" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="2393" column="0" selection-start-line="2393" selection-start-column="0" selection-end-line="2393" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
