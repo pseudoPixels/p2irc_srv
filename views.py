@@ -484,6 +484,7 @@ def getAllUsersDetails(thisUserEmail):
 
 
 import html
+import re
 @app_collaborative_sci_workflow.route('/cvs')
 def cvs():
 
@@ -526,7 +527,7 @@ def cvs():
 
 	pineline_modules = os.listdir("app_collaborative_sci_workflow/pipeline_modules/")
 
-
+	pineline_source_analysis_modules = [f for f in os.listdir('app_collaborative_sci_workflow/pipeline_modules/') if re.match(r'NiCAD*', f)] #os.listdir("app_collaborative_sci_workflow/pipeline_modules/source_analysis_tools/")
 
 
 
@@ -545,7 +546,8 @@ def cvs():
 	saved_pipelines = saved_pipelines,
 	shared_pipelines = shared_pipelines,
     all_other_users=all_other_users,
-    pineline_modules=pineline_modules)
+    pineline_modules=pineline_modules,
+	pineline_source_analysis_modules=pineline_source_analysis_modules)
 
 
 

@@ -776,6 +776,20 @@ html, body {
                   </li>
                   <li class="sub-menu">
                       <a href="javascript:;" >
+                          <i class="fa fa-th"></i>
+                          <span>Source Analysis</span>
+                      </a>
+                      <ul class="sub" id="source_analysis">
+                         <!-- <li><a  href="#" id="design_pipelines_menu_biodatacleaning_id">Bio Data Cleaning</a></li>
+                          <li><a  href="#" id="design_pipelines_menu_biocalc_id">Bio Brome</a></li> -->
+                          {% for aSourceAnalysisModule in pineline_source_analysis_modules %}
+                              <li><a href="#" class="pipeline_modules" id="{{aSourceAnalysisModule}}"> {{aSourceAnalysisModule}}</a></li>
+                          {% endfor %}
+
+                      </ul>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
                           <i class=" fa fa-bar-chart-o"></i>
                           <span>Stats</span>
                       </a>
