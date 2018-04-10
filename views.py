@@ -421,7 +421,7 @@ def Python_com():
 	
 	old_stdout = sys.stdout
 	redirected_output = sys.stdout = StringIO()
-	res = exec(program)
+	exec(program)
 	sys.stdout = old_stdout
 
 	return redirected_output.getvalue()
@@ -1337,9 +1337,15 @@ def locking_turn_get_current_floor_owner():
 ######## COLLABORATIVE LOCKING MACHANISMS ######################
 ################ ENDS HERE #####################################
 ################################################################
+import subprocess
+from subprocess import *
+from io import StringIO
+import sys
 
-
-
+@app_collaborative_sci_workflow.route('/run_bash/',  methods=['GET'])
+def run_bash():
+	pipe = subprocess.Popen(["/bin/bash","/home/ubuntu/Webpage/app_collaborative_sci_workflow/External_Libraries/NiCad-4.0/scripts/Extract", "functions", "java", '/home/ubuntu/Webpage/app_collaborative_sci_workflow/Dataset/open_source_projects/JHotDraw54b1', "", "", "/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/"]).communicate()
+	return "SUCCESS 200"
 
 
 

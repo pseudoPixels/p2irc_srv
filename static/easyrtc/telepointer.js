@@ -1483,6 +1483,7 @@ $("#run_pipeline").click(function () {
         data: 'textarea_source_code=' + sourceCode,
         success: function (option) {
             alert('Pipeline Completed Running Successfully.');
+            alert(option);
             get_workflow_outputs_list('test_workflow');
             $("#pr_status").html("Pipeline Completed Running Successfully.");
 
