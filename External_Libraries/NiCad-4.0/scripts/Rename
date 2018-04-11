@@ -10,7 +10,7 @@
 # Revised 11.8.15
 
 ulimit -s hard
-
+output_destination=$5
 # Find our installation
 lib="${0%%/scripts/Rename}"
 if [ ! -d ${lib} ]
@@ -101,7 +101,7 @@ fi
 date
 
 echo "${lib}/tools/streamprocess.x '${lib}/txl/${language}-rename-${renaming}-${granularity}.x stdin' < ${pcfile}.xml > ${pcfile}-${renaming}.xml"
-time ${lib}/tools/streamprocess.x "${lib}/txl/${language}-rename-${renaming}-${granularity}.x stdin" < ${pcfile}.xml > ${pcfile}-${renaming}.xml
+time ${lib}/tools/streamprocess.x "${lib}/txl/${language}-rename-${renaming}-${granularity}.x stdin" < ${pcfile}.xml > ${output_destination}.xml
 
 result=$?
 

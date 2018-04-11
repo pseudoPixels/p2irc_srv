@@ -10,7 +10,7 @@
 # Revised 11.8.15
 
 ulimit -s hard
-
+output_destination=$5
 # Find our installation
 lib="${0%%/scripts/Normalize}"
 if [ ! -d ${lib} ]
@@ -100,7 +100,7 @@ fi
 date
 
 echo "${lib}/tools/streamprocess.x '${lib}/txl/${normalizer}.x stdin' < ${pcfile}.xml > ${pcfile}-normalized.xml"
-time ${lib}/tools/streamprocess.x "${lib}/txl/${normalizer}.x stdin" < ${pcfile}.xml > ${pcfile}-normalized.xml
+time ${lib}/tools/streamprocess.x "${lib}/txl/${normalizer}.x stdin" < ${pcfile}.xml > ${output_destination}.xml
 
 result=$?
 

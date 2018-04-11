@@ -1346,7 +1346,20 @@ import sys
 
 @app_collaborative_sci_workflow.route('/run_bash/',  methods=['GET'])
 def run_bash():
-	pipe = subprocess.Popen(["/bin/bash","/home/ubuntu/Webpage/app_collaborative_sci_workflow/External_Libraries/NiCad-4.0/scripts/Extract", "functions", "java", '/home/ubuntu/Webpage/app_collaborative_sci_workflow/Dataset/open_source_projects/JHotDraw54b1', "", "", "/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/"]).communicate()
+	granularity = 'functions'
+	language = 'java'
+	input_source = '/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/abstract.xml'
+	normalization = 'java-normalize-ifconditions-functions'
+	output_destination = '/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/normalized'
+
+	pipe = subprocess.Popen(
+		["/bin/bash",
+		 "/home/ubuntu/Webpage/app_collaborative_sci_workflow/External_Libraries/NiCad-4.0/scripts/Normalize",
+		 granularity, language,
+		 input_source, normalization,
+		 output_destination]).communicate()
+
+
 	return "SUCCESS 200"
 
 

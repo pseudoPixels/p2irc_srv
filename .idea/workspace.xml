@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d67430e-b95a-44a6-ae46-52e63d6cf157" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/NiCAD_extract_potential_clones/NiCAD_extract_potential_clones_html.txt" afterPath="$PROJECT_DIR$/pipeline_modules/NiCAD_extract_potential_clones/NiCAD_extract_potential_clones_html.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/NiCAD_extract_potential_clones/NiCAD_extract_potential_clones_main.py" afterPath="$PROJECT_DIR$/pipeline_modules/NiCAD_extract_potential_clones/NiCAD_extract_potential_clones_main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/NiCAD_extract_potential_clones/NiCAD_extract_potential_clones_settings.py" afterPath="$PROJECT_DIR$/pipeline_modules/NiCAD_extract_potential_clones/NiCAD_extract_potential_clones_settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Abstract" afterPath="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Abstract" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Extract" afterPath="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Extract" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Filter" afterPath="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Filter" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Normalize" afterPath="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Normalize" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Rename" afterPath="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Rename" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/NiCAD_extract_potential_clones/NiCAD_extract_potential_clones_doc.txt" afterPath="$PROJECT_DIR$/pipeline_modules/NiCAD_extract_potential_clones/NiCAD_extract_potential_clones_doc.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/easyrtc/telepointer.js" afterPath="$PROJECT_DIR$/static/easyrtc/telepointer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views.py" afterPath="$PROJECT_DIR$/views.py" />
     </list>
     <ignored path="app_collaborative_sci_workflow.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,50 +30,48 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="NiCAD_normalizing_html.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing/NiCAD_normalizing_html.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NiCAD_normalizing_main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing/NiCAD_normalizing_main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="7" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NiCAD_normalizing_settings.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing/NiCAD_normalizing_settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="93" selection-start-line="6" selection-start-column="93" selection-end-line="6" selection-end-column="93" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="497" column="13" selection-start-line="497" selection-start-column="13" selection-end-line="497" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#73#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Extract" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Extract">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="85" selection-start-line="3" selection-start-column="71" selection-end-line="3" selection-end-column="85" />
+            <state relative-caret-position="555">
+              <caret line="1351" column="58" selection-start-line="1351" selection-start-column="21" selection-end-line="1351" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NiCAD_extract_potential_clones_settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_extract_potential_clones/NiCAD_extract_potential_clones_settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="14" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NiCAD_extract_potential_clones_html.txt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_extract_potential_clones/NiCAD_extract_potential_clones_html.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NiCAD_extract_potential_clones_main.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_extract_potential_clones/NiCAD_extract_potential_clones_main.py">
+      <file leaf-file-name="NiCAD_normalizing_doc.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing/NiCAD_normalizing_doc.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
               <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
@@ -76,11 +80,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fastqc_html.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pipeline_modules/fastqc/fastqc_html.txt">
+      <file leaf-file-name="Normalize" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Normalize">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="630">
+              <caret line="99" column="4" selection-start-line="99" selection-start-column="4" selection-end-line="99" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Filter" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Filter">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-660">
+              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -105,15 +119,36 @@
         <option value="$PROJECT_DIR$/pipeline_modules/fastqc/fastqc_main.py" />
         <option value="$PROJECT_DIR$/pipeline_modules/fastqc/fastqc_html.txt" />
         <option value="$PROJECT_DIR$/pipeline_modules/nicad_extract_potential_clones/nicad_extract_potential_clones_doc.txt" />
-        <option value="$PROJECT_DIR$/static/easyrtc/telepointer.js" />
         <option value="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Extract.sh" />
-        <option value="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Extract" />
         <option value="$PROJECT_DIR$/pipeline_modules/nicad_extract_potential_clones/nicad_extract_potential_clones_main.py" />
         <option value="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2.html" />
-        <option value="$PROJECT_DIR$/views.py" />
         <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_extract_potential_clones/NiCAD_extract_potential_clones_settings.py" />
         <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_extract_potential_clones/NiCAD_extract_potential_clones_main.py" />
+        <option value="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Extract" />
+        <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_renaming/NiCAD_renaming_main.py" />
+        <option value="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Rename" />
+        <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_renaming/NiCAD_renaming_settings.py" />
+        <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_renaming/NiCAD_renaming_html.txt" />
+        <option value="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Filter" />
+        <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_main.py" />
         <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_extract_potential_clones/NiCAD_extract_potential_clones_html.txt" />
+        <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_html.txt" />
+        <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_settings.py" />
+        <option value="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Abstract" />
+        <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_abstracting/NiCAD_abstracting_main.py" />
+        <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_abstracting/NiCAD_abstracting_settings.py" />
+        <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_abstracting/NiCAD_abstracting_html.txt" />
+        <option value="$PROJECT_DIR$/static/easyrtc/telepointer.js" />
+        <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_abstracting/NiCAD_abstracting_doc.txt" />
+        <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_extract_potential_clones/NiCAD_extract_potential_clones_doc.txt" />
+        <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_doc.txt" />
+        <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_renaming/NiCAD_renaming_doc.txt" />
+        <option value="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Normalize" />
+        <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing/NiCAD_normalizing_main.py" />
+        <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing/NiCAD_normalizing_settings.py" />
+        <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing/NiCAD_normalizing_doc.txt" />
+        <option value="$PROJECT_DIR$/views.py" />
+        <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing/NiCAD_normalizing_html.txt" />
       </list>
     </option>
   </component>
@@ -260,7 +295,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="fastqc" />
+              <option name="myItemId" value="NiCAD_renaming" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -278,7 +313,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="biodatacleaning" />
+              <option name="myItemId" value="NiCAD_normalizing" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_collaborative_sci_workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_collaborative_sci_workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pipeline_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NiCAD_filtering" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -310,7 +363,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Dataset" />
+              <option name="myItemId" value="pipeline_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NiCAD_abstracting" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -324,11 +381,77 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Dataset" />
+              <option name="myItemId" value="External_Libraries" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="open_source_projects" />
+              <option name="myItemId" value="NiCad-4.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_collaborative_sci_workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_collaborative_sci_workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External_Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NiCad-4.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="txl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_collaborative_sci_workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_collaborative_sci_workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External_Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NiCad-4.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_collaborative_sci_workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_collaborative_sci_workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External_Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NiCad-4.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -340,6 +463,13 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../srFLow/galaxy" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing" />
+      <recent name="$PROJECT_DIR$/pipeline_modules/NiCAD_abstracting" />
+      <recent name="$PROJECT_DIR$/pipeline_modules/NiCAD_filtering" />
+      <recent name="$PROJECT_DIR$/External_Libraries/NiCad-4.0/tools" />
+      <recent name="$PROJECT_DIR$/pipeline_modules/NiCAD_renaming" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/pipeline_modules" />
       <recent name="$PROJECT_DIR$/pipeline_modules/source_analysis_tools" />
@@ -498,7 +628,7 @@
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23089519" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23362446" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -533,162 +663,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/biobrome/biobrome_doc.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/biobrome/biobrome_main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/biobrome/biobrome_html.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/biobrome/biobrome_settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/biodatacleaning/biodatacleaning_settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/fastqc/fastqc_doc.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="86" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="86" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/std2sol/std2sol_doc.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/flash/flash_settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/flash/flash_main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/flash/flash_html.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/flash/fastqc_main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/flash/flash_doc.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/std2sol/std2sol_html_temp.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tool_integration.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="17" column="49" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/std2sol/std2sol_settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/std2sol/std2sol_main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/std2sol/std2sol_html.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../srFLow/galaxy/static/welcome.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pipeline_modules/biodatacleaning/biodatacleaning_doc.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="9" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_extract_potential_clones/NiCAD_extract_potential_clones_doc.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="54" selection-start-line="9" selection-start-column="54" selection-end-line="9" selection-end-column="54" />
           <folding />
         </state>
       </provider>
@@ -701,31 +679,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="1653" column="0" selection-start-line="1653" selection-start-column="0" selection-end-line="1653" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/cloud_vision_pipeline_save2.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="41">
           <caret line="748" column="27" selection-start-line="748" selection-start-column="27" selection-end-line="748" selection-end-column="27" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="497" column="13" selection-start-line="497" selection-start-column="13" selection-end-line="497" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#73#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#span#0;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -742,14 +702,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Extract">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="85" selection-start-line="3" selection-start-column="71" selection-end-line="3" selection-end-column="85" />
           <folding />
         </state>
       </provider>
@@ -786,10 +738,338 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/nicad4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/config/consistentrenamereport.cfg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/config/consistentrename.cfg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/config/cloneclustersreport.cfg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/config/blindrename.cfg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/config/abstractconditions.cfg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/00-README-NiCad4.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1680">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Extract">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_renaming/NiCAD_renaming_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="7" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_renaming/NiCAD_renaming_settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_renaming/NiCAD_renaming_html.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Rename">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-690">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Transform">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-270">
+          <caret line="40" column="9" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/txl/java-filter-functions.txl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/txl/java-filter-blocks.txl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/NiCadPair">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1324">
+          <caret line="272" column="0" selection-start-line="272" selection-start-column="0" selection-end-line="272" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/txl/generic-filter.txl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_extract_potential_clones/NiCAD_extract_potential_clones_html.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        <state relative-caret-position="255">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="19" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/txl/java.txl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/txl/bom.grm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/txl/c.grm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="1120" column="28" selection-start-line="1120" selection-start-column="28" selection-end-line="1120" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/txl/java.grm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="686" column="17" selection-start-line="686" selection-start-column="0" selection-end-line="686" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_abstracting/NiCAD_abstracting_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="30" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_html.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_abstracting/NiCAD_abstracting_settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="18" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_abstracting/NiCAD_abstracting_html.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="1696" column="0" selection-start-line="1696" selection-start-column="0" selection-end-line="1696" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_abstracting/NiCAD_abstracting_doc.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_extract_potential_clones/NiCAD_extract_potential_clones_doc.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="122" selection-start-line="3" selection-start-column="122" selection-end-line="3" selection-end-column="122" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_doc.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_renaming/NiCAD_renaming_doc.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/config/default.cfg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="42" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Abstract">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="111" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Filter">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-660">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Normalize">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="99" column="4" selection-start-line="99" selection-start-column="4" selection-end-line="99" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="1351" column="58" selection-start-line="1351" selection-start-column="21" selection-end-line="1351" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing/NiCAD_normalizing_doc.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing/NiCAD_normalizing_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="7" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing/NiCAD_normalizing_html.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing/NiCAD_normalizing_settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="93" selection-start-line="6" selection-start-column="93" selection-end-line="6" selection-end-column="93" />
           <folding />
         </state>
       </provider>

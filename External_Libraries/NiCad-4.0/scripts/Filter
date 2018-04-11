@@ -10,7 +10,7 @@
 # Revised 11.8.15
 
 ulimit -s hard
-
+output_destination=$5
 # Find our installation
 lib="${0%%/scripts/Filter}"
 if [ ! -d ${lib} ]
@@ -99,7 +99,7 @@ fi
 # Filter potential clones
 date
 echo "${lib}/tools/streamprocess.x '${lib}/txl/${language}-filter-${granularity}.x stdin - ${nonterminals}' < ${pcfile}.xml > ${pcfile}-filter.xml"
-time ${lib}/tools/streamprocess.x "${lib}/txl/${language}-filter-${granularity}.x stdin - ${nonterminals}" < ${pcfile}.xml > ${pcfile}-filter.xml
+time ${lib}/tools/streamprocess.x "${lib}/txl/${language}-filter-${granularity}.x stdin - ${nonterminals}" < ${pcfile}.xml > ${output_destination}.xml
 
 result=$?
 

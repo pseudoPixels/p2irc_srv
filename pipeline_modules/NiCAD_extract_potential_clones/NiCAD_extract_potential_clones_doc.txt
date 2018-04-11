@@ -1,6 +1,8 @@
 <b>NiCad - Extract Potential Clones</b>
-	<p><i>Description:</i> Extracts potential clones (based on block sizes) from the project. These results
-	does not include any comparision. Just returns all possible fragments based on configured blocks/functions sizes.</p>
+	<p><i>Description:</i> <br/>
+	Extracts potential clones (based on block sizes) from the project. These results<br/>
+	does not include any comparision. Just returns all possible fragments based on configured blocks/functions sizes.<br/>
+	</p>
 
 
 <i>Usage:</i>

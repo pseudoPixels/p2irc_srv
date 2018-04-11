@@ -11,15 +11,6 @@
 
 ulimit -s hard
 
-#echo 0_$0 >> "/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/mylog00.txt"
-#echo 1_$1 >> "/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/mylog00.txt"
-#echo 2_$2 >> "/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/mylog00.txt"
-#echo 3_$3 >> "/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/mylog00.txt"
-#echo 4_$4 >> "/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/mylog00.txt"
-#echo 5_$5 >> "/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/mylog00.txt"
-#echo 6_$6 >> "/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/mylog00.txt"
-#echo 7_$7 >> "/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/mylog00.txt"
-#shift
 destinationFile=$6
 # Find our installation
 lib="${0%%/scripts/Extract}"

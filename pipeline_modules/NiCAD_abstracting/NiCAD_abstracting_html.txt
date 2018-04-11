@@ -1,0 +1,21 @@
+<br/>
+ Input Potential Clone File (xml): <select  class="setting_param setting_param_parent" name="seq_file"> <!-- CHANGE IN THIS LINE -->
+      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/_functions.xml'" selected>_functions.xml</option>
+      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/_blocks.xml'" >_blocks.xml</option>
+</select>
+<br/><br/>
+ Language: <select  class="setting_param setting_param_parent" name="seq_file"> <!-- CHANGE IN THIS LINE -->
+      <option value="language = 'java'" selected>Java</option>
+      <option value="language = 'C#'" >C#</option>
+      <option value="language = 'python'" >Python</option>
+</select>
+<br/><br/>
+ Granularity: <select  class="setting_param setting_param_parent" name="seq_file"> <!-- CHANGE IN THIS LINE -->
+      <option value="granularity = 'functions'" selected>Functions</option>
+      <option value="granularity = 'blocks'" >Blocks</option>
+</select>
+<br/><br/>
+ Abstraction Nonterminal (e.g., condition, declaration, ...):
+<input type="text" class="setting_param" value="abstraction='none'" name="cleaning_threshold" size="45"/>
+<br/><br/>
+

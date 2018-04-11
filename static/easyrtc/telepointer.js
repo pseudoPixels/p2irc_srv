@@ -1460,7 +1460,7 @@ $(document).on('change', ".setting_param" ,function () {//here
 });
 
 $("#run_pipeline").click(function () {
-    $("#pr_status").html("Running Pipeline...");
+    $("#pr_status").html("<span style='color:orange'>Running Pipeline...</span>");
 
     var sourceCode = ''
     $('textarea').each(
@@ -1483,14 +1483,14 @@ $("#run_pipeline").click(function () {
         data: 'textarea_source_code=' + sourceCode,
         success: function (option) {
             alert('Pipeline Completed Running Successfully.');
-            alert(option);
+            //alert(option);
             get_workflow_outputs_list('test_workflow');
-            $("#pr_status").html("Pipeline Completed Running Successfully.");
+            $("#pr_status").html("<span style='color:green'>Pipeline Completed Running Successfully.</span>");
 
         },
         error: function (xhr, status, error) {
             //alert(xhr.responseText);
-            $("#pr_status").html("Pipeline Running Failed!!!");
+            $("#pr_status").html("<span style='color:red'>Pipeline Running Failed!!!</span>");
         }
 
     });
@@ -1704,14 +1704,14 @@ function addModuleToPipeline(moduleID, moduleName){
                 '<div style="margin:10px;font-size:17px;color:#000000;">' +
                   ' ' + module_name + '<hr/>' +
                    ' Documentation: <a style="font-size:12px;color:#000000;" href="#" class="documentation_show_hide">(Show/Hide)</a>' +
-                    '<div class="documentation" style="background-color:#888888;display:none;font-size:14px;">' + documentation + '</div>' +
+                    '<div class="documentation" style="background-color:#DDDDDD;display:none;font-size:14px;">' + documentation + '</div>' +
                 '</div>' +
 
 
                 '<!-- Settings -->' +
                 '<div style="margin:10px;font-size:17px;color:#000000;">' +
                  '   Settings: <a style="font-size:12px;color:#000000;" href="#" class="settings_show_hide">(Show/Hide)</a>' +
-                 '   <div class="settings" style="background-color:#888888;display:none;font-size:14px;">' + moduleSourceCode_html + '</div>' +
+                 '   <div class="settings" style="background-color:#DDDDDD;display:none;font-size:14px;">' + moduleSourceCode_html + '</div>' +
                 '</div>' +
 
 
