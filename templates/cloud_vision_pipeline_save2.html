@@ -774,6 +774,22 @@ html, body {
 
                       </ul>
                   </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-th"></i>
+                          <span>Mathematical Analysis</span>
+                      </a>
+                      <ul class="sub" id="math_analysis">
+                         <!-- <li><a  href="#" id="design_pipelines_menu_biodatacleaning_id">Bio Data Cleaning</a></li>
+                          <li><a  href="#" id="design_pipelines_menu_biocalc_id">Bio Brome</a></li> -->
+                          {% for aMathAnalysisModule in pineline_mathematical_analysis_modules %}
+                              <li><a href="#" class="pipeline_modules" id="{{aMathAnalysisModule}}"> {{aMathAnalysisModule}}</a></li>
+                          {% endfor %}
+
+                      </ul>
+                  </li>
+
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-th"></i>

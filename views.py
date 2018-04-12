@@ -483,6 +483,15 @@ def getAllUsersDetails(thisUserEmail):
 	return all_user_details
 
 
+
+
+
+
+
+
+
+
+
 import html
 import re
 @app_collaborative_sci_workflow.route('/cvs')
@@ -529,8 +538,8 @@ def cvs():
 
 	pineline_source_analysis_modules = [f for f in os.listdir('app_collaborative_sci_workflow/pipeline_modules/') if re.match(r'NiCAD*', f)] #os.listdir("app_collaborative_sci_workflow/pipeline_modules/source_analysis_tools/")
 
-
-
+	pineline_mathematical_analysis_modules = [f for f in os.listdir('app_collaborative_sci_workflow/pipeline_modules/') if
+										re.match(r'Math*', f)]
 
 
 	return render_template('cloud_vision_pipeline_save2.html', 
@@ -547,7 +556,8 @@ def cvs():
 	shared_pipelines = shared_pipelines,
     all_other_users=all_other_users,
     pineline_modules=pineline_modules,
-	pineline_source_analysis_modules=pineline_source_analysis_modules)
+	pineline_source_analysis_modules=pineline_source_analysis_modules,
+	pineline_mathematical_analysis_modules=pineline_mathematical_analysis_modules)
 
 
 

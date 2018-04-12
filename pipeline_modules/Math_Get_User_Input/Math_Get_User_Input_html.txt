@@ -1,0 +1,5 @@
+<br/>
+User Input (Numerical):
+<input type="text" class="setting_param" value="user_input = 0.0" name="cleaning_threshold" size="45"/>
+<br/><br/>
+
