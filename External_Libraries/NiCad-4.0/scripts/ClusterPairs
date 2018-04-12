@@ -2,7 +2,7 @@
 # Cluster clone pairs into classes
 
 ulimit -s hard
-
+output_destination=$2
 # Find our installation
 lib="${0%%/scripts/ClusterPairs}"
 if [ ! -d ${lib} ]
@@ -30,7 +30,7 @@ do
 
     # OK, let's run it
     echo "${lib}/tools/cloneclasses.x ${basename}.xml > ${basename}-classes.xml"
-    time ${lib}/tools/cloneclasses.x ${basename}.xml > ${basename}-classes.xml
+    time ${lib}/tools/cloneclasses.x ${basename}.xml > ${output_destination}.xml
     result=$?
 
     if [ ${result} != 0 ]

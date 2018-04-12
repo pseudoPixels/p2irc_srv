@@ -1346,17 +1346,13 @@ import sys
 
 @app_collaborative_sci_workflow.route('/run_bash/',  methods=['GET'])
 def run_bash():
-	granularity = 'functions'
-	language = 'java'
-	input_source = '/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/abstract.xml'
-	normalization = 'java-normalize-ifconditions-functions'
-	output_destination = '/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/normalized'
+	input_source = '/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/detectedClones.xml'
+	output_destination = '/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/cloneClass'
 
 	pipe = subprocess.Popen(
 		["/bin/bash",
-		 "/home/ubuntu/Webpage/app_collaborative_sci_workflow/External_Libraries/NiCad-4.0/scripts/Normalize",
-		 granularity, language,
-		 input_source, normalization,
+		 "/home/ubuntu/Webpage/app_collaborative_sci_workflow/External_Libraries/NiCad-4.0/scripts/ClusterPairs",
+		 input_source,
 		 output_destination]).communicate()
 
 

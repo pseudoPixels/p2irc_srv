@@ -1437,7 +1437,7 @@ $(document).on('change', ".setting_param" ,function () {//here
     var prev_code = $(this).parent().parent().siblings(".setting_section").children(".edit_code").find(".code_settings").val();
     $(this).parent().parent().siblings(".setting_section").children(".edit_code").find(".code_settings").val("\n"+prev_code + "\n\n" + $(this).val());
 
-
+    //alert("Change Triggered...!!!");
 
     //get module id and param information for change in the remote clients
     //var myPar = $(this).closest(".module");
@@ -1482,10 +1482,12 @@ $("#run_pipeline").click(function () {
         url: "/pythoncom/",
         data: 'textarea_source_code=' + sourceCode,
         success: function (option) {
-            alert('Pipeline Completed Running Successfully.');
+
             //alert(option);
             get_workflow_outputs_list('test_workflow');
             $("#pr_status").html("<span style='color:green'>Pipeline Completed Running Successfully.</span>");
+
+            alert('Pipeline Completed Running Successfully.');
 
         },
         error: function (xhr, status, error) {
@@ -1702,7 +1704,7 @@ function addModuleToPipeline(moduleID, moduleName){
 
                 '<!-- Documentation -->' +
                 '<div style="margin:10px;font-size:17px;color:#000000;">' +
-                  ' ' + module_name + '<hr/>' +
+                  ' ' + module_name +  ' (Module ' + moduleID + ')'+ '<hr/>' +
                    ' Documentation: <a style="font-size:12px;color:#000000;" href="#" class="documentation_show_hide">(Show/Hide)</a>' +
                     '<div class="documentation" style="background-color:#DDDDDD;display:none;font-size:14px;">' + documentation + '</div>' +
                 '</div>' +
@@ -1711,7 +1713,9 @@ function addModuleToPipeline(moduleID, moduleName){
                 '<!-- Settings -->' +
                 '<div style="margin:10px;font-size:17px;color:#000000;">' +
                  '   Settings: <a style="font-size:12px;color:#000000;" href="#" class="settings_show_hide">(Show/Hide)</a>' +
-                 '   <div class="settings" style="background-color:#DDDDDD;display:none;font-size:14px;">' + moduleSourceCode_html + '</div>' +
+                 '   <div class="settings" style="background-color:#DDDDDD;display:none;font-size:14px;">' + moduleSourceCode_html +
+                        '<input type="hidden" class="setting_param " size="45" id="module_id_'+ moduleID +'_output_destination" />'+
+                    '</div>' +
                 '</div>' +
 
 
@@ -1734,6 +1738,8 @@ function addModuleToPipeline(moduleID, moduleName){
 
 
             );//end of append
+
+            $("#module_id_"+ moduleID + "_output_destination").val("output_destination = '/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_" + moduleID + "'").trigger('change');
 
             if(isItMyFloor() == false)lockParamsSettings();
 

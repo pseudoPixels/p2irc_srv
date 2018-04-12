@@ -4,7 +4,7 @@
 # Revised 11.8.15
 
 ulimit -s hard
-
+output_destination=$5
 # Find our installation
 lib="${0%%/scripts/FindClonePairs}"
 if [ ! -d ${lib} ]
@@ -46,7 +46,7 @@ systemname=${basename##*/}
 # OK, let's run it
 date
 echo "${lib}/tools/clonepairs.x ${basename}.xml $* > ${resultsdir}/${systemname}-clones-${threshold}.xml"
-time ${lib}/tools/clonepairs.x ${basename}.xml $* > ${resultsdir}/${systemname}-clones-${threshold}.xml
+time ${lib}/tools/clonepairs.x ${basename}.xml $* > ${output_destination}.xml
 result=$?
 
 echo ""
