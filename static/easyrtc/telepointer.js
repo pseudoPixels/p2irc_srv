@@ -2358,6 +2358,7 @@ function get_workflow_outputs_list(workflow_id){
 		url: "/get_workflow_outputs_list/",
 		data: "workflow_id="+thisWorkflowID,
 		success: function (option) {
+			$("#workflow_outputs").html("");
 			for(var i=0;i<option['workflow_outputs_list'].length;i++){
 				var k = i+1;
 				//$("#workflow_outputs").html("");
