@@ -737,11 +737,11 @@ html, body {
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-book"></i>
-                          <span>Saved Pipelines</span>
+                          <span>Saved Workflows</span>
                       </a>
-                      <ul class="sub">
-                          {% for dict_item in saved_pipelines %}
-                              <li><a href="#"> {{dict_item['pipeline_name']}}</a></li>
+                      <ul class="sub" id="savedWorkflows">
+                          {% for aSavedWorkflow in saved_workflows %}
+                              <li><a href="#" class="aSavedWorkflow" id="{{aSavedWorkflow}}"> {{aSavedWorkflow}}</a></li>
                           {% endfor %}
 
 
@@ -1151,11 +1151,12 @@ document.getElementById("defaultOpen").click();
 
 
 
-<button id="run_pipeline" >Run Pipeline</button>  
+<button id="run_pipeline" >Run Workflow</button>
 <span id="pr_status" style="color:#000;"></span>
-<button id="save_pipeline" style="float:right;" >Save Pipeline</button>
+<button id="test_pipeline" style="float:right;" >Workflow Testing</button> <!-- Temporary for User Study -->
+<button id="save_pipeline" style="float:right;" >Save Workflow</button>
 <input type="text" id="save_pipeline_name"  style="float:right;">
-<span style="float:right;">Pipeline Name: </span>
+<span style="float:right;">Workflow Name: </span>
 
 
 
@@ -1537,12 +1538,12 @@ $('.letuschat').on('click', function() {
     $( "#myModal" ).draggable({
                 opacity: 0.85, snap:true, cancel:"select, #mycanvas, #id_tool_name_inp"
     });
-    $("#availableUsers").draggable({
+    /*$("#availableUsers").draggable({
                 opacity: 0.85, snap:true
     });
     $("#sidebar").draggable({
                 opacity: 0.85, snap:true
-    });
+    });*/
     $( "#myModal" ).resizable({handles: "n, e, s, w, se, sw, nw, ne"});
 
   } );

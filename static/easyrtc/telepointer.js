@@ -1506,8 +1506,26 @@ $("#run_pipeline").click(function () {
 $("#save_pipeline").click(function () {
     var pipelineName = $("#save_pipeline_name").val();
 
-    //alert(pipelineName);
 
+
+    //alert($("#img_processing_screen").html());
+    //var workflowToSave = encodeURIComponent(String($("#img_processing_screen").clone()))
+
+    //update the DOM
+    $('#img_processing_screen input').each(function(){
+	    $(this).attr('value', $(this).val());
+    });
+
+
+    $('#img_processing_screen select').each(function(){
+	    $(this).find('option:selected').attr('selected', 'selected');
+    });
+
+
+    var workflowToSave = encodeURIComponent(String($("#img_processing_screen").html()))
+
+
+/*
     var sourceCode = ''
     $('textarea').each(
         function () {
@@ -1521,14 +1539,17 @@ $("#save_pipeline").click(function () {
 
 
     //alert(sourceCode);
-
+*/
     $.ajax({
         type: "POST",
         cache: false,
         url: "/save_pipeline/",
-        data: 'textarea_source_code=' + sourceCode + '&pipelineName='+pipelineName,
+        data: 'textarea_source_code=' + workflowToSave + '&pipelineName='+pipelineName,
         success: function (option) {
-            alert('Piepline Saved Successfully...');
+            alert('Workflow Saved Successfully.');
+
+            $("#savedWorkflows").append("    <li><a href='#' class='aSavedWorkflow' id='" + pipelineName + ".wc'>" + pipelineName + ".wc</a></li>       ");
+
         },
         error: function (xhr, status, error) {
             alert(xhr.responseText);
@@ -1784,6 +1805,30 @@ $(document).on("click", ".pipeline_modules" ,function(){
 });
 
 
+
+//Load saved workflow
+$(document).on("click", ".aSavedWorkflow" ,function(){
+
+    	var savedWorkflowName = $(this).attr("id");
+
+    	$.ajax({
+		type: "POST",
+		cache: false,
+		url: "/get_saved_workflow",
+		data: "workflow_id="+savedWorkflowName,
+		success: function (option) {
+            $("#img_processing_screen").html(option.savedWorkflow)
+
+            $("#img_processing_screen input").trigger('change');
+
+		},
+		error: function (xhr, status, error) {
+	    		alert(xhr.responseText);
+		}
+
+    	});
+
+});
 
 
 
@@ -2463,6 +2508,39 @@ $(".a_workflow_output").live('click', function(){
 //======================================================
 
 
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+/////////// TMPORARY: FOR USER STUDY //////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+
+$("#test_pipeline").click(function () {
+
+    	var savedWorkflowName = 'mySavedPipeline.gom';
+
+    	$.ajax({
+		type: "POST",
+		cache: false,
+		url: "/get_saved_workflow",
+		data: "workflow_id="+savedWorkflowName,
+		success: function (option) {
+            $("#img_processing_screen").html(option.savedWorkflow)
+
+            $("#img_processing_screen input").trigger('change');
+
+		},
+		error: function (xhr, status, error) {
+	    		alert(xhr.responseText);
+		}
+
+    	});
+
+
+});
 
 
 

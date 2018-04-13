@@ -542,6 +542,10 @@ def cvs():
 										re.match(r'Math*', f)]
 
 
+
+	saved_workflows = os.listdir("app_collaborative_sci_workflow/pipeline_saved/")
+
+
 	return render_template('cloud_vision_pipeline_save2.html', 
 	module_name = '',#module.module_name,
 	documentation = '',#module.documentation,
@@ -557,7 +561,8 @@ def cvs():
     all_other_users=all_other_users,
     pineline_modules=pineline_modules,
 	pineline_source_analysis_modules=pineline_source_analysis_modules,
-	pineline_mathematical_analysis_modules=pineline_mathematical_analysis_modules)
+	pineline_mathematical_analysis_modules=pineline_mathematical_analysis_modules,
+	saved_workflows=saved_workflows)
 
 
 
@@ -735,26 +740,44 @@ def get_module_details():
 @app_collaborative_sci_workflow.route('/save_pipeline/',  methods=['POST'])
 def save_pipeline():
 	program = request.form['textarea_source_code']
-	pipeline_name = request.form['pipelineName']
+	pipeline_name =  request.form['pipelineName']
 
 
 	#save the pipeline to file system
-	f = open('pipeline_saved/'+pipeline_name, 'w')
+	f = open('app_collaborative_sci_workflow/pipeline_saved/'+pipeline_name+'.wc', 'w')
 	f.write(program)
 	f.close()
 
 	#save piepline information to database
-	saved_pipeline = SavedPipeline()
-	saved_pipeline.pipeline_name = pipeline_name
-	saved_pipeline.author = session.get('p2irc_user_email')
-	saved_pipeline.pipeline_link = 'pipeline_saved/'+pipeline_name
+	#saved_pipeline = SavedPipeline()
+	#saved_pipeline.pipeline_name = pipeline_name
+	#saved_pipeline.author = session.get('p2irc_user_email')
+	#saved_pipeline.pipeline_link = 'pipeline_saved/'+pipeline_name
 
-	saved_pipeline.store()
-	
+	#saved_pipeline.store()
+
 	return jsonify({'success': 1})
 
 
+@app_collaborative_sci_workflow.route('/get_saved_workflow', methods=['POST'])
+def get_saved_workflow():
+	workflow_id = request.form['workflow_id']
 
+
+	savedWorkflowPath = 'app_collaborative_sci_workflow/pipeline_saved/' + workflow_id #mySavedPipeline.gom' #+workflow_id
+
+
+	# moduleSourceCode_main = getModuleCodes(modulesPath+'biodatacleaning/biodatacleaning_main.py')
+	# moduleSourceCode_settings = getModuleCodes(modulesPath+'biodatacleaning/biodatacleaning_settings.py')
+	# moduleSourceCode_html = getModuleCodes(modulesPath+'biodatacleaning/biodatacleaning_html.txt')
+
+	savedWorkflow = getModuleCodes(savedWorkflowPath)
+	#moduleSourceCode_main = getModuleCodes(modulesPath + p_module_key + '/' + p_module_key + '_main.py')
+	#moduleSourceCode_settings = getModuleCodes(modulesPath + p_module_key + '/' + p_module_key + '_settings.py')
+	#moduleSourceCode_html = getModuleCodes(modulesPath + p_module_key + '/' + p_module_key + '_html.txt')
+	#module_documentation = getModuleCodes(modulesPath + p_module_key + '/' + p_module_key + '_doc.txt')
+
+	return jsonify({'savedWorkflow': savedWorkflow})
 
 
 
