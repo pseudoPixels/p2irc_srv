@@ -1,6 +1,7 @@
 <br/>
  Input Potential Clone File (xml): <select  class="setting_param setting_param_parent" name="seq_file"> <!-- CHANGE IN THIS LINE -->
-       <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_1.xml'" selected>From Module 1</option>
+    <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_0.xml'" selected>Set Source</option>
+       <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_1.xml'" >From Module 1</option>
       <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_2.xml'" >From Module 2</option>
       <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_3.xml'" >From Module 3</option>
       <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_4.xml'" >From Module 4</option>

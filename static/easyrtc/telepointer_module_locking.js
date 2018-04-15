@@ -835,8 +835,8 @@ function redrawWorkflowStructure(){
 }
 
 
-  //create parent workflow at the starting
-  var workflow = new Tree("workflow");
+//create parent workflow at the starting
+var workflow = new Tree("workflow");
 
 
 

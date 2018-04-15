@@ -13,9 +13,18 @@
 
 
 .chart { height: 159px; width: 332px; margin: 5px; margin: 5px auto; border: 3px solid #DDD; border-radius: 3px; }
-.node { color: #000; border: 1px solid #C8C8C8; border-radius: 3px; box-shadow: 4px 4px 6px grey;}
-.node p { font-size: 17px; line-height: 20px; height: 30px;  padding: 5px; margin: 0; }
+.node { color: #000; border: 1px solid #C8C8C8; border-radius: 5px; box-shadow: 1px 1px 2px grey; background-color:skyblue;}
+.node p{ color:#fff; font-weight: bold; font-size: 17px; line-height: 20px; height: 30px;  padding: 5px; margin: 5px; text-align:center; margin-bottom:2px;}
+.dag_module{
+margin:5px;
+}
 .lockedByMe{
     background-color:LIMEGREEN;
 }
-
+.startNode{
+    color: #fff; font-weight: bold; border: 1px solid #C8C8C8; border-radius: 50%; box-shadow: 1px 1px 2px grey; background-color:#34ab34; width: 60px;
+	height: 60px;
+}
+.startNode p{
+padding-top: 15px;
+}

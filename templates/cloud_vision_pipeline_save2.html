@@ -30,6 +30,10 @@
 
 
 
+
+   <!-- Treant CSS for workflow tree styling -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('app_collaborative_sci_workflow.static',filename='Treant/Treant.css') }}"/>
+
    
 
 
@@ -1174,9 +1178,13 @@ document.getElementById("defaultOpen").click();
 
 
 
-
+<div id="tree-simple" style="width:90%;"></div>
 
 <div id="img_processing_screen"></div>
+
+
+
+
 
 
 
@@ -1487,7 +1495,9 @@ $('.letuschat').on('click', function() {
     <script src="{{ url_for('app_collaborative_sci_workflow.static',filename='assets/js/sparkline-chart.js') }}"></script>    
 	<script src="{{ url_for('app_collaborative_sci_workflow.static',filename='assets/js/zabuto_calendar.js') }}"></script>
       
-      	
+    <!-- Treant JS for workflow tree view -->
+<script type="text/javascript" src="{{ url_for('app_collaborative_sci_workflow.static',filename='Treant/raphael.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('app_collaborative_sci_workflow.static',filename='Treant/Treant.min.js') }}"></script>
 	
 
 	<script type="application/javascript">

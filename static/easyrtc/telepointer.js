@@ -54,6 +54,373 @@ $(document).ready(function(){
 
 
 
+//=======================================================
+//============== WORKFLOW DAG STARTS ====================
+//=======================================================
+
+//========================================================
+//============= WORKFLOW CONTROL CODE STARTS =============
+//========================================================
+
+  //tree implementation starts
+
+  //node construct
+  function Node(data) {
+    this.data = data;
+    this.nodeName = "A Workflow Module";
+    this.parent = null;
+    this.isLocked = false;
+    this.currentOwner = "NONE";
+    this.children = [];
+  }
+
+  //tree construct
+  function Tree(data) {
+    var node = new Node(data);
+    this._root = node;
+  }
+
+  //traverse the tree by df default starting from the root of the tree
+  Tree.prototype.traverseDF = function(callback) {
+
+    // this is a recurse and immediately-invoking function
+    (function recurse(currentNode) {
+      // step 2
+      for (var i = 0, length = currentNode.children.length; i < length; i++) {
+        // step 3
+        recurse(currentNode.children[i]);
+      }
+
+      // step 4
+      callback(currentNode);
+
+      // step 1
+    })(this._root);
+
+  };
+
+  //traverse by depth first search from a specified start node (parent)
+  Tree.prototype.traverseDF_FromNode = function(startNode, callback) {
+
+        // this is a recurse and immediately-invoking function
+        (function recurse(currentNode) {
+            // step 2
+            for (var i = 0, length = currentNode.children.length; i < length; i++) {
+                // step 3
+                recurse(currentNode.children[i]);
+            }
+
+            // step 4
+            callback(currentNode);
+
+            // step 1
+        })(startNode);
+
+    };
+
+  //scans through all the nodes of the tree
+  Tree.prototype.contains = function(callback, traversal) {
+    traversal.call(this, callback);
+
+  };
+
+  //add a new node to a specific parent of the tree
+  Tree.prototype.add = function(data, toData, traversal) {
+    var child = new Node(data),
+      parent = null,
+      callback = function(node) {
+        if (node.data === toData) {
+          parent = node;
+        }
+      };
+
+    this.contains(callback, traversal);
+
+    if (parent) {
+      parent.children.push(child);
+      child.parent = parent;
+    } else {
+      throw new Error('Cannot add node to a non-existent parent.');
+    }
+    //return the newly created node
+    return child;
+  };
+
+  //change the parent of a node to a new specified parent. the whole subtree (descendants)
+  //moves along the node.
+  Tree.prototype.changeParent = function(data, newParentData, traversal) {
+    var targetNode = null,
+    	oldParent = null,
+      callback = function(node) {
+        if (node.data === data) {
+          oldParent = node.parent;
+          targetNode = node;
+        }
+      };
+
+    this.contains(callback, traversal);
+
+    if (oldParent) {
+      index = findIndex(oldParent.children, data);
+
+      if (index === undefined) {
+        throw new Error('Node to change parents of does not exist.');
+      } else {
+        nodeToChangeParentOf = oldParent.children.splice(index, 1);
+
+        var newParent = null,
+          newParentCallback = function(node) {
+            if (node.data === newParentData) {
+              newParent = node;
+            }
+          };
+
+        this.contains(newParentCallback, traversal);
+
+        if (newParent) {
+        	newParent.children.push(targetNode);
+          targetNode.parent = newParent;
+          //alert(newParent.children[0].data);
+        } else {
+          throw new Error('New Parent Does not exist!');
+        }
+
+
+      }
+
+
+    } else {
+      throw new Error('The node did not have any previous parent!');
+    }
+
+  };
+
+  //removes a particular node from its parent.
+  Tree.prototype.remove = function(data, fromData, traversal) {
+    var tree = this,
+      parent = null,
+      childToRemove = null,
+      index;
+
+    var callback = function(node) {
+      if (node.data === fromData) {
+        parent = node;
+      }
+    };
+
+    this.contains(callback, traversal);
+
+    if (parent) {
+      index = findIndex(parent.children, data);
+
+      if (index === undefined) {
+        throw new Error('Node to remove does not exist.');
+      } else {
+        childToRemove = parent.children.splice(index, 1);
+      }
+    } else {
+      throw new Error('Parent does not exist.');
+    }
+
+    return childToRemove;
+  };
+
+  //returns node object, given its node data
+  Tree.prototype.getNode = function(nodeData,  traversal) {
+    var theNode = null,
+        callback = function(node) {
+            if (node.data === nodeData) {
+                theNode = node;
+            }
+        };
+    this.contains(callback, traversal);
+
+    return theNode;
+
+  }
+
+  //check if the node or any of its descendants are locked currently.
+  //if not, the node floor is available as per the client request.
+  Tree.prototype.isNodeFloorAvailable = function(nodeData,  traversal) {
+    var theNode = this.getNode(nodeData, traversal);
+    if(theNode == null){
+        throw new Error('The requested node for access does not exist!');
+    }
+
+    //if the node is itself locked, then its NOT available for the requested user
+    if(theNode.isLocked == true)return false;
+
+    //if the node itself is not locked, check if any of its children are locked or not
+    //if any of them are locked, the access is NOT granted...
+    var nodeFloorAvailability = true;
+    this.traverseDF_FromNode(theNode, function(node){
+        //if any of its descendants are locked currently, the node access is not available
+        if(node.isLocked == true)nodeFloorAvailability = false;
+    });
+
+
+    return nodeFloorAvailability;
+
+  }
+
+  //someone has got the access to this node, so lock it and all its descendants
+  Tree.prototype.lockThisNodeAndDescendants = function(newOwner,nodeData,  traversal) {
+    var theNode = this.getNode(nodeData, traversal);
+    this.traverseDF_FromNode(theNode, function(node){
+         //use helper function to load this node for the corresponding user
+         lockNode(node, newOwner);
+    });
+  }
+
+  //someone has released the access to this node, so UNLOCK it and all its descendants
+  Tree.prototype.unlockThisNodeAndDescendants = function(nodeData,  traversal) {
+    var theNode = this.getNode(nodeData, traversal);
+    this.traverseDF_FromNode(theNode, function(node){
+         //use the helper function to unlock the node.
+         unlockNode(node);
+    });
+  }
+
+
+  //HELPER FUNCTION: child index
+  function findIndex(arr, data) {
+    var index;
+
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i].data === data) {
+        index = i;
+      }
+    }
+
+    return index;
+  }
+
+  //HELPER FUNCTION: lock a given node with corresponding owner name
+  function lockNode(node, nodeOwner){
+    node.isLocked = true;
+    node.currentOwner = nodeOwner;
+  }
+
+  //HELPER FUNCTION: unlock a node
+  function unlockNode(node){
+    node.isLocked = false;
+    node.currentOwner = "NONE";
+  }
+
+   //====================
+   //tree implementation ends
+   //====================
+
+
+
+function getParentJSON(parentNodeData, tree_nodes){
+    for(var i=0; i< tree_nodes.length; i++){
+      if(tree_nodes[i].text.node_id == parentNodeData)return tree_nodes[i];
+    }
+
+return null;
+}
+
+
+function redrawWorkflowStructure(){
+  var all_nodes = [];
+  workflow.traverseDF(function(node) {
+    all_nodes.push(node);
+  });
+
+  all_nodes.reverse();
+
+  var tree_nodes = [];
+
+  for(var i=0; i<all_nodes.length; i++){
+
+    var aNode = null;
+
+    //assign color as per access for visulaization...
+    var nodeClass = "";
+    if(all_nodes[i].currentOwner == user_email)nodeClass = "lockedByMe";
+
+    if(all_nodes[i].parent){
+      aNode = {
+        "parent": getParentJSON(all_nodes[i].parent.data, tree_nodes),
+        "HTMLclass": "node",
+        "text" : {
+          "node_id": all_nodes[i].data,
+          "name": all_nodes[i].nodeName
+          },
+        "innerHTML": "<div class='node'><p>" +all_nodes[i].nodeName +"<span style='font-size:12px;color:black;'>::"+  all_nodes[i].data +"</span></p><button class='dag_module' dag_mod_id='"+ all_nodes[i].data.split('_')[1]+"'>Configure</button></div>"
+
+      }
+    }else{
+      aNode = {
+        "HTMLclass": "startNode",
+        "text" : {
+          "node_id": all_nodes[i].data,
+          "name": "Start"
+        },
+        "innerHTML": "<p>Start</p>"
+      }
+    }
+
+    tree_nodes.push(aNode);
+
+  }
+  config = {
+    container: "#tree-simple",
+    node: {
+        collapsable: true
+    },
+    connectors:{
+        type: "bCurve"
+    },
+    padding: 0
+  };
+
+
+  tree_nodes.push(config);
+  tree_nodes.reverse();
+
+  new Treant(tree_nodes);
+
+}
+
+
+//create parent workflow at the starting
+var workflow = new Tree("Module_0");
+//n1 = workflow.add("Module 1", "Workflow", workflow.traverseDF);
+//n2 = workflow.add("Module 2", "Module 1", workflow.traverseDF);
+//n1.nodeName = 'Extract Potential Clones';
+//n2.nodeName = 'Find Near Miss Clones';
+//redrawWorkflowStructure();
+
+
+
+$(document).on('click', ".dag_module", function(){
+    //alert($(this).attr('dag_mod_id'));
+    $(".module").hide();
+    $("#module_id_"+$(this).attr('dag_mod_id')).show();
+});
+
+//=======================================================
+//============== WORKFLOW DAG ENDS ======================
+//=======================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1454,10 +1821,62 @@ $(document).on('change', ".setting_param" ,function () {//here
         notifyAll("moduleSettingsChanged", changeInfo);
     }
 
+});
 
 
+
+//FOR DAG UPDATE
+//Module parent change...
+$(document).on('change', ".setting_param_parent" ,function () {//here
+
+    //this Module id
+    var thisModuleID = $(this).closest(".module").attr('id'); //of format module_id_n
+    var thisModuleIndex = thisModuleID.split('_')[2]; //n from the format module_id_n
+
+    //THis module ID (for workflow tree)
+    var thisModuleID = "Module_"+thisModuleIndex;//for workflow tree
+
+    //New parent ID
+    var newParentSelected = $(this).val(); // module_1='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_1.txt'
+    var fileNameIndex = newParentSelected.lastIndexOf("/") + 1;
+    var filename = newParentSelected.substr(fileNameIndex); // Module_1.txt'
+    var newParentModuleID = filename.split('.')[0];  // Module_1
+
+
+    //alert("This -> " + thisModuleID);
+    //alert("Parent -> " + newParentModuleID);
+
+    //update the workflow tree
+    workflow.changeParent(thisModuleID, newParentModuleID, workflow.traverseDF);
+
+     //redraw the workflow structure based on this update
+     redrawWorkflowStructure();
+
+
+
+
+    //alert(thisModuleID);
+
+
+    //myPar.attr('id');
+    //var parentIndex = $(this).index("#" + myPar.attr('id') + "  .setting_param_parent");
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 $("#run_pipeline").click(function () {
     $("#pr_status").html("<span style='color:orange'>Running Pipeline...</span>");
@@ -1721,7 +2140,7 @@ function addModuleToPipeline(moduleID, moduleName){
 
                 //append new module to the pipeline...
                 $("#img_processing_screen").append(
-                    '<div style="background-color:#EEE;width:100%" class="module" id="module_id_'+ moduleID +'">' +
+                    '<div style="background-color:#EEE;width:100%;display:none;" class="module" id="module_id_'+ moduleID +'">' +
 
                 '<!-- Documentation -->' +
                 '<div style="margin:10px;font-size:17px;color:#000000;">' +
@@ -1761,6 +2180,19 @@ function addModuleToPipeline(moduleID, moduleName){
             );//end of append
 
             $("#module_id_"+ moduleID + "_output_destination").val("output_destination = '/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_" + moduleID + "'").trigger('change');
+
+
+
+
+            //Update the DAG
+            var newWorkflowModule = workflow.add("Module_"+moduleID, "Module_0", workflow.traverseDF);
+            newWorkflowModule.nodeName = moduleName;
+            redrawWorkflowStructure();
+
+
+
+
+
 
             if(isItMyFloor() == false)lockParamsSettings();
 
@@ -1803,6 +2235,9 @@ $(document).on("click", ".pipeline_modules" ,function(){
     }
 
 });
+
+
+
 
 
 
@@ -2541,6 +2976,11 @@ $("#test_pipeline").click(function () {
 
 
 });
+
+
+
+
+
 
 
 
