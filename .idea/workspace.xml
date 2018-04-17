@@ -2,21 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d67430e-b95a-44a6-ae46-52e63d6cf157" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/Math_Addition/Math_Addition_html.txt" afterPath="$PROJECT_DIR$/pipeline_modules/Math_Addition/Math_Addition_html.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/Math_Const_Mult/Math_Const_Mult_html.txt" afterPath="$PROJECT_DIR$/pipeline_modules/Math_Const_Mult/Math_Const_Mult_html.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/Math_Division/Math_Division_html.txt" afterPath="$PROJECT_DIR$/pipeline_modules/Math_Division/Math_Division_html.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/Math_Multiplication/Math_Multiplication_html.txt" afterPath="$PROJECT_DIR$/pipeline_modules/Math_Multiplication/Math_Multiplication_html.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/Math_Power/Math_Power_html.txt" afterPath="$PROJECT_DIR$/pipeline_modules/Math_Power/Math_Power_html.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/Math_Subtraction/Math_Subtraction_html.txt" afterPath="$PROJECT_DIR$/pipeline_modules/Math_Subtraction/Math_Subtraction_html.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/NiCAD_abstracting/NiCAD_abstracting_html.txt" afterPath="$PROJECT_DIR$/pipeline_modules/NiCAD_abstracting/NiCAD_abstracting_html.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_html.txt" afterPath="$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_html.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/NiCAD_find_near_miss_clones/NiCAD_find_near_miss_clones_html.txt" afterPath="$PROJECT_DIR$/pipeline_modules/NiCAD_find_near_miss_clones/NiCAD_find_near_miss_clones_html.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing/NiCAD_normalizing_html.txt" afterPath="$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing/NiCAD_normalizing_html.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/NiCAD_renaming/NiCAD_renaming_html.txt" afterPath="$PROJECT_DIR$/pipeline_modules/NiCAD_renaming/NiCAD_renaming_html.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/Treant/Treant.css" afterPath="$PROJECT_DIR$/static/Treant/Treant.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/easyrtc/telepointer.js" afterPath="$PROJECT_DIR$/static/easyrtc/telepointer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/easyrtc/telepointer_module_locking.js" afterPath="$PROJECT_DIR$/static/easyrtc/telepointer_module_locking.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2.html" afterPath="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views.py" afterPath="$PROJECT_DIR$/views.py" />
     </list>
     <ignored path="app_collaborative_sci_workflow.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,46 +24,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="telepointer.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointer.js">
+      <file leaf-file-name="telepointerGO.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointerGO.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
-              <caret line="401" column="3" selection-start-line="401" selection-start-column="3" selection-end-line="401" selection-end-column="3" />
+            <state relative-caret-position="555">
+              <caret line="100" column="38" selection-start-line="100" selection-start-column="38" selection-end-line="100" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cloud_vision_pipeline_save2.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/cloud_vision_pipeline_save2.html">
+      <file leaf-file-name="cloud_vision_pipeline_save2GO.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="1384" column="30" selection-start-line="1384" selection-start-column="30" selection-end-line="1384" selection-end-column="30" />
+            <state relative-caret-position="387">
+              <caret line="1204" column="55" selection-start-line="1204" selection-start-column="55" selection-end-line="1204" selection-end-column="55" />
               <folding>
-                <element signature="n#style#0;n#button#1;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#button#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#textarea#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Treant.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/Treant/Treant.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="155" selection-start-line="16" selection-start-column="155" selection-end-line="16" selection-end-column="155" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Treant.min.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/Treant/Treant.min.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="1617" column="62" selection-start-line="1617" selection-start-column="57" selection-end-line="1617" selection-end-column="62" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -88,8 +55,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing/NiCAD_normalizing_doc.txt" />
-        <option value="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/FindClonePairs" />
         <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_find_near_miss_clones/NiCAD_find_near_miss_clones_doc.txt" />
         <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_find_near_miss_clones/NiCAD_find_near_miss_clones_main.py" />
         <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_find_near_miss_clones/NiCAD_find_near_miss_clones_settings.py" />
@@ -123,9 +88,7 @@
         <option value="$PROJECT_DIR$/pipeline_modules/Math_Power/Math_Power_doc.txt" />
         <option value="$PROJECT_DIR$/pipeline_modules/Math_Power/Math_Power_main.py" />
         <option value="$PROJECT_DIR$/pipeline_modules/Math_Power/Math_Power_settings.py" />
-        <option value="$PROJECT_DIR$/views.py" />
         <option value="$PROJECT_DIR$/static/easyrtc/telepointer_module_locking.js" />
-        <option value="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2.html" />
         <option value="$PROJECT_DIR$/pipeline_modules/Math_Addition/Math_Addition_html.txt" />
         <option value="$PROJECT_DIR$/pipeline_modules/Math_Const_Mult/Math_Const_Mult_html.txt" />
         <option value="$PROJECT_DIR$/pipeline_modules/Math_Division/Math_Division_html.txt" />
@@ -139,6 +102,10 @@
         <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_renaming/NiCAD_renaming_html.txt" />
         <option value="$PROJECT_DIR$/static/Treant/Treant.css" />
         <option value="$PROJECT_DIR$/static/easyrtc/telepointer.js" />
+        <option value="$PROJECT_DIR$/views.py" />
+        <option value="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2.html" />
+        <option value="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html" />
+        <option value="$PROJECT_DIR$/static/easyrtc/telepointerGO.js" />
       </list>
     </option>
   </component>
@@ -546,11 +513,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates" />
+      <recent name="$PROJECT_DIR$/static/easyrtc" />
       <recent name="$PROJECT_DIR$/pipeline_modules/Math_Power" />
       <recent name="$PROJECT_DIR$/pipeline_modules/Math_Const_Mult" />
       <recent name="$PROJECT_DIR$/pipeline_modules/Math_Division" />
-      <recent name="$PROJECT_DIR$/pipeline_modules/Math_Multiplication" />
-      <recent name="$PROJECT_DIR$/pipeline_modules/Math_Subtraction" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/pipeline_modules" />
@@ -745,22 +712,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/Nicad_clone_clusters/NiCAD_find_clone_clusters_settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/Nicad_clone_clusters/NiCAD_find_clone_clusters_main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="7" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/workflow_outputs/test_workflow2/detectedClones.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -993,16 +944,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="758" column="34" selection-start-line="758" selection-start-column="34" selection-end-line="758" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#73#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/cloud_vision_pipeline_save_module_locking.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="296">
@@ -1134,6 +1075,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="379" column="26" selection-start-line="379" selection-start-column="26" selection-end-line="379" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/static/Treant/Treant.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -1144,8 +1093,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/cloud_vision_pipeline_save2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="1384" column="30" selection-start-line="1384" selection-start-column="30" selection-end-line="1384" selection-end-column="30" />
+        <state relative-caret-position="588">
+          <caret line="115" column="0" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#button#1;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1154,10 +1103,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointer.js">
+    <entry file="file://$PROJECT_DIR$/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="401" column="3" selection-start-line="401" selection-start-column="3" selection-end-line="401" selection-end-column="3" />
+        <state relative-caret-position="694">
+          <caret line="547" column="0" selection-start-line="547" selection-start-column="0" selection-end-line="547" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="1204" column="55" selection-start-line="1204" selection-start-column="55" selection-end-line="1204" selection-end-column="55" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#textarea#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointerGO.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="100" column="38" selection-start-line="100" selection-start-column="38" selection-end-line="100" selection-end-column="38" />
           <folding />
         </state>
       </provider>

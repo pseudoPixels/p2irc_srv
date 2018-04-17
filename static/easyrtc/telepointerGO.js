@@ -24,6 +24,219 @@ var iAmDone = false;
 $(document).ready(function(){
 
 
+
+
+
+
+
+//========================================================
+//================ GO CODES STARTS =======================
+//========================================================
+function init() {
+
+    var $ = go.GraphObject.make;
+
+    myDiagram =
+      $(go.Diagram, "myDiagramDiv",
+        {
+          initialContentAlignment: go.Spot.Left,
+          initialAutoScale: go.Diagram.UniformToFill,
+
+          "undoManager.isEnabled": true
+        }
+      );
+ 	myDiagram.grid.visible = true;
+    // when the document is modified, add a "*" to the title and enable the "Save" button
+    myDiagram.addDiagramListener("Modified", function(e) {
+      var button = document.getElementById("SaveButton");
+      if (button) button.disabled = !myDiagram.isModified;
+      var idx = document.title.indexOf("*");
+      if (myDiagram.isModified) {
+        if (idx < 0) document.title += "*";
+      } else {
+        if (idx >= 0) document.title = document.title.substr(0, idx);
+      }
+    });
+
+
+      // this predicate is true if both nodes have the same color
+  function sameDataType(fromnode, fromport, tonode, toport) {
+    return fromport.portId === toport.portId;
+    // this could look at the fromport.fill and toport.fill instead,
+    // assuming that the ports are Shapes, which they are because portID was set on them,
+    // and that there is a data Binding on the Shape.fill
+  }
+
+  // only allow new links between ports of the same color
+  //myDiagram.toolManager.linkingTool.linkValidation = sameDataType;
+
+
+
+    function makePort(name, leftside) {
+      var port = $(go.Shape, "Rectangle",
+                   {
+                     fill: "#FF5733", stroke: null,
+                     desiredSize: new go.Size(8, 8),
+                     portId: name,  // declare this object to be a "port"
+                     toMaxLinks: 1,  // don't allow more than one link into a port
+                     cursor: "pointer"  // show a different cursor to indicate potential link point
+                   });
+
+      var lab = $(go.TextBlock, name,  // the name of the port
+                  { font: "7pt sans-serif", stroke: "black" });
+
+      var panel = $(go.Panel, "Horizontal",
+                    { margin: new go.Margin(2, 0) });
+
+      // set up the port/panel based on which side of the node it will be on
+      if (leftside) {
+        port.toSpot = go.Spot.Left;
+        port.toLinkable = true;
+        port.fill = 'orange';
+        lab.margin = new go.Margin(1, 0, 0, 1);
+        panel.alignment = go.Spot.TopLeft;
+        panel.add(port);
+        panel.add(lab);
+      } else {
+        port.fromSpot = go.Spot.Right;
+        port.fromLinkable = true;
+        lab.margin = new go.Margin(1, 1, 0, 0);
+        panel.alignment = go.Spot.TopRight;
+        panel.add(lab);
+        panel.add(port);
+      }
+      return panel;
+    }
+
+    function makeTemplate(typename, icon, background, inports, outports) {
+      var node = $(go.Node, "Spot",
+          $(go.Panel, "Auto",
+            { width: 250, height: 120 },
+            $(go.Shape, "RoundedRectangle",
+              {
+                fill: "white", stroke: "black", strokeWidth: 2,
+                spot1: go.Spot.TopLeft, spot2: go.Spot.BottomRight
+              }),
+            $(go.Panel, "Table",
+              $(go.TextBlock,
+                {
+                  row: 0,
+                  margin: 3,
+                  editable: true,
+                  maxSize: new go.Size(150, 40),
+                  stroke: "black",
+                  font: "bold 11pt sans-serif"
+                },
+                new go.Binding("text", "name").makeTwoWay()),
+              $(go.Picture, icon,
+                { row: 1, width: 55, height: 55 }),
+                $(go.TextBlock, typename,
+                {
+                  row: 2,
+                  margin: 3,
+                  maxSize: new go.Size(150, NaN),
+                  stroke: "black",
+                  font: "bold 9pt sans-serif"
+                })
+            )
+          ),
+          $(go.Panel, "Vertical",
+            {
+              alignment: go.Spot.Left,
+              alignmentFocus: new go.Spot(0, 0.5, -8, 0)
+            },
+            inports),
+          $(go.Panel, "Vertical",
+            {
+              alignment: go.Spot.Right,
+              alignmentFocus: new go.Spot(1, 0.5, 8, 0)
+            },
+            outports)
+        );
+      myDiagram.nodeTemplateMap.add(typename, node);
+    }
+
+    makeTemplate("Table", "images/55x55.png", "forestgreen",
+                 [],
+                 [makePort("L", false), makePort("R", false)]);
+
+                     makeTemplate("Project", "images/55x55.png", "darkcyan",
+                 [makePort("L", true)],
+                 [makePort("OUT", false)]);
+
+    makeTemplate("Join", "images/55x55.png", "mediumorchid",
+                 [makePort("L", true), makePort("R", true)],
+                 [makePort("L", false), makePort("ML", false), makePort("M", false), makePort("R", false), makePort("UR", false)]);
+
+
+
+    makeTemplate("Filter", "images/55x55.png", "cornflowerblue",
+                 [makePort("", true)],
+                 [makePort("OUT", false),makePort("INV", false)]);
+
+    makeTemplate("Group", "images/55x55.png", "mediumpurple",
+                 [makePort("", true)],
+                 [makePort("OUT", false)]);
+
+    makeTemplate("Sort", "images/55x55.png", "sienna",
+                 [makePort("", true)],
+                 [makePort("OUT", false)]);
+
+    makeTemplate("Export", "images/55x55.png", "darkred",
+                 [makePort("", true)],
+                []);
+
+    myDiagram.linkTemplate =
+      $(go.Link,
+        {
+          routing: go.Link.Orthogonal, corner: 5,
+          relinkableFrom: true, relinkableTo: true
+        },
+        $(go.Shape, { stroke: "#00bfff", strokeWidth: 2.5 }),
+        $(go.Shape, { stroke: "#00bfff", fill: "#00bfff", toArrow: "Standard" })
+      );
+
+    load();
+  }
+
+  // Show the diagram's model in JSON format that the user may edit
+  function save() {
+    document.getElementById("mySavedModel").value = myDiagram.model.toJson();
+    myDiagram.isModified = false;
+  }
+  function load() {
+    myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
+  }
+
+  init();
+
+
+
+//========================================================
+//================ GO CODES ENDS =========================
+//========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //========================================================
 //================ ALL INITIALIZATION CODES STARTS =======
 //========================================================

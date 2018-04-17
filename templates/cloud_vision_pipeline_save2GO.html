@@ -106,9 +106,12 @@
         <script src="{{ url_for('app_collaborative_sci_workflow.static',filename='easyrtc/socket.io.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('app_collaborative_sci_workflow.static',filename='easyrtc/easyrtc.js') }}"></script>
 
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/1.8.16/go.js"></script>
+
         <!-- Specific feature files... Uncomment/Comment to remove/add specific features  -->
         <!-- <script type="text/javascript"  src="{{ url_for('static',filename='easyrtc/demo_audio_video.js') }}"></script> -->
-        <script type="text/javascript"  src="{{ url_for('app_collaborative_sci_workflow.static',filename='easyrtc/telepointer.js') }}"></script>
+        <script type="text/javascript"  src="{{ url_for('app_collaborative_sci_workflow.static',filename='easyrtc/telepointerGO.js') }}"></script> <!-- use telepointer.js for normal (without GO)-->
         <!--
         <script type="text/javascript"  src="{{ url_for('static',filename='easyrtc/collaboration_controls.js') }}"></script>-->
 
@@ -1176,9 +1179,38 @@ document.getElementById("defaultOpen").click();
 
 
 
+<br/>
+<!------------------------------------------------------------>
+<!------------------------------------------------------------>
+<!-- this go-digraph is for testing GO. REMOVE WITH CAUTION.-->
+<div id="go-digraph">
+    <div id="sample">
+  <div id="myDiagramDiv" style="border: solid 1px black; width: 100%; height: 600px"></div>
 
+  <div>
+    <div>
+      <button id="SaveButton" onclick="save()">Save</button>
+      <button onclick="load()">Load</button>
+      Diagram Model saved in JSON format:
+    </div>
+    <textarea id="mySavedModel" style="width:100%;height:300px">{ "class": "go.GraphLinksModel",
+  "nodeCategoryProperty": "type",
+  "linkFromPortIdProperty": "frompid",
+  "linkToPortIdProperty": "topid",
+  "nodeDataArray": [
+{"key":21, "type":"Project", "name":"NiCAD - Extract Potential Clones"},
+{"key":22, "type":"Project", "name":"NiCAD - Find Near Miss Clones (LCS)"},
+{"key":23, "type":"Project", "name":"NiCAD - Abstracting"},
+{"key":23, "type":"Project", "name":"NiCAD - Normalizing"},
+{"key":23, "type":"Project", "name":"NiCAD - Renaming"}
+  ],
+  "linkDataArray": [
 
-
+  ]}
+    </textarea>
+  </div>
+</div>
+</div>
 
 
 

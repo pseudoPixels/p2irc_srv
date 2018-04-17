@@ -546,7 +546,7 @@ def cvs():
 	saved_workflows = os.listdir("app_collaborative_sci_workflow/pipeline_saved/")
 
 
-	return render_template('cloud_vision_pipeline_save2.html', 
+	return render_template('cloud_vision_pipeline_save2GO.html', # change to cloud_vision_pipeline_save2.html for normal (without GO, which is in testing phase)
 	module_name = '',#module.module_name,
 	documentation = '',#module.documentation,
 	moduleSourceCode_settings = moduleSourceCode_settings,
