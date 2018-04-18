@@ -131,14 +131,15 @@ function init() {
                 new go.Binding("text", "name").makeTwoWay()),
               $(go.Picture, icon,
                 { row: 1, width: 55, height: 55 }),
-                $(go.TextBlock, typename,
+                $(go.TextBlock,
                 {
                   row: 2,
                   margin: 3,
                   maxSize: new go.Size(150, NaN),
                   stroke: "black",
-                  font: "bold 9pt sans-serif"
-                })
+                  font: "bold 8pt sans-serif"
+                },
+                new go.Binding("text", "module_id").makeTwoWay())
             )
           ),
           $(go.Panel, "Vertical",
@@ -159,7 +160,7 @@ function init() {
 
 
 
-    makeTemplate("Project", "images/55x55.png", "darkcyan",
+    makeTemplate("Project","images/55x55.png", "darkcyan",
                  [makePort("xml","Potential Clones", true)],
                  [makePort("xml", "XML ",false)]);
 
@@ -199,8 +200,8 @@ function init() {
     myDiagram.linkTemplate =
       $(go.Link,
         {
-          routing: go.Link.Orthogonal, corner: 5,
-          relinkableFrom: true, relinkableTo: true
+          routing: go.Link.AvoidsNodes, corner: 10,
+          relinkableFrom: true, relinkableTo: true, curve: go.Link.JumpGap
         },
         $(go.Shape, { stroke: "#00bfff", strokeWidth: 2.5 }),
         $(go.Shape, { stroke: "#00bfff", fill: "#00bfff", toArrow: "Standard" })
