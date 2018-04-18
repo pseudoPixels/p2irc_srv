@@ -59,31 +59,31 @@ function init() {
     });
 
 
-      // this predicate is true if both nodes have the same color
-  function sameDataType(fromnode, fromport, tonode, toport) {
-    return fromport.portId === toport.portId;
-    // this could look at the fromport.fill and toport.fill instead,
-    // assuming that the ports are Shapes, which they are because portID was set on them,
-    // and that there is a data Binding on the Shape.fill
+  // validate if the linking modules have the same (compatible) data type
+  function validateSameDataTypeOfModules(fromnode, fromport, tonode, toport) {
+    //fromport.portId ==> out:txt
+    if(fromport.portId.split(':')[1] == toport.portId.split(':')[1])return true;
+    return false;
+
   }
 
-  // only allow new links between ports of the same color
-  //myDiagram.toolManager.linkingTool.linkValidation = sameDataType;
+  // validate if the linking modules have the same (compatible) data type
+  myDiagram.toolManager.linkingTool.linkValidation = validateSameDataTypeOfModules;
 
 
 
-    function makePort(name, leftside) {
+    function makePort(portDataType, portDisplayName, leftside) {
       var port = $(go.Shape, "Rectangle",
                    {
                      fill: "#FF5733", stroke: null,
                      desiredSize: new go.Size(8, 8),
-                     portId: name,  // declare this object to be a "port"
+                     //portId: portDataType,  // declare this object to be a "port"
                      toMaxLinks: 1,  // don't allow more than one link into a port
                      cursor: "pointer"  // show a different cursor to indicate potential link point
                    });
 
-      var lab = $(go.TextBlock, name,  // the name of the port
-                  { font: "7pt sans-serif", stroke: "black" });
+      var lab = $(go.TextBlock, portDisplayName,  // the name of the port
+                  { font: "8pt sans-serif", stroke: "black", maxSize: new go.Size(100, 40),margin: 2 });
 
       var panel = $(go.Panel, "Horizontal",
                     { margin: new go.Margin(2, 0) });
@@ -92,6 +92,7 @@ function init() {
       if (leftside) {
         port.toSpot = go.Spot.Left;
         port.toLinkable = true;
+        port.portId = 'in:'+portDataType;
         port.fill = 'orange';
         lab.margin = new go.Margin(1, 0, 0, 1);
         panel.alignment = go.Spot.TopLeft;
@@ -100,6 +101,7 @@ function init() {
       } else {
         port.fromSpot = go.Spot.Right;
         port.fromLinkable = true;
+        port.portId = 'out:'+portDataType;
         lab.margin = new go.Margin(1, 1, 0, 0);
         panel.alignment = go.Spot.TopRight;
         panel.add(lab);
@@ -122,7 +124,6 @@ function init() {
                 {
                   row: 0,
                   margin: 3,
-                  editable: true,
                   maxSize: new go.Size(150, 40),
                   stroke: "black",
                   font: "bold 11pt sans-serif"
@@ -156,19 +157,25 @@ function init() {
       myDiagram.nodeTemplateMap.add(typename, node);
     }
 
-    makeTemplate("Table", "images/55x55.png", "forestgreen",
-                 [],
-                 [makePort("L", false), makePort("R", false)]);
 
-                     makeTemplate("Project", "images/55x55.png", "darkcyan",
-                 [makePort("L", true)],
-                 [makePort("OUT", false)]);
 
+    makeTemplate("Project", "images/55x55.png", "darkcyan",
+                 [makePort("xml","Potential Clones", true)],
+                 [makePort("xml", "XML ",false)]);
+
+    makeTemplate("Project2", "images/55x55.png", "darkcyan",
+                 [makePort("xml","Potential Clones", true)],
+                 [makePort("xml", "XML",false)]);
+
+
+/*
     makeTemplate("Join", "images/55x55.png", "mediumorchid",
                  [makePort("L", true), makePort("R", true)],
                  [makePort("L", false), makePort("ML", false), makePort("M", false), makePort("R", false), makePort("UR", false)]);
 
-
+    makeTemplate("Table", "images/55x55.png", "forestgreen",
+                 [],
+                 [makePort("L", false), makePort("R", false)]);
 
     makeTemplate("Filter", "images/55x55.png", "cornflowerblue",
                  [makePort("", true)],
@@ -185,6 +192,9 @@ function init() {
     makeTemplate("Export", "images/55x55.png", "darkred",
                  [makePort("", true)],
                 []);
+*/
+
+
 
     myDiagram.linkTemplate =
       $(go.Link,
