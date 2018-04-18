@@ -39,7 +39,7 @@ function init() {
     myDiagram =
       $(go.Diagram, "myDiagramDiv",
         {
-          initialContentAlignment: go.Spot.Left,
+          initialContentAlignment: go.Spot.Center,
           initialAutoScale: go.Diagram.UniformToFill,
 
           "undoManager.isEnabled": true
@@ -116,7 +116,7 @@ function init() {
             { width: 250, height: 120 },
             $(go.Shape, "RoundedRectangle",
               {
-                fill: "white", stroke: "black", strokeWidth: 2,
+                fill: background, stroke: "black", strokeWidth: 2,
                 spot1: go.Spot.TopLeft, spot2: go.Spot.BottomRight
               }),
             $(go.Panel, "Table",
@@ -160,41 +160,13 @@ function init() {
 
 
 
-    makeTemplate("Project","images/55x55.png", "darkcyan",
+    makeTemplate("Project","images/55x55.png", "white",
                  [makePort("xml","Potential Clones", true)],
                  [makePort("xml", "XML ",false)]);
 
-    makeTemplate("Project2", "images/55x55.png", "darkcyan",
+    makeTemplate("Project2", "images/55x55.png", "white",
                  [makePort("xml","Potential Clones", true)],
                  [makePort("xml", "XML",false)]);
-
-
-/*
-    makeTemplate("Join", "images/55x55.png", "mediumorchid",
-                 [makePort("L", true), makePort("R", true)],
-                 [makePort("L", false), makePort("ML", false), makePort("M", false), makePort("R", false), makePort("UR", false)]);
-
-    makeTemplate("Table", "images/55x55.png", "forestgreen",
-                 [],
-                 [makePort("L", false), makePort("R", false)]);
-
-    makeTemplate("Filter", "images/55x55.png", "cornflowerblue",
-                 [makePort("", true)],
-                 [makePort("OUT", false),makePort("INV", false)]);
-
-    makeTemplate("Group", "images/55x55.png", "mediumpurple",
-                 [makePort("", true)],
-                 [makePort("OUT", false)]);
-
-    makeTemplate("Sort", "images/55x55.png", "sienna",
-                 [makePort("", true)],
-                 [makePort("OUT", false)]);
-
-    makeTemplate("Export", "images/55x55.png", "darkred",
-                 [makePort("", true)],
-                []);
-*/
-
 
 
     myDiagram.linkTemplate =
