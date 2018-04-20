@@ -2339,11 +2339,29 @@ function addModuleToPipeline(moduleID, moduleName){
                     user_role_based_edit = '| <a style="font-size:12px;color:#000000;" href="#" class="btn_edit_code"> Edit </a> | <a style="font-size:12px;color:#000000;" href="#" > Contact Author </a>';
                 }
 
-            //parser = new DOMParser();
-            //xmlDoc = parser.parseFromString(moduleSourceCode_html,"text/xml");
+                //Parse the givn XML for tool definition
+                var xmlDoc = $.parseXML( moduleSourceCode_html );
+                var $xml_tool_definition = $(xmlDoc);
 
-            //moduleSourceCode_html =
-            //xmlDoc.getElementsByTagName("WorC")[0].innerHTML;
+                //the tool configuration.
+                //TODO: add the input port info.
+                var tool_configs = $xml_tool_definition.find("toolConfigurations");
+                tool_configs = tool_configs.html();
+
+
+
+                var tool_documentation = $xml_tool_definition.find("toolDocumentation");
+                tool_documentation = tool_documentation.html();
+
+
+
+//Parse the givn XML
+//var xmlDoc = $.parseXML( xml );
+
+//var $xml = $(xmlDoc);
+
+  // Find Person Tag
+//var $person = $xml.find("toolConfigurations");
 
 
                 //append new module to the pipeline...
@@ -2354,14 +2372,14 @@ function addModuleToPipeline(moduleID, moduleName){
                 '<div style="margin:10px;font-size:17px;color:#000000;">' +
                   ' ' + module_name +  ' (Module ' + moduleID + ')'+ '<hr/>' +
                    ' Documentation: <a style="font-size:12px;color:#000000;" href="#" class="documentation_show_hide">(Show/Hide)</a>' +
-                    '<div class="documentation" style="background-color:#DDDDDD;display:none;font-size:14px;">' + documentation + '</div>' +
+                    '<div class="documentation" style="background-color:#DDDDDD;display:none;font-size:14px;">' + tool_documentation + '</div>' +
                 '</div>' +
 
 
                 '<!-- Settings -->' +
                 '<div style="margin:10px;font-size:17px;color:#000000;">' +
                  '   Settings: <a style="font-size:12px;color:#000000;" href="#" class="settings_show_hide">(Show/Hide)</a>' +
-                 '   <div class="settings" style="background-color:#DDDDDD;display:none;font-size:14px;">' + moduleSourceCode_html +
+                 '   <div class="settings" style="background-color:#DDDDDD;display:none;font-size:14px;">' + tool_configs +
                         '<input type="hidden" class="setting_param " size="45" id="module_id_'+ moduleID +'_output_destination" />'+
                     '</div>' +
                 '</div>' +
@@ -2396,14 +2414,9 @@ function addModuleToPipeline(moduleID, moduleName){
             var listOfOutputPorts = [];
 
 
-            //Parse the givn XML
-            var xmlDoc = $.parseXML( moduleSourceCode_html );
-            var $xml = $(xmlDoc);
-
-
 
              //input port definition
-            var $toolInput = $xml.find("toolInput");
+            var $toolInput = $xml_tool_definition.find("toolInput");
 
             $toolInput.each(function(){
 
@@ -2423,7 +2436,7 @@ function addModuleToPipeline(moduleID, moduleName){
 
 
              //input port definition
-            var $toolOutput = $xml.find("toolOutput");
+            var $toolOutput = $xml_tool_definition.find("toolOutput");
 
             $toolOutput.each(function(){
 
