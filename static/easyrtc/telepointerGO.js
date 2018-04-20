@@ -199,8 +199,11 @@ myDiagram='';
   }
 
   //init();
-
-
+  // create the Overview and initialize it to show the main Diagram
+  var myOverview =
+    $$(go.Overview, "myDiagramOverview",
+      { observed: myDiagram });
+    myOverview.grid.visible = false;
 
 //========================================================
 //================ GO CODES ENDS =========================

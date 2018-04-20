@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d67430e-b95a-44a6-ae46-52e63d6cf157" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/easyrtc/telepointerGO.js" afterPath="$PROJECT_DIR$/static/easyrtc/telepointerGO.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html" afterPath="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html" />
     </list>
     <ignored path="app_collaborative_sci_workflow.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,10 +26,10 @@
       <file leaf-file-name="telepointerGO.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointerGO.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="2360" column="23" selection-start-line="2360" selection-start-column="23" selection-end-line="2360" selection-end-column="23" />
+            <state relative-caret-position="241">
+              <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
               <folding>
-                <element signature="e#0#92629#0" expanded="false" />
+                <element signature="e#0#92824#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -58,10 +58,11 @@
       <file leaf-file-name="cloud_vision_pipeline_save2GO.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="86">
-              <caret line="601" column="44" selection-start-line="601" selection-start-column="44" selection-end-line="601" selection-end-column="44" />
+            <state relative-caret-position="292">
+              <caret line="1607" column="0" selection-start-line="1607" selection-start-column="0" selection-end-line="1607" selection-end-column="0" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#textarea#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -124,10 +125,10 @@
         <option value="$PROJECT_DIR$/static/Treant/Treant.css" />
         <option value="$PROJECT_DIR$/static/easyrtc/telepointer.js" />
         <option value="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2.html" />
-        <option value="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html" />
         <option value="$PROJECT_DIR$/views.py" />
         <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_renaming2/NiCAD_renaming2_html.txt" />
         <option value="$PROJECT_DIR$/static/easyrtc/telepointerGO.js" />
+        <option value="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html" />
       </list>
     </option>
   </component>
@@ -1109,18 +1110,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="601" column="44" selection-start-line="601" selection-start-column="44" selection-end-line="601" selection-end-column="44" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#textarea#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -1145,12 +1134,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="1607" column="0" selection-start-line="1607" selection-start-column="0" selection-end-line="1607" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#textarea#0;n#div#1;n#div#0;n#div#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointerGO.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="2360" column="23" selection-start-line="2360" selection-start-column="23" selection-end-line="2360" selection-end-column="23" />
+        <state relative-caret-position="241">
+          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
           <folding>
-            <element signature="e#0#92629#0" expanded="false" />
+            <element signature="e#0#92824#0" expanded="false" />
           </folding>
         </state>
       </provider>
