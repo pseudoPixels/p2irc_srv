@@ -32,12 +32,13 @@ $(document).ready(function(){
 //========================================================
 //================ GO CODES STARTS =======================
 //========================================================
-function init() {
+myDiagram='';
+//function init() {
 
-    var $ = go.GraphObject.make;
+    var $$ = go.GraphObject.make;
 
     myDiagram =
-      $(go.Diagram, "myDiagramDiv",
+      $$(go.Diagram, "myDiagramDiv",
         {
           initialContentAlignment: go.Spot.Center,
           initialAutoScale: go.Diagram.UniformToFill,
@@ -47,7 +48,7 @@ function init() {
       );
  	myDiagram.grid.visible = true;
     // when the document is modified, add a "*" to the title and enable the "Save" button
-    myDiagram.addDiagramListener("Modified", function(e) {
+    /*myDiagram.addDiagramListener("Modified", function(e) {
       var button = document.getElementById("SaveButton");
       if (button) button.disabled = !myDiagram.isModified;
       var idx = document.title.indexOf("*");
@@ -56,13 +57,22 @@ function init() {
       } else {
         if (idx >= 0) document.title = document.title.substr(0, idx);
       }
-    });
+    });*/
 
 
   // validate if the linking modules have the same (compatible) data type
   function validateSameDataTypeOfModules(fromnode, fromport, tonode, toport) {
+    //portID => port_identifier(portDataType)
+    var portOneDataType = fromport.portId.split('(')[fromport.portId.split('(').length - 1]; // portDataType)
+    portOneDataType = portOneDataType.split(')')[0]; // portDataType
+
+    var portTwoDataType = toport.portId.split('(')[toport.portId.split('(').length - 1]; // portDataType)
+    portTwoDataType = portTwoDataType.split(')')[0]; // portDataType
+
+    if(portOneDataType == portTwoDataType)return true; //the linking datatype is same, so allow
     //fromport.portId ==> out:txt
-    if(fromport.portId.split(':')[1] == toport.portId.split(':')[1])return true;
+    //if(fromport.portId.split(':')[1] == toport.portId.split(':')[1])return true;
+    //if(fromport.portDataType == toport.portDataType)return true;
     return false;
 
   }
@@ -72,8 +82,8 @@ function init() {
 
 
 
-    function makePort(portDataType, portDisplayName, leftside) {
-      var port = $(go.Shape, "Rectangle",
+    function makePort(portDataType, portIdentifier, leftside) {
+      var port = $$(go.Shape, "Rectangle",
                    {
                      fill: "#FF5733", stroke: null,
                      desiredSize: new go.Size(8, 8),
@@ -82,17 +92,17 @@ function init() {
                      cursor: "pointer"  // show a different cursor to indicate potential link point
                    });
 
-      var lab = $(go.TextBlock, portDisplayName,  // the name of the port
-                  { font: "8pt sans-serif", stroke: "black", maxSize: new go.Size(100, 40),margin: 2 });
+      var lab = $$(go.TextBlock, portIdentifier + ' ('+ portDataType +') ',  // the name of the port
+                  { font: "8pt sans-serif", stroke: "black", maxSize: new go.Size(150, 40),margin: 0 });
 
-      var panel = $(go.Panel, "Horizontal",
+      var panel =$$(go.Panel, "Horizontal",
                     { margin: new go.Margin(2, 0) });
 
       // set up the port/panel based on which side of the node it will be on
       if (leftside) {
         port.toSpot = go.Spot.Left;
         port.toLinkable = true;
-        port.portId = 'in:'+portDataType;
+        port.portId = portIdentifier + '('+ portDataType +')';
         port.fill = 'orange';
         lab.margin = new go.Margin(1, 0, 0, 1);
         panel.alignment = go.Spot.TopLeft;
@@ -101,7 +111,7 @@ function init() {
       } else {
         port.fromSpot = go.Spot.Right;
         port.fromLinkable = true;
-        port.portId = 'out:'+portDataType;
+        port.portId = portIdentifier+ '('+ portDataType +')';
         lab.margin = new go.Margin(1, 1, 0, 0);
         panel.alignment = go.Spot.TopRight;
         panel.add(lab);
@@ -111,16 +121,16 @@ function init() {
     }
 
     function makeTemplate(typename, icon, background, inports, outports) {
-      var node = $(go.Node, "Spot",
-          $(go.Panel, "Auto",
+      var node = $$(go.Node, "Spot",
+          $$(go.Panel, "Auto",
             { width: 250, height: 120 },
-            $(go.Shape, "RoundedRectangle",
+            $$(go.Shape, "RoundedRectangle",
               {
                 fill: background, stroke: "black", strokeWidth: 2,
                 spot1: go.Spot.TopLeft, spot2: go.Spot.BottomRight
               }),
-            $(go.Panel, "Table",
-              $(go.TextBlock,
+            $$(go.Panel, "Table",
+              $$(go.TextBlock,
                 {
                   row: 0,
                   margin: 3,
@@ -129,9 +139,9 @@ function init() {
                   font: "bold 11pt sans-serif"
                 },
                 new go.Binding("text", "name").makeTwoWay()),
-              $(go.Picture, icon,
+              $$(go.Picture, icon,
                 { row: 1, width: 55, height: 55 }),
-                $(go.TextBlock,
+                $$(go.TextBlock,
                 {
                   row: 2,
                   margin: 3,
@@ -142,13 +152,13 @@ function init() {
                 new go.Binding("text", "module_id").makeTwoWay())
             )
           ),
-          $(go.Panel, "Vertical",
+          $$(go.Panel, "Vertical",
             {
               alignment: go.Spot.Left,
               alignmentFocus: new go.Spot(0, 0.5, -8, 0)
             },
             inports),
-          $(go.Panel, "Vertical",
+          $$(go.Panel, "Vertical",
             {
               alignment: go.Spot.Right,
               alignmentFocus: new go.Spot(1, 0.5, 8, 0)
@@ -164,23 +174,20 @@ function init() {
                  [makePort("xml","Potential Clones", true)],
                  [makePort("xml", "XML ",false)]);
 
-    makeTemplate("Project2", "images/55x55.png", "white",
-                 [makePort("xml","Potential Clones", true)],
-                 [makePort("xml", "XML",false)]);
 
 
     myDiagram.linkTemplate =
-      $(go.Link,
+      $$(go.Link,
         {
           routing: go.Link.AvoidsNodes, corner: 10,
           relinkableFrom: true, relinkableTo: true, curve: go.Link.JumpGap
         },
-        $(go.Shape, { stroke: "#00bfff", strokeWidth: 2.5 }),
-        $(go.Shape, { stroke: "#00bfff", fill: "#00bfff", toArrow: "Standard" })
+        $$(go.Shape, { stroke: "#00bfff", strokeWidth: 2.5 }),
+        $$(go.Shape, { stroke: "#00bfff", fill: "#00bfff", toArrow: "Standard" })
       );
 
     load();
-  }
+
 
   // Show the diagram's model in JSON format that the user may edit
   function save() {
@@ -191,7 +198,7 @@ function init() {
     myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
   }
 
-  init();
+  //init();
 
 
 
@@ -2332,12 +2339,16 @@ function addModuleToPipeline(moduleID, moduleName){
                     user_role_based_edit = '| <a style="font-size:12px;color:#000000;" href="#" class="btn_edit_code"> Edit </a> | <a style="font-size:12px;color:#000000;" href="#" > Contact Author </a>';
                 }
 
+            //parser = new DOMParser();
+            //xmlDoc = parser.parseFromString(moduleSourceCode_html,"text/xml");
 
+            //moduleSourceCode_html =
+            //xmlDoc.getElementsByTagName("WorC")[0].innerHTML;
 
 
                 //append new module to the pipeline...
                 $("#img_processing_screen").append(
-                    '<div style="background-color:#EEE;width:100%;display:none;" class="module" id="module_id_'+ moduleID +'">' +
+                    '<div style="background-color:#EEE;width:100%;" class="module" id="module_id_'+ moduleID +'">' +
 
                 '<!-- Documentation -->' +
                 '<div style="margin:10px;font-size:17px;color:#000000;">' +
@@ -2381,10 +2392,83 @@ function addModuleToPipeline(moduleID, moduleName){
 
 
 
+            var listOfInputPorts = [];
+            var listOfOutputPorts = [];
+
+
+            //Parse the givn XML
+            var xmlDoc = $.parseXML( moduleSourceCode_html );
+            var $xml = $(xmlDoc);
+
+
+
+             //input port definition
+            var $toolInput = $xml.find("toolInput");
+
+            $toolInput.each(function(){
+
+                var label = $(this).find('label').text(),
+                    dataFormat = $(this).find('dataFormat').text(),
+                    idn = $(this).find('identifier').text();
+
+                //$("#ProfileList" ).append('<li>' +label+ ' - ' +dataFormat+ ' - ' + idn +'</li>');
+
+                var aNewInputPort = makePort(dataFormat,idn,true);
+                listOfInputPorts.push(aNewInputPort);
+
+            });
+
+
+
+
+
+             //input port definition
+            var $toolOutput = $xml.find("toolOutput");
+
+            $toolOutput.each(function(){
+
+                var label = $(this).find('label').text(),
+                    dataFormat = $(this).find('dataFormat').text(),
+                    idn = $(this).find('identifier').text();
+
+                //$("#ProfileList" ).append('<li>' +label+ ' - ' +dataFormat+ ' - ' + idn +'</li>');
+
+                var aNewOutputPort = makePort(dataFormat,idn,false);
+                listOfOutputPorts.push(aNewOutputPort);
+
+            });
+
+
+
+
+
+                makeTemplate(moduleName,"images/55x55.png", "white",
+                 listOfInputPorts,
+                 listOfOutputPorts);
+
+
+
+
+
+
             //Update the DAG
-            var newWorkflowModule = workflow.add("Module_"+moduleID, "Module_0", workflow.traverseDF);
-            newWorkflowModule.nodeName = moduleName;
-            redrawWorkflowStructure();
+            //var newWorkflowModule = workflow.add("Module_"+moduleID, "Module_0", workflow.traverseDF);
+            //newWorkflowModule.nodeName = moduleName;
+            //redrawWorkflowStructure();
+
+
+            //alert("Add");
+            myDiagram.startTransaction("add node");
+            // have the Model add the node data
+            var newnode = {"key":"Module_" + moduleID, "type":moduleName, "name":moduleName, "module_id": "Module "+moduleID};
+            myDiagram.model.addNodeData(newnode);
+            // locate the node initially where the parent node is
+           // diagram.findNodeForData(newnode).location = node.location;
+            // and then add a link data connecting the original node with the new one
+            //var newlink = { from: node.data.key, to: newnode.key };
+            //diagram.model.addLinkData(newlink);
+            // finish the transaction -- will automatically perform a layout
+            myDiagram.commitTransaction("add node");
 
 
 
