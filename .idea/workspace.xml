@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0d67430e-b95a-44a6-ae46-52e63d6cf157" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/easyrtc/telepointerGO.js" afterPath="$PROJECT_DIR$/static/easyrtc/telepointerGO.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html" afterPath="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html" />
     </list>
     <ignored path="app_collaborative_sci_workflow.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,10 +25,10 @@
       <file leaf-file-name="telepointerGO.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointerGO.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+            <state relative-caret-position="614">
+              <caret line="235" column="0" selection-start-line="235" selection-start-column="0" selection-end-line="235" selection-end-column="0" />
               <folding>
-                <element signature="e#0#92824#0" expanded="false" />
+                <element signature="e#0#94094#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -127,8 +126,8 @@
         <option value="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2.html" />
         <option value="$PROJECT_DIR$/views.py" />
         <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_renaming2/NiCAD_renaming2_html.txt" />
-        <option value="$PROJECT_DIR$/static/easyrtc/telepointerGO.js" />
         <option value="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html" />
+        <option value="$PROJECT_DIR$/static/easyrtc/telepointerGO.js" />
       </list>
     </option>
   </component>
@@ -1149,10 +1148,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointerGO.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+        <state relative-caret-position="614">
+          <caret line="235" column="0" selection-start-line="235" selection-start-column="0" selection-end-line="235" selection-end-column="0" />
           <folding>
-            <element signature="e#0#92824#0" expanded="false" />
+            <element signature="e#0#94094#0" expanded="false" />
           </folding>
         </state>
       </provider>

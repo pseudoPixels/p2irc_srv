@@ -205,6 +205,54 @@ myDiagram='';
       { observed: myDiagram });
     myOverview.grid.visible = false;
 
+
+
+
+
+//===========================>>>>>>>>>>>>>>>>>>>>>>>>
+// Diagram Events Start
+//===========================>>>>>>>>>>>>>>>>>>>>>>>>
+
+  //show the corresponding module details on any module click
+  myDiagram.addDiagramListener("ObjectSingleClicked",
+      function(e) {
+        var part = e.subject.part;
+        if (!(part instanceof go.Link)) {
+            var clickedModuleID = part.data.key; // Module_1
+            clickedModuleID = clickedModuleID.split('_')[1]; // 1
+            $(".module").hide();
+            $("#module_id_"+clickedModuleID).show();
+        }
+      }
+  );
+
+  //remove all corresponding module details on background click
+  myDiagram.addDiagramListener("BackgroundSingleClicked",
+      function(e) {
+        $(".module").hide();
+      }
+  );
+
+
+
+  myDiagram.model.addChangedListener(function(e) {
+    if (e.isTransactionFinished) {
+      var tx = e.object;
+      if (tx instanceof go.Transaction && window.console) {
+        window.console.log(tx.toString());
+        tx.changes.each(function(c) {
+          if (c.model) window.console.log("  " + c.toString());
+        });
+      }
+    }
+  });
+//===========================>>>>>>>>>>>>>>>>>>>>>>>>
+// Diagram Events Ends
+//===========================>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+
 //========================================================
 //================ GO CODES ENDS =========================
 //========================================================
@@ -2369,7 +2417,7 @@ function addModuleToPipeline(moduleID, moduleName){
 
                 //append new module to the pipeline...
                 $("#img_processing_screen").append(
-                    '<div style="background-color:#EEE;width:100%;" class="module" id="module_id_'+ moduleID +'">' +
+                    '<div style="background-color:#EEE;width:100%;display:none;" class="module" id="module_id_'+ moduleID +'">' +
 
                 '<!-- Documentation -->' +
                 '<div style="margin:10px;font-size:17px;color:#000000;">' +
