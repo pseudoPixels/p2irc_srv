@@ -206,8 +206,10 @@ myDiagram='';
     myOverview.grid.visible = false;
 
 
-
-
+  //turn off undo/redo
+  myDiagram.model.undoManager.isEnabled = false;
+  //make the diagram read only
+  myDiagram.isReadOnly = true;
 
 //===========================>>>>>>>>>>>>>>>>>>>>>>>>
 // Diagram Events Start
@@ -234,18 +236,36 @@ myDiagram='';
   );
 
 
-
+  //remove all corresponding module details on background click
+  myDiagram.addDiagramListener("SelectionDeleting",
+      function(e) {
+        alert("SelectionDeleting");
+        for (var iter = myDiagram.selection.iterator; iter.next(); ) {
+            var part = iter.value;
+            if (part instanceof go.Node) {
+                alert(part.data.key);
+            }
+            if (part instanceof go.Link) {
+                alert(part.data.from);
+                alert(part.data.topid);
+            }
+        }
+      }
+  );
+/*
   myDiagram.model.addChangedListener(function(e) {
     if (e.isTransactionFinished) {
-      var tx = e.object;
-      if (tx instanceof go.Transaction && window.console) {
-        window.console.log(tx.toString());
+
+      var tx = e.newValue;
+      window.console.log(tx);
+      //if (tx instanceof go.Transaction && window.console) {
+        //window.console.log(tx.name);
         tx.changes.each(function(c) {
           if (c.model) window.console.log("  " + c.toString());
         });
-      }
+      //}
     }
-  });
+  });*/
 //===========================>>>>>>>>>>>>>>>>>>>>>>>>
 // Diagram Events Ends
 //===========================>>>>>>>>>>>>>>>>>>>>>>>>
@@ -702,6 +722,10 @@ $(document).on('click', ".dag_module", function(){
                 haveIGotTheFloor = option['haveIGotTheFloor'];
                 //alert(haveIGotTheFloor);
                 if(haveIGotTheFloor == true){
+                    //Allow Both Read and Write
+                    //Remove read only from the diagram
+                    myDiagram.isReadOnly = false;
+
                     alert("Got the Floor.");
                     onFloorOwnerChanged(user_email);
                     notifyAll("floor_owner_changed", user_email);
@@ -753,6 +777,8 @@ $(document).on('click', ".dag_module", function(){
             url: "/locking_turn_release_floor/",
             data: 'workflow_id=' + workflow_id,
             success: function (option) {
+                   myDiagram.isReadOnly = true;
+
                    newFloorOwner = option['newFloorOwner'];
                    /*if (iAmDone == true){
                     alert("New FLoor Owner: " + newFloorOwner);
