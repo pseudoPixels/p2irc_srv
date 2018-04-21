@@ -198,6 +198,17 @@ myDiagram='';
     myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
   }
 
+  function addNewLinkToWorkflowObject(newLinkInformation){
+    myDiagram.startTransaction("add link");
+    //var fromNode = myDiagram.findNodeForKey(newLinkInformation.from);
+    //var toNode = myDiagram.findNodeForKey(newLinkInformation.to);
+    var newlink = { from: newLinkInformation.from, frompid: newLinkInformation.frompid, to: newLinkInformation.to, topid:newLinkInformation.topid};
+    myDiagram.model.addLinkData(newlink);
+    myDiagram.commitTransaction("add link");
+  }
+
+
+
   //init();
   // create the Overview and initialize it to show the main Diagram
   var myOverview =
@@ -236,7 +247,7 @@ myDiagram='';
   );
 
 
-  //remove all corresponding module details on background click
+  //attempting Workflow Diagram Part (link/node) deletion.
   myDiagram.addDiagramListener("SelectionDeleting",
       function(e) {
         alert("SelectionDeleting");
@@ -252,6 +263,26 @@ myDiagram='';
         }
       }
   );
+
+  //event called on creating new link on the workflow object
+  myDiagram.addDiagramListener("LinkDrawn",
+      function(e) {
+        var part = e.subject.part;
+        if (part instanceof go.Link) {
+            //alert("Linked From: "+ part.data.from + " To: " + part.data.to);
+            var newLinkInformation = {'from': part.data.from, 'frompid': part.data.frompid, 'to': part.data.to, 'topid': part.data.topid};
+            notifyAll("workflow_obj_new_link_created", newLinkInformation);
+
+        }
+      }
+  );
+
+
+
+
+
+
+
 /*
   myDiagram.model.addChangedListener(function(e) {
     if (e.isTransactionFinished) {
@@ -777,6 +808,7 @@ $(document).on('click', ".dag_module", function(){
             url: "/locking_turn_release_floor/",
             data: 'workflow_id=' + workflow_id,
             success: function (option) {
+                   //on floor release, make the workflow object read only
                    myDiagram.isReadOnly = true;
 
                    newFloorOwner = option['newFloorOwner'];
@@ -1262,7 +1294,9 @@ function onMessageRecieved(who, msgType, content) {
         case "remote_draw":
             remoteAddClick(content);
             break;
-
+        case "workflow_obj_new_link_created":
+            addNewLinkToWorkflowObject(content);
+            break;
 
     }
 }
