@@ -180,7 +180,7 @@ myDiagram='';
       $$(go.Link,
         {
           routing: go.Link.AvoidsNodes, corner: 10,
-          relinkableFrom: true, relinkableTo: true, curve: go.Link.JumpGap
+          relinkableFrom: false, relinkableTo: false, curve: go.Link.JumpGap
         },
         $$(go.Shape, { stroke: "#00bfff", strokeWidth: 2.5 }),
         $$(go.Shape, { stroke: "#00bfff", fill: "#00bfff", toArrow: "Standard" })
@@ -200,13 +200,18 @@ myDiagram='';
 
   function addNewLinkToWorkflowObject(newLinkInformation){
     myDiagram.startTransaction("add link");
-    //var fromNode = myDiagram.findNodeForKey(newLinkInformation.from);
-    //var toNode = myDiagram.findNodeForKey(newLinkInformation.to);
     var newlink = { from: newLinkInformation.from, frompid: newLinkInformation.frompid, to: newLinkInformation.to, topid:newLinkInformation.topid};
     myDiagram.model.addLinkData(newlink);
     myDiagram.commitTransaction("add link");
   }
 
+
+   function workflowObjSelectionMoved(selectionNewLocationInfo){
+     myDiagram.startTransaction('selection moved');
+     var movedNode = myDiagram.findNodeForKey(selectionNewLocationInfo.key);
+     movedNode.location = new go.Point(selectionNewLocationInfo.x, selectionNewLocationInfo.y);
+     myDiagram.commitTransaction('selection moved');
+   }
 
 
   //init();
@@ -271,14 +276,27 @@ myDiagram='';
         if (part instanceof go.Link) {
             //alert("Linked From: "+ part.data.from + " To: " + part.data.to);
             var newLinkInformation = {'from': part.data.from, 'frompid': part.data.frompid, 'to': part.data.to, 'topid': part.data.topid};
-            notifyAll("workflow_obj_new_link_created", newLinkInformation);
+            notifyAll("workflow_obj_new_link_drawn", newLinkInformation);
 
         }
       }
   );
 
+  //event called on selection (Node) changes...
+  myDiagram.addDiagramListener("SelectionMoved",
+      function(e) {
+        //alert("Selection Moved");
+        for (var iter = myDiagram.selection.iterator; iter.next(); ) {
+            var part = iter.value;
+            if (part instanceof go.Node) {
+                //alert(part.data.key + " x: " + part.location.x + " y: " + part.location.y);
+                var nodeNewLocationInformation = {'key': part.data.key, 'x':part.location.x, 'y':part.location.y};
+                notifyAll('workflow_obj_selection_moved', nodeNewLocationInformation);
+            }
+        }
 
-
+      }
+  );
 
 
 
@@ -1294,10 +1312,12 @@ function onMessageRecieved(who, msgType, content) {
         case "remote_draw":
             remoteAddClick(content);
             break;
-        case "workflow_obj_new_link_created":
+        case "workflow_obj_new_link_drawn":
             addNewLinkToWorkflowObject(content);
             break;
-
+        case "workflow_obj_selection_moved":
+            workflowObjSelectionMoved(content);
+            break;
     }
 }
 
