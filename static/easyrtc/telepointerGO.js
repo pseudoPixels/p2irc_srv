@@ -214,6 +214,29 @@ myDiagram='';
    }
 
 
+   function workflowObjRemoveNode(nodeInfoForRemoval){
+     myDiagram.startTransaction('node removed');
+     var nodeTargetedForDeletion = myDiagram.findNodeForKey(nodeInfoForRemoval.key);
+     myDiagram.remove(nodeTargetedForDeletion);
+     myDiagram.commitTransaction('node removed');
+   }
+
+
+    function workflowObjRemoveLink(linkInfoForRemoval){
+         var linksTargetedForDeletion = myDiagram.findLinksByExample({ 'from': linkInfoForRemoval.from, 'frompid': linkInfoForRemoval.frompid, 'to': linkInfoForRemoval.to, 'topid':linkInfoForRemoval.topid});
+
+        for (var iter = linksTargetedForDeletion; iter.next(); ) {
+            aLink = iter.value;
+            myDiagram.startTransaction('link removed');
+            myDiagram.remove(aLink);
+            myDiagram.commitTransaction('link removed');
+        }
+
+    }
+
+
+
+
   //init();
   // create the Overview and initialize it to show the main Diagram
   var myOverview =
@@ -255,15 +278,19 @@ myDiagram='';
   //attempting Workflow Diagram Part (link/node) deletion.
   myDiagram.addDiagramListener("SelectionDeleting",
       function(e) {
-        alert("SelectionDeleting");
+        //alert("SelectionDeleting");
         for (var iter = myDiagram.selection.iterator; iter.next(); ) {
             var part = iter.value;
             if (part instanceof go.Node) {
-                alert(part.data.key);
+                //alert(part.data.key);
+                var nodeInfoForRemoval = {'key':part.data.key};
+                notifyAll("workflow_obj_selection_node_delete",nodeInfoForRemoval);
             }
             if (part instanceof go.Link) {
-                alert(part.data.from);
-                alert(part.data.topid);
+                //alert(part.data.from);
+                //alert(part.data.topid);
+                var linkInfoForRemoval = {'from': part.data.from, 'frompid': part.data.frompid, 'to': part.data.to, 'topid': part.data.topid};
+                notifyAll("workflow_obj_selection_link_delete",linkInfoForRemoval);
             }
         }
       }
@@ -1317,6 +1344,12 @@ function onMessageRecieved(who, msgType, content) {
             break;
         case "workflow_obj_selection_moved":
             workflowObjSelectionMoved(content);
+            break;
+        case "workflow_obj_selection_node_delete":
+            workflowObjRemoveNode(content);
+            break;
+        case "workflow_obj_selection_link_delete":
+            workflowObjRemoveLink(content);
             break;
     }
 }
