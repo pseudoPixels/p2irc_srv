@@ -341,7 +341,7 @@
 /* Modal Header #5cb85c*/
 .modal-header {
     padding: 1px 8px;
-    background-color: #3CB371;
+    background-color: #808080;
     color: white;
 }
 
@@ -351,7 +351,7 @@
 /* Modal Footer */
 .modal-footer {
     padding: 1px 2px;
-    background-color: #3CB371;
+    background-color: #808080;
     color: white;
 }
 
@@ -574,7 +574,7 @@ html, body {
 
 #goDiagramContainer {
   width: 100%;
-  height: 600px;
+  height: 610px;
   position: relative;
 }
 #myDiagramDiv {
@@ -868,6 +868,27 @@ html, body {
 
 
 
+
+
+   <div  class="modal" id="modal_module_configs">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+      <div class="modal-header">
+    <span class="close">&times;</span>
+    <h4>Module Configurations</h4>
+  </div>
+  <div class="modal-body">
+     <div id="img_processing_screen"></div>
+
+  </div>
+  <div class="modal-footer">
+    <h6>...</h6>
+  </div>
+
+
+  </div>
+  </div>
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -1248,7 +1269,7 @@ document.getElementById("defaultOpen").click();
 
 <div id="tree-simple" style="width:90%;"></div>
 
-<div id="img_processing_screen"></div>
+
 
 
 
@@ -1616,10 +1637,10 @@ $('.letuschat').on('click', function() {
     $( "#myModal" ).draggable({
                 opacity: 0.85, snap:true, cancel:"select, #mycanvas, #id_tool_name_inp"
     });
-    /*$("#myDiagramOverview").draggable({
+   $("#modal_module_configs").draggable({
                 opacity: 0.85, snap:true
     });
-    $("#sidebar").draggable({
+     /*$("#sidebar").draggable({
                 opacity: 0.85, snap:true
     });*/
     $( "#myModal" ).resizable({handles: "n, e, s, w, se, sw, nw, ne"});

@@ -267,12 +267,41 @@ myDiagram='';
       }
   );
 
+
+    //show the corresponding module details on any module click
+  myDiagram.addDiagramListener("ObjectDoubleClicked",
+      function(e) {
+        var part = e.subject.part;
+        if (!(part instanceof go.Link)) {
+            var clickedModuleID = part.data.key; // Module_1
+            clickedModuleID = clickedModuleID.split('_')[1]; // 1
+            $(".module").hide();
+            $("#module_id_"+clickedModuleID).show();
+
+            $("#modal_module_configs").css('display', 'block');
+        }
+      }
+  );
+
+
+
+
+
+
+
   //remove all corresponding module details on background click
   myDiagram.addDiagramListener("BackgroundSingleClicked",
       function(e) {
-        $(".module").hide();
+        //$(".module").hide();
+        $("#modal_module_configs").css('display', 'none');
       }
   );
+
+$(document).on('click', '.close', function(){
+    //alert('close clicked');
+    $("#modal_module_configs").css('display', 'none');
+    $("#myModal").css('display', 'none');
+});
 
 
   //attempting Workflow Diagram Part (link/node) deletion.
