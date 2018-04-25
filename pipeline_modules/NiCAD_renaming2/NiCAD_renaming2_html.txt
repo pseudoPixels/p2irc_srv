@@ -2,7 +2,17 @@
     <toolInputs>
         <toolInput>
             <label>Potential Clones</label>
-            <identifier>input_source</identifier>
+            <referenceVariable>potential_clones</referenceVariable>
+            <dataFormat>xml</dataFormat>
+        </toolInput>
+         <toolInput>
+            <label>Clone Reports</label>
+            <referenceVariable>clone_report</referenceVariable>
+            <dataFormat>txt</dataFormat>
+        </toolInput>
+        <toolInput>
+            <label>Original Source Codes</label>
+            <referenceVariable>original_source</referenceVariable>
             <dataFormat>xml</dataFormat>
         </toolInput>
     </toolInputs>
@@ -12,17 +22,12 @@
     <toolOutputs>
         <toolOutput>
             <label>Renamed Potential Clones</label>
-            <identifier>renamed_clones</identifier>
+            <referenceVariable>renamed_clones</referenceVariable>
             <dataFormat>xml</dataFormat>
         </toolOutput>
-                <toolOutput>
+        <toolOutput>
             <label>Renamed Potential Clones</label>
-            <identifier>normalized_clones</identifier>
-            <dataFormat>txt</dataFormat>
-        </toolOutput>
-                <toolOutput>
-            <label>Renamed Potential Clones</label>
-            <identifier>abstract_clones</identifier>
+            <referenceVariable>abstracted_clones</referenceVariable>
             <dataFormat>xml</dataFormat>
         </toolOutput>
     </toolOutputs>

@@ -24,7 +24,10 @@ var iAmDone = false;
 $(document).ready(function(){
 
 
-
+//TODO: NEED TO MAKE IT RELATIVE
+var WORKFLOW_OUTPUTS_PATH = '/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/';
+//TODO: GET IT FROM USER (WORKFLOW NAME FIELD)
+var THIS_WORKFLOW_NAME = 'test_workflow';
 
 
 
@@ -63,16 +66,18 @@ myDiagram='';
   // validate if the linking modules have the same (compatible) data type
   function validateSameDataTypeOfModules(fromnode, fromport, tonode, toport) {
     //portID => port_identifier(portDataType)
-    var portOneDataType = fromport.portId.split('(')[fromport.portId.split('(').length - 1]; // portDataType)
-    portOneDataType = portOneDataType.split(')')[0]; // portDataType
+    //var portOneDataType = fromport.portId.split('(')[fromport.portId.split('(').length - 1]; // portDataType)
+    //portOneDataType = portOneDataType.split(')')[0]; // portDataType
 
-    var portTwoDataType = toport.portId.split('(')[toport.portId.split('(').length - 1]; // portDataType)
-    portTwoDataType = portTwoDataType.split(')')[0]; // portDataType
+    //var portTwoDataType = toport.portId.split('(')[toport.portId.split('(').length - 1]; // portDataType)
+    //portTwoDataType = portTwoDataType.split(')')[0]; // portDataType
+
+    var portOneDataType = fromport.portId.split('.')[fromport.portId.split('.').length - 1];
+    var portTwoDataType = toport.portId.split('.')[toport.portId.split('.').length - 1];
+
 
     if(portOneDataType == portTwoDataType)return true; //the linking datatype is same, so allow
-    //fromport.portId ==> out:txt
-    //if(fromport.portId.split(':')[1] == toport.portId.split(':')[1])return true;
-    //if(fromport.portDataType == toport.portDataType)return true;
+
     return false;
 
   }
@@ -102,7 +107,7 @@ myDiagram='';
       if (leftside) {
         port.toSpot = go.Spot.Left;
         port.toLinkable = true;
-        port.portId = portIdentifier + '('+ portDataType +')';
+        port.portId = portIdentifier + '.'+ portDataType;
         port.fill = 'orange';
         lab.margin = new go.Margin(1, 0, 0, 1);
         panel.alignment = go.Spot.TopLeft;
@@ -111,7 +116,7 @@ myDiagram='';
       } else {
         port.fromSpot = go.Spot.Right;
         port.fromLinkable = true;
-        port.portId = portIdentifier+ '('+ portDataType +')';
+        port.portId = portIdentifier+ '.'+ portDataType;
         lab.margin = new go.Margin(1, 1, 0, 0);
         panel.alignment = go.Spot.TopRight;
         panel.add(lab);
@@ -260,9 +265,9 @@ myDiagram='';
         var part = e.subject.part;
         if (!(part instanceof go.Link)) {
             var clickedModuleID = part.data.key; // Module_1
-            clickedModuleID = clickedModuleID.split('_')[1]; // 1
+            //clickedModuleID = clickedModuleID.split('_')[1]; // 1
             $(".module").hide();
-            $("#module_id_"+clickedModuleID).show();
+            $("#"+clickedModuleID).show();
         }
       }
   );
@@ -274,9 +279,9 @@ myDiagram='';
         var part = e.subject.part;
         if (!(part instanceof go.Link)) {
             var clickedModuleID = part.data.key; // Module_1
-            clickedModuleID = clickedModuleID.split('_')[1]; // 1
+            //clickedModuleID = clickedModuleID.split('_')[1]; // 1
             $(".module").hide();
-            $("#module_id_"+clickedModuleID).show();
+            $("#"+clickedModuleID).show();
 
             $("#modal_module_configs").css('display', 'block');
         }
@@ -331,6 +336,21 @@ $(document).on('click', '.close', function(){
         var part = e.subject.part;
         if (part instanceof go.Link) {
             //alert("Linked From: "+ part.data.from + " To: " + part.data.to);
+
+            //$("#module_id_1 ."+part.data.topid).val("var='this should be new value'");
+            //var toModuleId = part.data.to.split('_')[1]; // ie., x in Module_x
+            //toModuleId = '#module_id_'+ toModuleId;
+
+            var toPortClass = part.data.topid.split('.')[part.data.topid.split('.').length - 2];
+            //var fromPortClass = part.data.frompid.split('.')[part.data.frompid.split('.').length - 2];
+            //toPortClass = ' .' + toPortClass;
+
+            $('#'+part.data.to +' .'+toPortClass).val(toPortClass+"='"+ WORKFLOW_OUTPUTS_PATH + THIS_WORKFLOW_NAME + '/' + part.data.from+'_'+part.data.frompid+"'").trigger('change');
+
+
+            //alert("To " + part.data.to);
+            //alert(part.data.topid.split('(')[part.data.topid.split('(').length - 2]);
+
             var newLinkInformation = {'from': part.data.from, 'frompid': part.data.frompid, 'to': part.data.to, 'topid': part.data.topid};
             notifyAll("workflow_obj_new_link_drawn", newLinkInformation);
 
@@ -2547,6 +2567,43 @@ function addModuleToPipeline(moduleID, moduleName){
                 tool_documentation = tool_documentation.html();
 
 
+                var ioInformation = '';
+
+                var $toolInput = $xml_tool_definition.find("toolInput");
+
+                $toolInput.each(function(){
+
+                    var label = $(this).find('label').text(),
+                        dataFormat = $(this).find('dataFormat').text(),
+                        referenceVariable = $(this).find('referenceVariable').text();
+
+                        ioInformation += referenceVariable + ': <input type="text" class="setting_param module_input '+ referenceVariable + '" ' + ' size="45"/><br/>';
+
+
+                });
+
+
+                var $toolOutput = $xml_tool_definition.find("toolOutput");
+
+                $toolOutput.each(function(){
+
+                    var label = $(this).find('label').text(),
+                        dataFormat = $(this).find('dataFormat').text(),
+                        referenceVariable = $(this).find('referenceVariable').text();
+
+                    //var thisPortOutput = 'module_id_' + moduleID + '_' + referenceVariable+'.' + dataFormat;
+                    //var thisPortOutputPath = referenceVariable + '="' + thisPortOutput + '"';
+
+                    ioInformation += referenceVariable + ': <input type="text" class="setting_param module_output '+ referenceVariable + '" size="45"/><br/>';
+
+
+                });
+
+
+
+
+
+
 
 //Parse the givn XML
 //var xmlDoc = $.parseXML( xml );
@@ -2572,7 +2629,7 @@ function addModuleToPipeline(moduleID, moduleName){
                 '<!-- Settings -->' +
                 '<div style="margin:10px;font-size:17px;color:#000000;">' +
                  '   Settings: <a style="font-size:12px;color:#000000;" href="#" class="settings_show_hide">(Show/Hide)</a>' +
-                 '   <div class="settings" style="background-color:#DDDDDD;display:none;font-size:14px;">' + tool_configs +
+                 '   <div class="settings" style="background-color:#DDDDDD;display:none;font-size:14px;">' + tool_configs + '<br/>' + ioInformation +
                         '<input type="hidden" class="setting_param " size="45" id="module_id_'+ moduleID +'_output_destination" />'+
                     '</div>' +
                 '</div>' +
@@ -2581,13 +2638,13 @@ function addModuleToPipeline(moduleID, moduleName){
                 '<div style="margin:10px;font-size:17px;color:#000000;" class="setting_section">' +
                 '    Source Code: <a style="font-size:12px;color:#000000;" href="#" class="code_show_hide">(Show/Hide)</a>' + user_role_based_edit +
 
-                 '   <div class="edit_code" style="background-color:#888888;display:none;font-size:14px;">' +
-                  '          <textarea rows=7 cols=180 class="code_settings">' + moduleSourceCode_settings + '</textarea>' +
+                 '   <div class="edit_code" style="background-color:#888888;font-size:14px;">' +
+                  '          <textarea rows=7 cols=150 class="code_settings">' + moduleSourceCode_settings + '</textarea>' +
                    '         <p style="color:#000000;">Main Implementation: </p>' +
-                    '        <textarea rows=10 cols=180>' + moduleSourceCode_main + '</textarea>' +
+                    '        <textarea rows=10 cols=150>' + moduleSourceCode_main + '</textarea>' +
                     '</div>' +
 
-                   ' <pre style="background-color:#333333;width:100%;" class="pre_highlighted_code">' + '<code class="python highlighted_code" style="display:none;">' + moduleSourceCode_settings +
+                   ' <pre style="background-color:#333333;width:100%;display:none;" class="pre_highlighted_code">' + '<code class="python highlighted_code" style="display:none;">' + moduleSourceCode_settings +
                    ' ' +
                 moduleSourceCode_main + '</code></pre>' +
 
@@ -2615,12 +2672,19 @@ function addModuleToPipeline(moduleID, moduleName){
 
                 var label = $(this).find('label').text(),
                     dataFormat = $(this).find('dataFormat').text(),
-                    idn = $(this).find('identifier').text();
+                    referenceVariable = $(this).find('referenceVariable').text();
 
                 //$("#ProfileList" ).append('<li>' +label+ ' - ' +dataFormat+ ' - ' + idn +'</li>');
 
-                var aNewInputPort = makePort(dataFormat,idn,true);
+                var aNewInputPort = makePort(dataFormat,referenceVariable,true);
                 listOfInputPorts.push(aNewInputPort);
+
+
+
+                 var thisPortInput = 'module_id_' + moduleID + '_NO_INPUT_SOURCE_SELECTED_.' + dataFormat;
+                 thisPortInput = referenceVariable + '="' + WORKFLOW_OUTPUTS_PATH + THIS_WORKFLOW_NAME + '/' +thisPortInput + '"';
+
+                 $("#module_id_"+moduleID + ' .' + referenceVariable).val(thisPortInput).trigger('change');
 
             });
 
@@ -2628,19 +2692,25 @@ function addModuleToPipeline(moduleID, moduleName){
 
 
 
-             //input port definition
+             //output port definition
             var $toolOutput = $xml_tool_definition.find("toolOutput");
 
             $toolOutput.each(function(){
 
                 var label = $(this).find('label').text(),
                     dataFormat = $(this).find('dataFormat').text(),
-                    idn = $(this).find('identifier').text();
+                    referenceVariable = $(this).find('referenceVariable').text();
 
                 //$("#ProfileList" ).append('<li>' +label+ ' - ' +dataFormat+ ' - ' + idn +'</li>');
 
-                var aNewOutputPort = makePort(dataFormat,idn,false);
+                var aNewOutputPort = makePort(dataFormat,referenceVariable,false);
                 listOfOutputPorts.push(aNewOutputPort);
+
+
+                 var thisPortOutput = 'module_id_' + moduleID + '_' + referenceVariable+'.' + dataFormat;
+                 thisPortOutput = referenceVariable + '="' + WORKFLOW_OUTPUTS_PATH + THIS_WORKFLOW_NAME + '/' +thisPortOutput + '"';
+
+                 $("#module_id_"+moduleID + ' .' + referenceVariable).val(thisPortOutput).trigger('change');
 
             });
 
@@ -2648,7 +2718,7 @@ function addModuleToPipeline(moduleID, moduleName){
 
 
 
-                makeTemplate(moduleName,"images/55x55.png", "white",
+            makeTemplate(moduleName,"images/55x55.png", "white",
                  listOfInputPorts,
                  listOfOutputPorts);
 
@@ -2666,7 +2736,7 @@ function addModuleToPipeline(moduleID, moduleName){
             //alert("Add");
             myDiagram.startTransaction("add node");
             // have the Model add the node data
-            var newnode = {"key":"Module_" + moduleID, "type":moduleName, "name":moduleName, "module_id": "Module "+moduleID};
+            var newnode = {"key":"module_id_" + moduleID, "type":moduleName, "name":moduleName, "module_id": "Module "+moduleID};
             myDiagram.model.addNodeData(newnode);
             // locate the node initially where the parent node is
            // diagram.findNodeForData(newnode).location = node.location;
