@@ -323,6 +323,14 @@ $(document).on('click', '.close', function(){
             if (part instanceof go.Link) {
                 //alert(part.data.from);
                 //alert(part.data.topid);
+
+                 var thisPortInput = part.data.to + '_NO_INPUT_SOURCE_SELECTED_' + part.data.topid;
+                 var referenceVariable = part.data.topid.split('.')[part.data.topid.split('.').length - 2];
+                 thisPortInput = referenceVariable + '="' + WORKFLOW_OUTPUTS_PATH + THIS_WORKFLOW_NAME + '/' +thisPortInput + '"';
+
+                 $("#"+part.data.to + ' .' + referenceVariable).val(thisPortInput).trigger('change');
+
+
                 var linkInfoForRemoval = {'from': part.data.from, 'frompid': part.data.frompid, 'to': part.data.to, 'topid': part.data.topid};
                 notifyAll("workflow_obj_selection_link_delete",linkInfoForRemoval);
             }
