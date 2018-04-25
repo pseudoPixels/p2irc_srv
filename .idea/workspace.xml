@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d67430e-b95a-44a6-ae46-52e63d6cf157" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Abstract" afterPath="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Abstract" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Filter" afterPath="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Filter" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/FindClonePairs" afterPath="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/FindClonePairs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Normalize" afterPath="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Normalize" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/NiCAD_abstracting/NiCAD_abstracting_html.txt" afterPath="$PROJECT_DIR$/pipeline_modules/NiCAD_abstracting/NiCAD_abstracting_html.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/NiCAD_abstracting/NiCAD_abstracting_main.py" afterPath="$PROJECT_DIR$/pipeline_modules/NiCAD_abstracting/NiCAD_abstracting_main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_html.txt" afterPath="$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_html.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_main.py" afterPath="$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/NiCAD_find_near_miss_clones/NiCAD_find_near_miss_clones_html.txt" afterPath="$PROJECT_DIR$/pipeline_modules/NiCAD_find_near_miss_clones/NiCAD_find_near_miss_clones_html.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/NiCAD_find_near_miss_clones/NiCAD_find_near_miss_clones_main.py" afterPath="$PROJECT_DIR$/pipeline_modules/NiCAD_find_near_miss_clones/NiCAD_find_near_miss_clones_main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing/NiCAD_normalizing_html.txt" afterPath="$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing/NiCAD_normalizing_html.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing/NiCAD_normalizing_main.py" afterPath="$PROJECT_DIR$/pipeline_modules/NiCAD_normalizing/NiCAD_normalizing_main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/easyrtc/telepointerGO.js" afterPath="$PROJECT_DIR$/static/easyrtc/telepointerGO.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html" afterPath="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html" />
     </list>
     <ignored path="app_collaborative_sci_workflow.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,101 +23,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="NiCAD_abstracting_html.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_abstracting/NiCAD_abstracting_html.txt">
+      <file leaf-file-name="telepointerGO.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointerGO.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="750">
-              <caret line="69" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+            <state relative-caret-position="555">
+              <caret line="2651" column="0" selection-start-line="2651" selection-start-column="0" selection-end-line="2651" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#104326#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Extract" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Extract">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-30">
+              <caret line="99" column="2" selection-start-line="99" selection-start-column="2" selection-end-line="99" selection-end-column="2" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NiCAD_abstracting_main.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_abstracting/NiCAD_abstracting_main.py">
+      <file leaf-file-name="java-extract-functions.txl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/txl/java-extract-functions.txl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="48" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Abstract" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Abstract">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NiCAD_filtering_html.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_html.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NiCAD_filtering_main.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Filter" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Filter">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="72" column="21" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NiCAD_find_near_miss_clones_html.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_find_near_miss_clones/NiCAD_find_near_miss_clones_html.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="47" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NiCAD_find_near_miss_clones_main.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_find_near_miss_clones/NiCAD_find_near_miss_clones_main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="37" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FindClonePairs" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/FindClonePairs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NiCAD_find_near_miss_clones_doc.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_find_near_miss_clones/NiCAD_find_near_miss_clones_doc.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="5" selection-start-line="0" selection-start-column="0" selection-end-line="18" selection-end-column="5" />
+            <state relative-caret-position="450">
+              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -167,9 +89,7 @@
         <option value="$PROJECT_DIR$/static/easyrtc/telepointer.js" />
         <option value="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2.html" />
         <option value="$PROJECT_DIR$/views.py" />
-        <option value="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html" />
         <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_Get_Data/NiCAD_GET_Data_html.txt" />
-        <option value="$PROJECT_DIR$/static/easyrtc/telepointerGO.js" />
         <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_Get_Data/NiCAD_Get_Data_settings.py" />
         <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_Get_Data/NiCAD_Get_Data_main.py" />
         <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_extract_potential_clones/NiCAD_extract_potential_clones_html.txt" />
@@ -192,6 +112,8 @@
         <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_find_near_miss_clones/NiCAD_find_near_miss_clones_html.txt" />
         <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_find_near_miss_clones/NiCAD_find_near_miss_clones_main.py" />
         <option value="$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/FindClonePairs" />
+        <option value="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html" />
+        <option value="$PROJECT_DIR$/static/easyrtc/telepointerGO.js" />
       </list>
     </option>
   </component>
@@ -243,6 +165,52 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app_collaborative_sci_workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_collaborative_sci_workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_collaborative_sci_workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_collaborative_sci_workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_collaborative_sci_workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_collaborative_sci_workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_collaborative_sci_workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="easyrtc" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -361,6 +329,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="NiCad-4.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_collaborative_sci_workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_collaborative_sci_workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External_Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NiCad-4.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="txl" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -609,14 +599,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/Math_Multiplication/Math_Multiplication_settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pipeline_modules/Math_Const_Mult/Math_Const_Mult_main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -740,18 +722,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/cloud_vision_pipeline_save2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="115" column="0" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#button#1;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="579">
@@ -776,19 +746,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="357" column="19" selection-start-line="357" selection-start-column="19" selection-end-line="357" selection-end-column="19" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#3;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#3;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#textarea#0;n#div#1;n#div#0;n#div#3;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pipeline_modules/Math_Power/Math_Power_html.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -810,16 +767,6 @@
         <state relative-caret-position="348">
           <caret line="864" column="0" selection-start-line="864" selection-start-column="0" selection-end-line="864" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointerGO.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
-          <caret line="2321" column="52" selection-start-line="2321" selection-start-column="52" selection-end-line="2321" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#104335#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -867,14 +814,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Extract">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="7" />
           <folding />
         </state>
       </provider>
@@ -967,38 +906,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_abstracting/NiCAD_abstracting_html.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="69" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Filter">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="72" column="21" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_html.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_find_near_miss_clones/NiCAD_find_near_miss_clones_doc.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -1007,10 +914,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_find_near_miss_clones/NiCAD_find_near_miss_clones_html.txt">
+    <entry file="file://$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="47" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="47" />
+        <state relative-caret-position="161">
+          <caret line="1446" column="0" selection-start-line="1446" selection-start-column="0" selection-end-line="1446" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#header#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#a#0;n#li#0;n#ul#0;n#div#1;n#header#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h3#1;n#div#1;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/cloud_vision_pipeline_save2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="93" column="90" selection-start-line="93" selection-start-column="87" selection-end-line="93" selection-end-column="90" />
+          <folding>
+            <element signature="n#style#0;n#button#1;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/FindClonePairs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1023,11 +954,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/FindClonePairs">
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_find_near_miss_clones/NiCAD_find_near_miss_clones_html.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+        <state relative-caret-position="60">
+          <caret line="4" column="47" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="47" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Filter">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="72" column="21" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_html.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_abstracting/NiCAD_abstracting_html.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/scripts/Extract">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-30">
+          <caret line="99" column="2" selection-start-line="99" selection-start-column="2" selection-end-line="99" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/External_Libraries/NiCad-4.0/txl/java-extract-functions.txl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointerGO.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="2651" column="0" selection-start-line="2651" selection-start-column="0" selection-end-line="2651" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#104326#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

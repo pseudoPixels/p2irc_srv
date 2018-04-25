@@ -2628,7 +2628,7 @@ function addModuleToPipeline(moduleID, moduleName){
                         dataFormat = $(this).find('dataFormat').text(),
                         referenceVariable = $(this).find('referenceVariable').text();
 
-                        ioInformation += referenceVariable + ': <input type="text" class="setting_param module_input '+ referenceVariable + '" ' + ' size="45"/><br/>';
+                        ioInformation +=  '<input type="text" style="display:none;" class="setting_param module_input '+ referenceVariable + '" ' + ' size="45"/>';
 
 
                 });
@@ -2645,7 +2645,7 @@ function addModuleToPipeline(moduleID, moduleName){
                     //var thisPortOutput = 'module_id_' + moduleID + '_' + referenceVariable+'.' + dataFormat;
                     //var thisPortOutputPath = referenceVariable + '="' + thisPortOutput + '"';
 
-                    ioInformation += referenceVariable + ': <input type="text" class="setting_param module_output '+ referenceVariable + '" size="45"/><br/>';
+                    ioInformation += '<input type="text" style="display:none;" class="setting_param module_output '+ referenceVariable + '" size="45"/>';
 
 
                 });
@@ -2680,7 +2680,7 @@ function addModuleToPipeline(moduleID, moduleName){
                 '<!-- Settings -->' +
                 '<div style="margin:10px;font-size:17px;color:#000000;">' +
                  '   Settings: <a style="font-size:12px;color:#000000;" href="#" class="settings_show_hide">(Show/Hide)</a>' +
-                 '   <div class="settings" style="background-color:#DDDDDD;display:none;font-size:14px;">' + tool_configs + '<br/>' + ioInformation +
+                 '   <div class="settings" style="background-color:#DDDDDD;font-size:14px;">' + tool_configs + '<br/>' + ioInformation +
                         '<input type="hidden" class="setting_param " size="45" id="module_id_'+ moduleID +'_output_destination" />'+
                     '</div>' +
                 '</div>' +
@@ -2689,7 +2689,7 @@ function addModuleToPipeline(moduleID, moduleName){
                 '<div style="margin:10px;font-size:17px;color:#000000;" class="setting_section">' +
                 '    Source Code: <a style="font-size:12px;color:#000000;" href="#" class="code_show_hide">(Show/Hide)</a>' + user_role_based_edit +
 
-                 '   <div class="edit_code" style="background-color:#888888;font-size:14px;">' +
+                 '   <div class="edit_code" style="background-color:#888888;font-size:14px;display:none;">' +
                   '          <textarea rows=7 cols=150 class="code_settings">' + moduleSourceCode_settings + '</textarea>' +
                    '         <p style="color:#000000;">Main Implementation: </p>' +
                     '        <textarea rows=10 cols=150>' + moduleSourceCode_main + '</textarea>' +
