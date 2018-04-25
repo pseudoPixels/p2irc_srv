@@ -1,24 +1,63 @@
-<br/>
- Input Potential Clone File (xml): <select  class="setting_param setting_param_parent" name="seq_file"> <!-- CHANGE IN THIS LINE -->
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_0.xml'" selected>Set Source</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_1.xml'" >From Module 1</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_2.xml'" >From Module 2</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_3.xml'" >From Module 3</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_4.xml'" >From Module 4</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_5.xml'" >From Module 5</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_6.xml'" >From Module 6</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_7.xml'" >From Module 7</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_8.xml'" >From Module 8</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_9.xml'" >From Module 9</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_10.xml'" >From Module 10</option>
-</select>
-<br/><br/>
- Threshold (0.n):
-<input type="text" class="setting_param" value="threshold= 0.3" name="cleaning_threshold" size="45"/>
-<br/><br/>
- Minimum Clone Size (e.g., in pretty-printed lines):
-<input type="text" class="setting_param" value="minCloneSize = 10" name="cleaning_threshold" size="45"/>
-<br/><br/>
-Maximum Clone Size (e.g., in pretty-printed lines):
-<input type="text" class="setting_param" value="maxCloneSize = 2500" name="cleaning_threshold" size="45"/>
-<br/><br/>
+<SciWorC>
+    <toolInputs>
+        <toolInput>
+            <label>Potential Clones</label>
+            <referenceVariable>potential_clones</referenceVariable>
+            <dataFormat>xml</dataFormat>
+        </toolInput>
+    </toolInputs>
+
+
+
+    <toolOutputs>
+        <toolOutput>
+            <label>Renamed Potential Clones</label>
+            <referenceVariable>near_miss_clones</referenceVariable>
+            <dataFormat>xml</dataFormat>
+        </toolOutput>
+    </toolOutputs>
+
+
+
+    <toolConfigurations>
+         Threshold (0.n):
+        <input type="text" class="setting_param" value="threshold= 0.3" name="cleaning_threshold" size="45"/>
+        <br/><br/>
+         Minimum Clone Size (e.g., in pretty-printed lines):
+        <input type="text" class="setting_param" value="minCloneSize = 10" name="cleaning_threshold" size="45"/>
+        <br/><br/>
+        Maximum Clone Size (e.g., in pretty-printed lines):
+        <input type="text" class="setting_param" value="maxCloneSize = 2500" name="cleaning_threshold" size="45"/>
+        <br/><br/>
+    </toolConfigurations>
+
+
+
+    <toolDocumentation>
+            <b>NiCad - Find Near Miss Clones</b>
+            <p><i>Description:</i><br/>
+            Maximum difference threshold we are interested in (0.n)<br/>
+            Example: 	threshold=0.3<br/>
+
+
+            Sizes of clones we are interested in, in pretty-printed lines<br/>
+            Example:	minsize=10<br/>
+            maxsize=2500<br/>
+
+            </p>
+
+
+            <i>Usage:</i>
+            <ol>
+            <li>Source Project: Select the module or files to take the input from.</li>
+            <li>Output Files: Select the module or files to send the input to.</li>
+            <li>Set Granularity Levels: Functions/Blocks.</li>
+            </ol>
+    </toolDocumentation>
+
+
+
+</SciWorC>
+
+
+

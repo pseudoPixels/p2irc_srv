@@ -99,7 +99,7 @@ fi
 # Filter potential clones
 date
 echo "${lib}/tools/streamprocess.x '${lib}/txl/${language}-filter-${granularity}.x stdin - ${nonterminals}' < ${pcfile}.xml > ${pcfile}-filter.xml"
-time ${lib}/tools/streamprocess.x "${lib}/txl/${language}-filter-${granularity}.x stdin - ${nonterminals}" < ${pcfile}.xml > ${output_destination}.xml
+time ${lib}/tools/streamprocess.x "${lib}/txl/${language}-filter-${granularity}.x stdin - ${nonterminals}" < ${pcfile}.xml > ${output_destination}
 
 result=$?
 

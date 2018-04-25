@@ -100,7 +100,7 @@ fi
 date
 
 echo "${lib}/tools/streamprocess.x '${lib}/txl/${normalizer}.x stdin' < ${pcfile}.xml > ${pcfile}-normalized.xml"
-time ${lib}/tools/streamprocess.x "${lib}/txl/${normalizer}.x stdin" < ${pcfile}.xml > ${output_destination}.xml
+time ${lib}/tools/streamprocess.x "${lib}/txl/${normalizer}.x stdin" < ${pcfile}.xml > ${output_destination}
 
 result=$?
 

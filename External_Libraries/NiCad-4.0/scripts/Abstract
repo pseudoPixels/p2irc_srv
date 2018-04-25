@@ -99,7 +99,7 @@ fi
 # Rename potential clones
 date
 echo "${lib}/tools/streamprocess.x '${lib}/txl/${language}-abstract-${granularity}.x stdin - ${nonterminals}' < ${pcfile}.xml > ${pcfile}-abstract.xml"
-time ${lib}/tools/streamprocess.x "${lib}/txl/${language}-abstract-${granularity}.x stdin - ${nonterminals}" < ${pcfile}.xml > ${output_destination}.xml
+time ${lib}/tools/streamprocess.x "${lib}/txl/${language}-abstract-${granularity}.x stdin - ${nonterminals}" < ${pcfile}.xml > ${output_destination}
 
 result=$?
 

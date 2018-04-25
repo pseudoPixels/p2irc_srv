@@ -1,31 +1,73 @@
-<br/>
- Input Potential Clone File (xml): <select  class="setting_param setting_param_parent" name="seq_file"> <!-- CHANGE IN THIS LINE -->
-        <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_0.xml'" selected>Set Source</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_1.xml'" >From Module 1</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_2.xml'" >From Module 2</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_3.xml'" >From Module 3</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_4.xml'" >From Module 4</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_5.xml'" >From Module 5</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_6.xml'" >From Module 6</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_7.xml'" >From Module 7</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_8.xml'" >From Module 8</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_9.xml'" >From Module 9</option>
-      <option value="input_source='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_10.xml'" >From Module 10</option>
-</select>
-<br/><br/>
- Language: <select  class="setting_param setting_param_parent" name="seq_file"> <!-- CHANGE IN THIS LINE -->
-      <option value="language = 'java'" selected>Java</option>
-      <option value="language = 'cs'" >C#</option>
-      <option value="language = 'py'" >Python</option>
-      <option value="language = 'c'" >C</option>
-</select>
-<br/><br/>
- Granularity: <select  class="setting_param setting_param_parent" name="seq_file"> <!-- CHANGE IN THIS LINE -->
-      <option value="granularity = 'functions'" selected>Functions</option>
-      <option value="granularity = 'blocks'" >Blocks</option>
-</select>
-<br/><br/>
- Filters (Reg. Exp.):
-<input type="text" class="setting_param" value="filters='none'" name="cleaning_threshold" size="45"/>
-<br/><br/>
+<SciWorC>
+    <toolInputs>
+        <toolInput>
+            <label>Potential Clones</label>
+            <referenceVariable>potential_clones</referenceVariable>
+            <dataFormat>xml</dataFormat>
+        </toolInput>
+    </toolInputs>
+
+
+
+    <toolOutputs>
+        <toolOutput>
+            <label>Renamed Potential Clones</label>
+            <referenceVariable>filtered_potential_clones</referenceVariable>
+            <dataFormat>xml</dataFormat>
+        </toolOutput>
+    </toolOutputs>
+
+
+
+    <toolConfigurations>
+             Language: <select  class="setting_param setting_param_parent" name="seq_file"> <!-- CHANGE IN THIS LINE -->
+                  <option value="language = 'java'" >Java</option>
+                  <option value="language = 'cs'" >C#</option>
+                  <option value="language = 'py'" >Python</option>
+                  <option value="language = 'c'" >C</option>
+            </select>
+            <br/><br/>
+             Granularity: <select  class="setting_param setting_param_parent" name="seq_file"> <!-- CHANGE IN THIS LINE -->
+                  <option value="granularity = 'functions'" >Functions</option>
+                  <option value="granularity = 'blocks'" >Blocks</option>
+            </select>
+            <br/><br/>
+             Filters (Reg. Exp.):
+            <input type="text" class="setting_param" value="filters='none'" name="cleaning_threshold" size="45"/>
+            <br/><br/>
+    </toolConfigurations>
+
+
+
+    <toolDocumentation>
+        <b>NiCad - Abstracting</b>
+            <p><i>Description:</i><br/>
+        Kind of abstraction to be applied (none, nonterminal ...) <br/>
+        Where each "nonterminal" is the name of a nonterminal in the language grammar <br/>
+        Example: 	abstract=expression <br/>
+        means abstract all [expression]s to the identifier "expression" in potential clones <br/>
+        Abstraction nonterminals presently supported for C, C#, Java, Python: <br/>
+            block - all blocks, including function bodies <br/>
+            declaration - all data declarations <br/>
+            statement - all statements <br/>
+            expression - all expressions <br/>
+            condition - all if/while conditions <br/>
+            literal - all literal constant values <br/>
+        </p>
+
+
+        <i>Usage:</i>
+        <ol>
+            <li>Source Project: Select the module or files to take the input from.</li>
+            <li>Output Files: Select the module or files to send the input to.</li>
+            <li>Set Granularity Levels: Functions/Blocks.</li>
+        </ol>
+    </toolDocumentation>
+
+
+
+</SciWorC>
+
+
+
 

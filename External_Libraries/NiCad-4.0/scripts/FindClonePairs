@@ -46,7 +46,7 @@ systemname=${basename##*/}
 # OK, let's run it
 date
 echo "${lib}/tools/clonepairs.x ${basename}.xml $* > ${resultsdir}/${systemname}-clones-${threshold}.xml"
-time ${lib}/tools/clonepairs.x ${basename}.xml $* > ${output_destination}.xml
+time ${lib}/tools/clonepairs.x ${basename}.xml $* > ${output_destination}
 result=$?
 
 echo ""
