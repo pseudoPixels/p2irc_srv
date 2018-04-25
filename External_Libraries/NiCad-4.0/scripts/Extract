@@ -101,7 +101,7 @@ fi
 
 # Clean up any previous results
 /bin/rm -rf ${system}_${granularity}
-echo -n > ${destinationFile}.xml
+echo -n > ${destinationFile}
 
 # Extract potential clones
 date
@@ -140,7 +140,7 @@ do
     fi
 
     # echo "${lib}/txl/${language}-extract-${granularity}.x ${source} >> ${system}_${granularity}.xml"
-    ${lib}/txl/${language}-extract-${granularity}.x "${source}" >> ${destinationFile}.xml
+    ${lib}/txl/${language}-extract-${granularity}.x "${source}" >> ${destinationFile}
 
     if [ $? != 0 ]
     then

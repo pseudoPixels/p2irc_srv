@@ -2288,11 +2288,54 @@ $(document).on('change', ".setting_param_parent" ,function () {//here
 
 });
 
+//For Dynamic Resource Discovery
+$(document).on("focus",".enableResourceDiscovery", function(){
+
+    $(this).html('');
+
+    discoverResources(this, $(this).attr('referenceVariable'), THIS_WORKFLOW_NAME);
+    /*$(this).append($('<option>', {
+            value: $(this).attr('referenceVariable'),
+            text: 'My option'
+    }));*/
+
+});
 
 
 
 
 
+function discoverResources(domElement,referenceVariable,workflow_id){
+	var thisWorkflowID = workflow_id;
+
+	//get the ouput list via async call
+    	$.ajax({
+		type: "POST",
+		cache: false,
+		url: "/get_workflow_outputs_list/",
+		data: "workflow_id="+thisWorkflowID,
+		success: function (option) {
+			//$("#workflow_outputs").html("");
+			for(var i=0;i<option['workflow_outputs_list'].length;i++){
+				//var k = i+1;
+				//$("#workflow_outputs").html("");
+				$(domElement).append($('<option>', {
+                    value: referenceVariable+'="'+WORKFLOW_OUTPUTS_PATH+workflow_id+'/'+option['workflow_outputs_list'][i]+'"',
+                    text: option['workflow_outputs_list'][i]
+                }));
+
+				//$("#workflow_outputs").append("<a href='/file_download?workflow_id=" + thisWorkflowID +"&file_id=" + option['workflow_outputs_list'][i]+"' class='a_workflow_output' id='"+option['workflow_outputs_list'][i] +"'>"  + option['workflow_outputs_list'][i] + "</a><br/>");
+			}
+
+		},
+		error: function (xhr, status, error) {
+	    		alert(xhr.responseText);
+		}
+
+    	});
+
+
+}
 
 
 
@@ -2663,7 +2706,21 @@ function addModuleToPipeline(moduleID, moduleName){
 
             );//end of append
 
+
+
+
+
+
+
+
             $("#module_id_"+ moduleID + "_output_destination").val("output_destination = '/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_" + moduleID + "'").trigger('change');
+
+
+
+
+
+
+
 
 
 
