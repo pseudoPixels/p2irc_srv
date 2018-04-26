@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d67430e-b95a-44a6-ae46-52e63d6cf157" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pipeline_modules/Math_Addition/Math_Addition_html.txt" afterPath="$PROJECT_DIR$/pipeline_modules/Math_Addition/Math_Addition_html.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/easyrtc/telepointerGO.js" afterPath="$PROJECT_DIR$/static/easyrtc/telepointerGO.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html" afterPath="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views.py" afterPath="$PROJECT_DIR$/views.py" />
     </list>
     <ignored path="app_collaborative_sci_workflow.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,24 +26,48 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="cloud_vision_pipeline_save2GO.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="cloud_vision_pipeline_save2GO.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="899" column="18" selection-start-line="899" selection-start-column="18" selection-end-line="899" selection-end-column="18" />
+            <state relative-caret-position="-498">
+              <caret line="913" column="0" selection-start-line="913" selection-start-column="0" selection-end-line="913" selection-end-column="0" />
+              <folding>
+                <element signature="n#style#0;n#p#1;n#div#2;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#iframe#0;n#div#2;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#image#0;n#div#2;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#pre#0;n#div#2;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#textarea#0;n#div#1;n#div#0;n#div#3;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Math_Addition_html.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pipeline_modules/Math_Addition/Math_Addition_html.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="600">
+              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="telepointerGO.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="telepointerGO.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointerGO.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="16" selection-start-line="9" selection-start-column="2" selection-end-line="9" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#104326#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="195">
+              <caret line="3470" column="173" selection-start-line="3470" selection-start-column="173" selection-end-line="3470" selection-end-column="173" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="259">
+              <caret line="522" column="36" selection-start-line="522" selection-start-column="36" selection-end-line="522" selection-end-column="36" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -64,7 +91,6 @@
         <option value="$PROJECT_DIR$/static/Treant/Treant.css" />
         <option value="$PROJECT_DIR$/static/easyrtc/telepointer.js" />
         <option value="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2.html" />
-        <option value="$PROJECT_DIR$/views.py" />
         <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_Get_Data/NiCAD_GET_Data_html.txt" />
         <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_Get_Data/NiCAD_Get_Data_settings.py" />
         <option value="$PROJECT_DIR$/pipeline_modules/NiCAD_Get_Data/NiCAD_Get_Data_main.py" />
@@ -91,7 +117,6 @@
         <option value="$PROJECT_DIR$/pipeline_modules/Math_Get_User_Input/Math_Get_User_Input_main.py" />
         <option value="$PROJECT_DIR$/pipeline_modules/Math_Get_User_Input/Math_Get_User_Input_html.txt" />
         <option value="$PROJECT_DIR$/pipeline_modules/Math_Addition/Math_Addition_main.py" />
-        <option value="$PROJECT_DIR$/pipeline_modules/Math_Addition/Math_Addition_html.txt" />
         <option value="$PROJECT_DIR$/pipeline_modules/Math_Const_Mult/Math_Const_Mult_html.txt" />
         <option value="$PROJECT_DIR$/pipeline_modules/Math_Const_Mult/Math_Const_Mult_main.py" />
         <option value="$PROJECT_DIR$/pipeline_modules/Math_Division/Math_Division_html.txt" />
@@ -102,8 +127,10 @@
         <option value="$PROJECT_DIR$/pipeline_modules/Math_Power/Math_Power_main.py" />
         <option value="$PROJECT_DIR$/pipeline_modules/Math_Subtraction/Math_Subtraction_html.txt" />
         <option value="$PROJECT_DIR$/pipeline_modules/Math_Subtraction/Math_Subtraction_main.py" />
-        <option value="$PROJECT_DIR$/static/easyrtc/telepointerGO.js" />
+        <option value="$PROJECT_DIR$/pipeline_modules/Math_Addition/Math_Addition_html.txt" />
+        <option value="$PROJECT_DIR$/views.py" />
         <option value="$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html" />
+        <option value="$PROJECT_DIR$/static/easyrtc/telepointerGO.js" />
       </list>
     </option>
   </component>
@@ -168,7 +195,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
+              <option name="myItemId" value="workflow_outputs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -182,11 +209,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
+              <option name="myItemId" value="workflow_outputs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="easyrtc" />
+              <option name="myItemId" value="test_workflow" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -200,10 +227,10 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/workflow_outputs/test_workflow" />
+      <recent name="$PROJECT_DIR$/static" />
       <recent name="$PROJECT_DIR$/pipeline_modules" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/static/easyrtc" />
-      <recent name="$PROJECT_DIR$/pipeline_modules/Math_Power" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/static" />
@@ -366,7 +393,7 @@
     <frame x="65" y="24" width="1855" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2341703" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17631005" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -401,22 +428,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointer_module_locking.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="864" column="0" selection-start-line="864" selection-start-column="0" selection-end-line="864" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_Get_Data/NiCAD_Get_Data_settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_Get_Data/NiCAD_Get_Data_main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -605,14 +616,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="604">
-          <caret line="1299" column="34" selection-start-line="1299" selection-start-column="34" selection-end-line="1299" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pipeline_modules/Math_Get_User_Input/Math_Get_User_Input_doc.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -733,14 +736,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/Math_Addition/Math_Addition_html.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="10" selection-start-line="0" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pipeline_modules/Math_Subtraction/Math_Subtraction_doc.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -797,20 +792,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointerGO.js">
+    <entry file="file://$PROJECT_DIR$/static/highlight/highlight/highlight.pack.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="16" selection-start-line="9" selection-start-column="2" selection-end-line="9" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#104326#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/jClone.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="35" selection-start-line="0" selection-start-column="0" selection-end-line="246" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/Math_Addition/Math_Addition_html.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/cloud_vision_pipeline_save2GO.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="899" column="18" selection-start-line="899" selection-start-column="18" selection-end-line="899" selection-end-column="18" />
+        <state relative-caret-position="-498">
+          <caret line="913" column="0" selection-start-line="913" selection-start-column="0" selection-end-line="913" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#p#1;n#div#2;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#iframe#0;n#div#2;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#image#0;n#div#2;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#pre#0;n#div#2;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#textarea#0;n#div#1;n#div#0;n#div#3;n#div#0;n#div#0;n#section#0;n#section#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="522" column="36" selection-start-line="522" selection-start-column="36" selection-end-line="522" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointerGO.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="3470" column="173" selection-start-line="3470" selection-start-column="173" selection-end-line="3470" selection-end-column="173" />
           <folding />
         </state>
       </provider>

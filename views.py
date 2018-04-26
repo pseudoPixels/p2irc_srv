@@ -737,6 +737,22 @@ def get_module_details():
 	'moduleSourceCode_html': moduleSourceCode_html,
 	'user_role': session.get('user_role') })
 
+
+@app_collaborative_sci_workflow.route('/load_output_for_visualization', methods=['POST'])
+def load_output_for_visualization():
+	fileName= request.form['fileName']
+
+
+	output = getModuleCodes('app_collaborative_sci_workflow/workflow_outputs/test_workflow/'+ fileName)
+
+
+
+	return jsonify({'output': output})
+
+
+
+
+
 @app_collaborative_sci_workflow.route('/save_pipeline/',  methods=['POST'])
 def save_pipeline():
 	program = request.form['textarea_source_code']

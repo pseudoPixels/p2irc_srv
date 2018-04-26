@@ -2818,9 +2818,9 @@ function addModuleToPipeline(moduleID, moduleName){
 
             if(isItMyFloor() == false)lockParamsSettings();
 
-                $('pre code').each(function (i, block) {
+                /*$('pre code').each(function (i, block) {
                     hljs.highlightBlock(block);
-                });
+                });*/
 
 
             },
@@ -3464,7 +3464,18 @@ function get_workflow_outputs_list(workflow_id){
 			for(var i=0;i<option['workflow_outputs_list'].length;i++){
 				var k = i+1;
 				//$("#workflow_outputs").html("");
-				$("#workflow_outputs").append("<a href='/file_download?workflow_id=" + thisWorkflowID +"&file_id=" + option['workflow_outputs_list'][i]+"' class='a_workflow_output' id='"+option['workflow_outputs_list'][i] +"'>"  + option['workflow_outputs_list'][i] + "</a><br/>");
+				var thisFileName = option['workflow_outputs_list'][i];
+				var visulaizationLink = '';
+				if(thisFileName.split('.').length>0){
+				    var thisFileType = thisFileName.split('.')[thisFileName.split('.').length - 1];
+				    if(thisFileType == 'html' || thisFileType == 'htm' || thisFileType == 'xml' || thisFileType == 'txt'){//currently supported file types for visualization.
+				        visulaizationLink = "<a style='color:white;font-size:11px;' href='#' class='output_vis' viewid='"+ option['workflow_outputs_list'][i] +"'> (View) </a>";
+				    }
+				}
+
+
+
+				$("#workflow_outputs").append(visulaizationLink + "<a href='/file_download?workflow_id=" + thisWorkflowID +"&file_id=" + option['workflow_outputs_list'][i]+"' class='a_workflow_output' id='"+option['workflow_outputs_list'][i] +"'>"  + option['workflow_outputs_list'][i] + "</a><br/>");
 			}
 	    		
 		},
@@ -3478,6 +3489,92 @@ function get_workflow_outputs_list(workflow_id){
 }
 
 get_workflow_outputs_list('test_workflow');
+
+function showTab(tabID){
+
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(tabID).style.display = "block";
+    //evt.currentTarget.className += " active";
+    document.getElementById(tabID).click();
+}
+
+
+
+$(document).on('click', '.output_vis', function(){
+    $("#tool_vis_file_title").text(">>Loading...");
+
+    $('.tool_vis_content').hide();
+
+    var fileName = $(this).attr('viewid');
+
+    showTab('tool_vis');
+
+    $("#myModal").css('display', 'block');
+
+    var fileType = fileName.split('.')[fileName.split('.').length - 1];
+
+    $.ajax({
+        type: "POST",
+        cache: false,
+        url: "/load_output_for_visualization",
+        data: 'fileName=' + fileName,
+        success: function (option) {
+            $("#tool_vis_file_title").text(">>" + fileName);
+
+            if(fileType=='png' || fileType=='jpg'){
+                $("#pre_id").hide();
+                $("#tool_vis_image").attr('src', 'data:image/png;base64,' + option.output );
+                $("#tool_vis_image").show();
+            }
+            else if(fileType=='xml' || fileType=='txt'){
+                $("#tool_vis_txt").text(option.output);
+                $('pre code').each(function (i, block) {
+                    hljs.highlightBlock(block);
+                });
+                $("#pre_id").show();
+                $("#tool_vis_txt").show();
+            }
+            else if(fileType=='htm' || fileType=='html'){
+                $("#pre_id").hide();
+                $("#tool_vis_iframe").attr('src', 'data:text/html;charset=utf-8,' + encodeURIComponent(option.output));
+                $("#tool_vis_iframe").show();
+            }
+
+
+        },
+        error: function (xhr, status, error) {
+            alert(xhr.responseText);
+        }
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+});
 
 
 
