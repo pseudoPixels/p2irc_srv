@@ -642,7 +642,7 @@ html, body {
                                         <div class="desc">Ashik Ibn Saif</div>
                                         <div >Hello the following pipeline did not ... </div>
                                     </div>
-                                    
+
                                 </a>
                             </li>
                             <li>
@@ -691,7 +691,7 @@ html, body {
                     </li>
                     <!-- settings end -->
                     <!-- inbox dropdown start-->
-                   
+
                     <!-- inbox dropdown end -->
                 </ul>
                 <!--  notification end -->
@@ -708,7 +708,7 @@ html, body {
 
         </header>
       <!--header end-->
-      
+
       <!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
@@ -717,12 +717,12 @@ html, body {
           <div id="sidebar" style="z-index:500;" class="nav-collapse">
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
-              
+
               	  <p class="centered"><a href="profile.html"><img src="{{ url_for('app_collaborative_sci_workflow.static',filename='assets/img_outputs/pp.png') }}" class="img-circle" width="60"></a></p>
 
-                  
+
               	  <h5 class="centered">{{first_name + " " + last_name}}</h5>
-              	  	
+
                   <li class="mt">
                       <a class="active" href="index.html">
                           <i class="fa fa-dashboard"></i>
@@ -736,7 +736,7 @@ html, body {
                           <span>Image Processing Tools</span>
                       </a>
                       <ul class="sub">
-                          
+
                           <li><a  href="#" id="img_tools_menu_binThreshold_id">Binary Thresholding</a></li>
                           <li><a  href="#" id="img_tools_menu_imgMasking_id">Image Masking</a></li>
                           <li><a  href="#" id="img_tools_menu_bitwiseOr_id">Logical Or</a></li>
@@ -754,7 +754,7 @@ html, body {
                           <span>Design Pipelines</span>
                       </a>
                       <ul class="sub">
-                          
+
                           <li ><a  href="#" id="design_pipelines_menu_imgMasking_id_tmp" class = "design_pipeline_menu" title="Masking">Image Masking</a></li>
                           <li><a  href="#" id="design_pipelines_menu_bitwiseOr_id">Logical Or</a></li>
                           <li><a  href="#" id="design_pipelines_menu_medianBlur_id">Median Blur</a></li>
@@ -851,7 +851,7 @@ html, body {
           </div>
       </aside>
       <!--sidebar end-->
-      
+
       <!-- **********************************************************************************************************************************************************
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
@@ -1346,7 +1346,7 @@ THis is a test for remote access....
 
 <script type="text/javascript">
 $(document).ready(function() {
- 
+
 
 $('.letuschat').on('click', function() {
     $('#live-chat').toggle();
@@ -1355,7 +1355,7 @@ $('.letuschat').on('click', function() {
 });
 </script>
 
-<!-- 
+<!--
 <ul id="messages"></ul>
 <input type="text" id="myMessage">
 <button id="sendbutton">Send</button>
@@ -1365,9 +1365,9 @@ $('.letuschat').on('click', function() {
 
 
 <div id="live-chat" style="display:none;">
-        
+
         <header class="clearfix">
-            
+
             <a href="#" class="chat-close">x</a>
 
             <h4>Darrell Contreras</h4>
@@ -1377,28 +1377,28 @@ $('.letuschat').on('click', function() {
         </header>
 
         <div class="chat">
-            
+
             <div class="chat-history" id="messages">
-                
+
                 <!-- <ul id="messages"></ul> -->
 
-                
 
-                
+
+
 
             </div> <!-- end chat-history -->
 
             <p class="chat-feedback"></p>
 
-            
+
                 <fieldset>
-                    
+
                     <input id="myMessage" type="text" placeholder="Type your message…" autofocus><button id="sendbutton">Send</button>
                     <input type="hidden">
 
                 </fieldset>
 
-            
+
 
         </div> <!-- end chat -->
 
@@ -1407,15 +1407,15 @@ $('.letuschat').on('click', function() {
 
 
 
-                  
-                <!-- ATTEMPT TO SAVE PIPELINE BEGINS HERE -->  	
-     
-                      
-                      
-                      
-                <!-- ATTEMPT TO SAVE PIPELINE ENDS HERE -->      
-                     
-					
+
+                <!-- ATTEMPT TO SAVE PIPELINE BEGINS HERE -->
+
+
+
+
+                <!-- ATTEMPT TO SAVE PIPELINE ENDS HERE -->
+
+
 
 
 
@@ -1437,16 +1437,16 @@ $('.letuschat').on('click', function() {
 
 
                   </div><!-- /col-lg-9 END SECTION MIDDLE -->
-                  
-                  
+
+
       <!-- **********************************************************************************************************************************************************
       RIGHT SIDEBAR CONTENT
-      *********************************************************************************************************************************************************** -->                  
-                  
+      *********************************************************************************************************************************************************** -->
+
 
 
                   <div class="col-lg-3 ds" style="width:20%;" id="availableUsers">
-                   
+
 
 
 
@@ -1484,7 +1484,7 @@ $('.letuschat').on('click', function() {
         <input name="file" type="file">
         <button id="upload-file-btn" type="button">Upload</button>
 </form>
-                                        
+
                       <!-- First Action -->
                       <div class="desc">
                         <div class="thumb">
@@ -1507,7 +1507,7 @@ $('.letuschat').on('click', function() {
                           </p>
                         </div>
                       </div>
-                      
+
                       <!-- Fourth Action -->
                       <div class="desc">
                         <div class="thumb">
@@ -1544,7 +1544,7 @@ $('.letuschat').on('click', function() {
                                 </div>
                             </div>
                         </div><!-- / calendar -->
-                      
+
                   </div><!-- /col-lg-3 -->
               </div><! --/row -->
           </section>
@@ -1563,9 +1563,9 @@ $('.letuschat').on('click', function() {
       <!--footer end-->
   </section>
 
-     
+
 <!--
-    <script src="{{ url_for('static',filename='assets/js/jquery.js') }}"></script> 
+    <script src="{{ url_for('static',filename='assets/js/jquery.js') }}"></script>
     <script src="{{ url_for('static',filename='assets/js/jquery-1.8.3.min.js') }}"></script>-->
     <script src="{{ url_for('app_collaborative_sci_workflow.static',filename='assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('app_collaborative_sci_workflow.static',filename='assets/js/jquery.dcjqaccordion.2.7.js') }}"></script>
@@ -1576,18 +1576,18 @@ $('.letuschat').on('click', function() {
 
     <!--common script for all pages-->
     <script src="{{ url_for('app_collaborative_sci_workflow.static',filename='assets/js/common-scripts.js') }}"></script>
-    
+
     <script type="text/javascript" src="{{ url_for('app_collaborative_sci_workflow.static',filename='assets/js/gritter/js/jquery.gritter.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('app_collaborative_sci_workflow.static',filename='assets/js/gritter-conf.js') }}"></script>
 
     <!--script for this page-->
-    <script src="{{ url_for('app_collaborative_sci_workflow.static',filename='assets/js/sparkline-chart.js') }}"></script>    
+    <script src="{{ url_for('app_collaborative_sci_workflow.static',filename='assets/js/sparkline-chart.js') }}"></script>
 	<script src="{{ url_for('app_collaborative_sci_workflow.static',filename='assets/js/zabuto_calendar.js') }}"></script>
-      
+
     <!-- Treant JS for workflow tree view -->
 <script type="text/javascript" src="{{ url_for('app_collaborative_sci_workflow.static',filename='Treant/raphael.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('app_collaborative_sci_workflow.static',filename='Treant/Treant.min.js') }}"></script>
-	
+
 
 	<script type="application/javascript">
         /*$(document).ready(function () {
@@ -1596,7 +1596,7 @@ $('.letuschat').on('click', function() {
             $("#date-popover").click(function (e) {
                 $(this).hide();
             });
-        
+
             $("#my-calendar").zabuto_calendar({
                 action: function () {
                     return myDateFunction(this.id, false);
@@ -1614,8 +1614,8 @@ $('.letuschat').on('click', function() {
                 ]
             });
         });
-        
-        
+
+
         function myNavFunction(id) {
             $("#date-popover").hide();
             var nav = $("#" + id).data("navigation");
@@ -1623,7 +1623,7 @@ $('.letuschat').on('click', function() {
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
         }*/
     </script>
-  
+
 
 
    <style>

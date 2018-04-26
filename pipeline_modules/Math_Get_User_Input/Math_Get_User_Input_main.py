@@ -1,4 +1,4 @@
 
 
-with open(output_destination+".txt", "w+") as moduleOutputFile:
+with open(obtained_user_input, "w+") as moduleOutputFile:
 	moduleOutputFile.write(str(user_input))

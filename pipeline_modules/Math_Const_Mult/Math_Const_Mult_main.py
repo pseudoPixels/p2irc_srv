@@ -5,7 +5,7 @@ num1 = 0
 
 
 lines = ''
-with open(module_1) as module_1_inp:
+with open(input_number) as module_1_inp:
 	lines = module_1_inp.readlines()
 
 #only read the first line (in case it has multiples)
@@ -18,5 +18,5 @@ res = num1 * const_num
 
 
 #write out this module Output
-with open(output_destination+".txt", "w+") as thisModuleOutput:
+with open(multiplication_result, "w+") as thisModuleOutput:
 	thisModuleOutput.write(str(res))
