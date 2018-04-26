@@ -897,7 +897,7 @@ html, body {
   <div class="modal-content">
       <div class="modal-header">
     <span class="close">&times;</span>
-    <h4>Collaboration Tools</h4>
+    <h4>Tools</h4>
   </div>
   <div class="modal-body">
 
@@ -909,7 +909,7 @@ html, body {
   <button class="tablinks" onclick="openTab(event, 'tab_audio')">Audio Streaming</button>
   <button class="tablinks" onclick="openTab(event, 'tab_video')">Video Streaming</button>
   <button class="tablinks" onclick="openTab(event, 'tab_tool_integration')">Plug-in Workflow Tools</button>
-
+  <button class="tablinks" onclick="openTab(event, 'tab_tool_visualization')">Output Visualization</button>
 </div>
 
 <!-- Tab content -->
@@ -930,6 +930,10 @@ html, body {
 
 </div>
 
+<div id="tab_tool_visualization" class="tabcontent">
+ <iframe src="http://p2irc-cloud.usask.ca/app_collaborative_sci_workflow/static/SP1_fastqc.html"  target="_blank" height="600px" width="100%"></iframe>
+</div>
+
 <div id="tab_audio" class="tabcontent">
 
 
@@ -947,6 +951,8 @@ html, body {
 
 
 </div>
+
+
 
 <div id="tab_tool_integration" class="tabcontent">
       <div id="file_upload_div" >
@@ -1268,8 +1274,6 @@ document.getElementById("defaultOpen").click();
 
 
 <div id="tree-simple" style="width:90%;"></div>
-
-
 
 
 

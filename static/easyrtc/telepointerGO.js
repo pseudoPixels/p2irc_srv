@@ -2687,7 +2687,7 @@ function addModuleToPipeline(moduleID, moduleName){
 
 
                 '<div style="margin:10px;font-size:17px;color:#000000;" class="setting_section">' +
-                '    Source Code: <a style="font-size:12px;color:#000000;" href="#" class="code_show_hide">(Show/Hide)</a>' + user_role_based_edit +
+                '    <a style="display:none;font-size:12px;color:#000000;" href="#" class="code_show_hide">(Show/Hide)</a>' + user_role_based_edit +
 
                  '   <div class="edit_code" style="background-color:#888888;font-size:14px;display:none;">' +
                   '          <textarea rows=7 cols=150 class="code_settings">' + moduleSourceCode_settings + '</textarea>' +
@@ -2940,7 +2940,7 @@ $("#design_pipelines_menu_biocalc_id").click(function () {
 
 
             '<div style="margin:10px;font-size:17px;color:#000000;" class="setting_section">' +
-            '    Source Code: <a style="font-size:12px;color:#000000;" href="#" class="code_show_hide">(Show/Hide)</a>' + user_role_based_edit +
+            '    <a style="display:none;font-size:12px;color:#000000;" href="#" class="code_show_hide">(Show/Hide)</a>' + user_role_based_edit +
 
              '   <div class="edit_code" style="background-color:#888888;display:none;font-size:14px;">' +
               '          <textarea rows=7 cols=180 class="code_settings">' + moduleSourceCode_settings + '</textarea>' +
