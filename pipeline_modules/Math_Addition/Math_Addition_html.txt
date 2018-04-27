@@ -37,10 +37,5 @@ Adds Two Numbers <br/>
     </toolDocumentation>
 
 
-
-
-
-
-
 </SciWorC>
 

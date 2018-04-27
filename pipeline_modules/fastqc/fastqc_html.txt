@@ -1,11 +1,43 @@
-<br/>
-Select Input Files: <select  class="setting_param setting_param_parent" name="seq_file"> <!-- CHANGE IN THIS LINE -->
-      <option value="inputFile = '/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_inputs/test_workflow/SP1.fq'" selected>Sequence File 1</option>
-      <option value="inputFile = '/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_inputs/test_workflow/SP2.fq'" >Sequence File 2</option>
-      <option value="inputFile = '/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/std2sol.fq'" >From Module 1</option>
-      <option value="inputFile = '/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/illumina2std.fq'" >From Module 2</option>
-      
-</select>
- <br/><br/>
+<SciWorC>
+    <toolInputs>
+        <toolInput>
+            <label>Fastq File</label>
+            <referenceVariable>fastq_file_path</referenceVariable>
+            <dataFormat>txt</dataFormat>
+        </toolInput>
+    </toolInputs>
+
+
+
+    <toolOutputs>
+        <toolOutput>
+            <label>Quality Analysis HTML</label>
+            <referenceVariable>fastqc_summary</referenceVariable>
+            <dataFormat>html</dataFormat>
+        </toolOutput>
+        <toolOutput>
+            <label>Quality Analysis ZIP</label>
+            <referenceVariable>fastqc_compressed_report</referenceVariable>
+            <dataFormat>zip</dataFormat>
+        </toolOutput>
+    </toolOutputs>
+
+
+
+    <toolConfigurations>
+    </toolConfigurations>
+
+
+
+    <toolDocumentation>
+<b>Math - Addition</b>
+	<p><i>Description:</i><br/>
+Adds Two Numbers <br/>
+<br/></p>
+    </toolDocumentation>
+
+
+</SciWorC>
+
 
 

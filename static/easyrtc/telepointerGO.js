@@ -3468,7 +3468,7 @@ function get_workflow_outputs_list(workflow_id){
 				var visulaizationLink = '';
 				if(thisFileName.split('.').length>0){
 				    var thisFileType = thisFileName.split('.')[thisFileName.split('.').length - 1];
-				    if(thisFileType == 'html' || thisFileType == 'htm' || thisFileType == 'xml' || thisFileType == 'txt'){//currently supported file types for visualization.
+				    if(thisFileType == 'html' || thisFileType == 'htm' || thisFileType == 'xml' || thisFileType == 'txt' ){//currently supported file types for visualization.
 				        visulaizationLink = "<a style='color:white;font-size:11px;' href='#' class='output_vis' viewid='"+ option['workflow_outputs_list'][i] +"'> (View) </a>";
 				    }
 				}
