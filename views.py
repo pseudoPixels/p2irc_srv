@@ -428,6 +428,79 @@ def Python_com():
 	#return jsonify(res)
 	#return jsonify({'allTasks':tasks})
 
+import os.path
+from enum import Enum
+
+def getTotalJobStates(jobStates, jobCount, state):
+	jobStateCount = 0
+	for i in range(jobCount):
+		if jobStates[i] == state:
+			jobStateCount += 1
+	return jobStateCount
+
+@app_collaborative_sci_workflow.route('/workflow_job_manager/', methods=['POST'])
+def workflow_job_manager():
+	#print(request.is_json)
+
+	#print( jsonify( request.get_json()) )
+	#for aJob in  request.get_json()[0] :
+	#	print(aJob['moduleID'])
+
+	#print(request.get_json()['jobDefinition'][0]['moduleID'])
+
+	jobCounts = len(request.get_json()['jobDefinition'])
+	print('Total Number of Jobs ', jobCounts)
+
+
+	# 0 => Not Started
+	# 1 => Running
+	# 2 => Finished
+	# 3 => Failed
+
+	jobStates = [0 for x in range(jobCounts)]
+
+	print('Number of Job yet to start =>', getTotalJobStates(jobStates, jobCounts, 0))
+
+	#msg = ''
+
+	#while there is at least one job to get started.
+	while getTotalJobStates(jobStates, jobCounts, 0) > 0:
+		didAnyJobStarted = False
+		for i in range(jobCounts):
+			if jobStates[i] != 0:# this job was already handled/started.
+				continue
+			#print( 'Data Dependency for -> ' , request.get_json()['jobDefinition'][i]['moduleID'])
+			dataDependencyCount = len(request.get_json()['jobDefinition'][i]['dataDependecnyList'])
+			isThisJobReadyToStart = True
+			for j in range(dataDependencyCount):
+				aDataPath = request.get_json()['jobDefinition'][i]['dataDependecnyList'][j]
+				#print(aDataPath, " ==> ", os.path.exists(aDataPath[1:-1]))
+				if os.path.exists(aDataPath[1:-1]) == False:
+					isThisJobReadyToStart = False
+					break
+			if isThisJobReadyToStart == True:
+				didAnyJobStarted = True
+				jobStates[i] = 1 #Running
+				print('Running Job -> ' , request.get_json()['jobDefinition'][i]['moduleID'])
+				old_stdout = sys.stdout
+				redirected_output = sys.stdout = StringIO()
+				exec(request.get_json()['jobDefinition'][i]['sourceCode'])
+				sys.stdout = old_stdout
+				jobStates[i] = 2 #Finished
+				print('Finished Job -> ', request.get_json()['jobDefinition'][i]['moduleID'])
+		if didAnyJobStarted == False: #NO JOB STARTED in the last pass, there must be some error in workflow DAG
+			print('COULD NOT START ANY JOB !!!')
+			break
+
+
+	return jsonify({'output': 'ok'})
+
+
+# return jsonify(res)
+# return jsonify({'allTasks':tasks})
+
+
+
 
 def getModuleCodes(path):
 	sourceCode = ''

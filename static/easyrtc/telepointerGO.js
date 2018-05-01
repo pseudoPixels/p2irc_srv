@@ -2340,7 +2340,71 @@ function discoverResources(domElement,referenceVariable,workflow_id){
 
 
 
+$("#run_workflowNEW").click(function(){
+    //alert("new workflow run");
 
+    var jobDefinition = [];
+
+    $('.module').each(function(){
+        var thisModID = $(this).attr('id');
+        var dataDependecnyList = [];
+        var sourceCode = '';
+
+        $('#'+thisModID+' .module_input').each(function(){
+            //alert($(this).val().split('=')[1]);
+            dataDependecnyList.push($(this).val().split('=')[1]);
+        });
+
+        $('#'+thisModID+' textarea').each(function(){
+            sourceCode = sourceCode + "\n" +$(this).val();
+        });
+        //sourceCode = encodeURIComponent(String(sourceCode));
+
+        var thisJobDefinition = {'moduleID': thisModID, 'dataDependecnyList': dataDependecnyList, 'sourceCode': sourceCode};
+
+        jobDefinition.push(thisJobDefinition);
+
+    });
+
+
+    //alert(JSON.stringify(jobDefinition));
+
+    $.ajax({
+        type: "POST",
+        cache: false,
+        url: "/workflow_job_manager/",
+        data: JSON.stringify({ 'jobDefinition' : jobDefinition }),
+        dataType: "json",
+        contentType: 'application/json;charset=UTF-8',
+        success: function (option) {
+
+            //alert(option);
+            //get_workflow_outputs_list('test_workflow');
+            //$("#pr_status").html("<span style='color:green'>Pipeline Completed Running Successfully.</span>");
+
+            //alert('Success');
+            //alert(option);
+            get_workflow_outputs_list('test_workflow');
+            $("#pr_status").html("<span style='color:green'>Pipeline Completed Running Successfully.</span>");
+
+            alert('Pipeline Completed Running Successfully.');
+
+        },
+        error: function (xhr, status, error) {
+            //alert(xhr.responseText);
+            $("#pr_status").html("<span style='color:red'>Pipeline Running Failed!!!</span>");
+        }
+
+    });
+
+
+
+
+
+
+
+
+});
 
 
 
