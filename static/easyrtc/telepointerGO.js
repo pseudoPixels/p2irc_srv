@@ -98,7 +98,7 @@ myDiagram='';
                    });
 
       var lab = $$(go.TextBlock, portIdentifier + ' ('+ portDataType +') ',  // the name of the port
-                  { font: "8pt sans-serif", stroke: "black", maxSize: new go.Size(150, 40),margin: 0 });
+                  { font: "8pt sans-serif", stroke: "black", maxSize: new go.Size(130, 40),margin: 0 });
 
       var panel =$$(go.Panel, "Horizontal",
                     { margin: new go.Margin(2, 0) });
@@ -128,7 +128,7 @@ myDiagram='';
     function makeTemplate(typename, icon, background, inports, outports) {
       var node = $$(go.Node, "Spot",
           $$(go.Panel, "Auto",
-            { width: 250, height: 120 },
+            { width: 290, height: 130},
             $$(go.Shape, "RoundedRectangle",
               {
                 fill: background, stroke: "black", strokeWidth: 2,
@@ -155,7 +155,9 @@ myDiagram='';
                   font: "bold 8pt sans-serif"
                 },
                 new go.Binding("text", "module_id").makeTwoWay())
-            )
+            ),
+              $$(go.Shape, "Circle",
+                { row: 3, fill: "white", strokeWidth: 0, name: "jobStatus", width: 13, height: 13 })
           ),
           $$(go.Panel, "Vertical",
             {
@@ -187,8 +189,8 @@ myDiagram='';
           routing: go.Link.AvoidsNodes, corner: 10,
           relinkableFrom: false, relinkableTo: false, curve: go.Link.JumpGap
         },
-        $$(go.Shape, { stroke: "#00bfff", strokeWidth: 2.5 }),
-        $$(go.Shape, { stroke: "#00bfff", fill: "#00bfff", toArrow: "Standard" })
+        $$(go.Shape, { stroke: "#00bfff", name:"datalink", strokeWidth: 2.5 }),
+        $$(go.Shape, { stroke: "#00bfff", name:"datalinkArrow", fill: "#00bfff",  toArrow: "Standard" })
       );
 
     load();
@@ -2338,10 +2340,71 @@ function discoverResources(domElement,referenceVariable,workflow_id){
 }
 
 
+var jobStatus_activeNode = '';//IMPORTANT for job status SHOWING
+
+ref_getJobStatus = '';
+function getJobStatus(){
+
+    var thisWorkflowID = 'test_workflow';
+    $.ajax({
+    type: "POST",
+    cache: false,
+    url: "/workflow_get_job_states/",
+    data: "workflow_id="+thisWorkflowID,
+    success: function (option) {
+        //alert(option.jobStates);
+        for(var i=0;i<option.jobStates.length;i++){
+
+            var jobNode = myDiagram.findNodeForKey(option.jobStates[i]['jobID']);
+            jobNodeShape = jobNode.findObject("jobStatus");
+
+            if(parseInt(option.jobStates[i]['jobStatus']) == 0){
+                jobNodeShape.fill = "#FFFFFF";
+            }else if(parseInt(option.jobStates[i]['jobStatus']) == 1){
+                jobNodeShape.fill = "#FF8C00";
+                jobStatus_activeNode = jobNodeShape;
+
+            }else if(parseInt(option.jobStates[i]['jobStatus']) == 2){
+                jobNodeShape.fill = "#008800";
+            }else{
+                jobNodeShape.fill = "#880000";
+            }
+        }
+    },
+    error: function (xhr, status, error) {
+            alert(xhr.responseText);
+    }
+
+    });
+
+}
+
+ref_showJobStatus = ''
+var odd = false;
+function showJobStatus(){
+    if(odd == false){
+        jobStatus_activeNode.height = 15;
+        jobStatus_activeNode.width = 15;
+        odd = true;
+    }
+    else{
+        jobStatus_activeNode.height = 13;
+        jobStatus_activeNode.width = 13;
+        odd = false;
+    }
+}
+
+
 
 
 $("#run_workflowNEW").click(function(){
     //alert("new workflow run");
+
+
+    //ref_getAndShowJobStatus = setInterval(getAndShowJobStatus, 500);
+
+    $("#pr_status").html("<span style='color:orange'>Running Pipeline...</span>");
+    //$(this).prop("disabled", true);
 
     var jobDefinition = [];
 
@@ -2385,20 +2448,30 @@ $("#run_workflowNEW").click(function(){
             //alert('Success');
             //alert(option);
             get_workflow_outputs_list('test_workflow');
-            $("#pr_status").html("<span style='color:green'>Pipeline Completed Running Successfully.</span>");
+            $("#pr_status").html("<span style='color:green;background-color:yellow;'>Pipeline Completed Running Successfully.</span>");
 
-            alert('Pipeline Completed Running Successfully.');
+            //alert('Pipeline Completed Running Successfully.');
+            //$(this).prop("disabled", false);
+
+            clearInterval(ref_getJobStatus);
+            clearInterval(ref_showJobStatus);
+
+            getJobStatus();
+            showJobStatus();
 
         },
         error: function (xhr, status, error) {
             //alert(xhr.responseText);
+            //clearInterval(ref_getAndShowJobStatus);
+            //$(this).prop("disabled", false);
             $("#pr_status").html("<span style='color:red'>Pipeline Running Failed!!!</span>");
         }
 
     });
 
 
-
+    ref_getAndShowJobStatus = setInterval(getJobStatus, 500);
+    ref_showJobStatus = setInterval(showJobStatus, 300);
 
 
 

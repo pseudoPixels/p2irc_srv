@@ -80,6 +80,18 @@ views_by_workflow_locking_module = ViewDefinition('hello', 'workflow_locking_mod
     ''')
 
 
+views_by_workflow_job_status = ViewDefinition('hello', 'workflow_job_status', '''
+    function (doc) {
+         if (doc.the_doc_type && doc.the_doc_type == 'workflow_job_status') {
+            emit(doc.workflow_id, doc._id)
+        };
+    }
+    ''')
+
+
+
+
+
 from flask import current_app as app
 
 
@@ -92,7 +104,7 @@ app.config.update(
 manager = CouchDBManager()
 with app.app_context():
 	manager.setup(app)
-	manager.add_viewdef([views_by_user, views_by_non_validated_clones, views_by_pipeline_module, views_by_email, views_by_saved_pipeline, views_by_workflow_locking_turn, views_by_workflow_locking_module])
+	manager.add_viewdef([views_by_user, views_by_non_validated_clones, views_by_pipeline_module, views_by_email, views_by_saved_pipeline, views_by_workflow_locking_turn, views_by_workflow_locking_module, views_by_workflow_job_status])
 	manager.sync(app)
 
 
@@ -289,7 +301,7 @@ def bio():
 
 
 
-from flaskext.couchdb import Document, TextField, FloatField, DictField, Mapping,ListField
+from flaskext.couchdb import Document, TextField, FloatField, DictField, Mapping,ListField, IntegerField
 
 
 # class PlantPhenotype(Document):
@@ -438,19 +450,44 @@ def getTotalJobStates(jobStates, jobCount, state):
 			jobStateCount += 1
 	return jobStateCount
 
+
+
+#global refs for jobCounts and jobStatus
+#TODO: Need to use Database for storing workflow specific submitted job status
+jobCounts =''
+jobStates = ''
+jobDefinitions = ''
+
+
+
 @app_collaborative_sci_workflow.route('/workflow_job_manager/', methods=['POST'])
 def workflow_job_manager():
-	#print(request.is_json)
+	#Remove all existing documents
+	for row in views_by_workflow_job_status(g.couch):
+		tmp = WorkflowJobStatus.load(row.value)
+		g.couch.delete(tmp)
 
-	#print( jsonify( request.get_json()) )
-	#for aJob in  request.get_json()[0] :
-	#	print(aJob['moduleID'])
 
+
+	thisWorkflowID = 'test_workflow'
 	#print(request.get_json()['jobDefinition'][0]['moduleID'])
+	workflowJobStatusDoc = WorkflowJobStatus(workflow_id=thisWorkflowID)
 
-	jobCounts = len(request.get_json()['jobDefinition'])
+	jobDefinitions = request.get_json()['jobDefinition']
+	jobCounts = len(jobDefinitions)
+
+	for i in range(jobCounts):
+		workflowJobStatusDoc.jobStatusList.append(jobID=jobDefinitions[i]['moduleID'], jobStatus=0)
+	workflowJobStatusDoc.store()
+
+	thisJobStatusDocID = ''
+	for row in (views_by_workflow_job_status(g.couch)):
+		if row.key == thisWorkflowID:
+			thisJobStatusDocID = row.value
+			break
+
+	#jobDefinitions = request.get_json()['jobDefinition']
 	print('Total Number of Jobs ', jobCounts)
-
 
 	# 0 => Not Started
 	# 1 => Running
@@ -481,12 +518,21 @@ def workflow_job_manager():
 			if isThisJobReadyToStart == True:
 				didAnyJobStarted = True
 				jobStates[i] = 1 #Running
+				tmp_jobID = jobDefinitions[i]['moduleID']
 				print('Running Job -> ' , request.get_json()['jobDefinition'][i]['moduleID'])
+				workflowJobStatusDoc = WorkflowJobStatus.load(thisJobStatusDocID)
+				for c in range(jobCounts):
+					if workflowJobStatusDoc.jobStatusList[c]['jobID'] == tmp_jobID:
+						workflowJobStatusDoc.jobStatusList[c]['jobStatus'] = 1
+						break
+				workflowJobStatusDoc.store()
 				old_stdout = sys.stdout
 				redirected_output = sys.stdout = StringIO()
 				exec(request.get_json()['jobDefinition'][i]['sourceCode'])
 				sys.stdout = old_stdout
 				jobStates[i] = 2 #Finished
+				workflowJobStatusDoc.jobStatusList[c]['jobStatus'] = 2
+				workflowJobStatusDoc.store()
 				print('Finished Job -> ', request.get_json()['jobDefinition'][i]['moduleID'])
 		if didAnyJobStarted == False: #NO JOB STARTED in the last pass, there must be some error in workflow DAG
 			print('COULD NOT START ANY JOB !!!')
@@ -494,6 +540,27 @@ def workflow_job_manager():
 
 
 	return jsonify({'output': 'ok'})
+
+
+
+
+@app_collaborative_sci_workflow.route('/workflow_get_job_states/', methods=['POST'])
+def workflow_get_job_states():
+	tmpJobStates = []
+	thisWorkflowID = 'test_workflow'
+	thisJobStatusDocID = ''
+	for row in (views_by_workflow_job_status(g.couch)):
+		if row.key == thisWorkflowID:
+			#thisJobStatusDocID = row.value
+			thisJobDoc = WorkflowJobStatus.load(row.value)
+			#tmpJobStates_keyVal = len(thisJobDoc.jobStatusList)
+			for i in range(len(thisJobDoc.jobStatusList)):
+				tmpJobStates.append({'jobID': thisJobDoc.jobStatusList[i]['jobID'], 'jobStatus': thisJobDoc.jobStatusList[i]['jobStatus']})
+			break
+
+
+	return jsonify({'jobStates': tmpJobStates})
+
 
 
 # return jsonify(res)
@@ -1323,6 +1390,14 @@ class WorkflowLockingTurn(Document):
 	request_queue = ListField(TextField())
 	current_floor_owner = TextField(default='NONE')
 
+class WorkflowJobStatus(Document):
+	the_doc_type = TextField(default='workflow_job_status')
+	workflow_id = TextField()
+	jobStatusList = ListField(DictField(Mapping.build(
+		jobID = TextField(),
+		jobStatus = IntegerField()
+	)))
+
 
 @app_collaborative_sci_workflow.route('/init_locking_server/',  methods=['GET'])
 def init_locking_server():
@@ -1335,6 +1410,12 @@ def init_locking_server():
 	#Add one doc
 	turnBasedLocking = WorkflowLockingTurn(workflow_id='workflow_turn_id_1')
 	turnBasedLocking.store()
+
+	#Remove all existing documents
+	for row in views_by_workflow_job_status(g.couch):
+		tmp = WorkflowJobStatus.load(row.value)
+		g.couch.delete(tmp)
+
 
 	return jsonify({'success': 'OK'})
 
