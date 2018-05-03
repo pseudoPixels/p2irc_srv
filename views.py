@@ -714,6 +714,18 @@ def cvs():
 
 @app_collaborative_sci_workflow.route('/cvs_module_locking')
 def cvs_module_locking():
+
+	#TODO: REMOVE WHEN DEBUGGLING FOR LOCKING DONE
+	#Remove all existing documents
+	for row in views_by_workflow_locking_turn(g.couch):
+		tmp = WorkflowLockingTurn.load(row.value)
+		g.couch.delete(tmp)
+
+	#Add one doc
+	turnBasedLocking = WorkflowLockingTurn(workflow_id='workflow_turn_id_1')
+	turnBasedLocking.store()
+
+
 	module = ''
 	for row in views_by_pipeline_module(g.couch):
 		if row.key == 'rgb2gray':
@@ -741,24 +753,35 @@ def cvs_module_locking():
 	all_other_users = getAllUsersDetails(session.get('p2irc_user_email'))
 
 
+	pineline_modules = os.listdir("app_collaborative_sci_workflow/pipeline_modules/")
+
+	pineline_source_analysis_modules = [f for f in os.listdir('app_collaborative_sci_workflow/pipeline_modules/') if re.match(r'NiCAD*', f)] #os.listdir("app_collaborative_sci_workflow/pipeline_modules/source_analysis_tools/")
+
+	pineline_mathematical_analysis_modules = [f for f in os.listdir('app_collaborative_sci_workflow/pipeline_modules/') if
+										re.match(r'Math*', f)]
 
 
 
+	saved_workflows = os.listdir("app_collaborative_sci_workflow/pipeline_saved/")
 
 
-	return render_template('cloud_vision_pipeline_save_module_locking.html',
-	module_name = '',#module.module_name,
-	documentation = '',#module.documentation,
-	moduleSourceCode_settings = moduleSourceCode_settings,
-	moduleSourceCode_main = moduleSourceCode_main,
-	moduleSourceCode_html = html.unescape(moduleSourceCode_html),
-	first_name = first_name,
-	last_name = last_name,
-	email = email,
-	user_role = user_role,
-	saved_pipelines = saved_pipelines,
-	shared_pipelines = shared_pipelines,
-    all_other_users=all_other_users)
+	return render_template('cloud_vision_pipeline_save_module_lockingGO.html',
+   	module_name='',  # module.module_name,
+    documentation='',  # module.documentation,
+   	moduleSourceCode_settings=moduleSourceCode_settings,
+   	moduleSourceCode_main=moduleSourceCode_main,
+   	moduleSourceCode_html=moduleSourceCode_html,
+   	first_name=first_name,
+   	last_name=last_name,
+   	email=email,
+   	user_role=user_role,
+   	saved_pipelines=saved_pipelines,
+   	shared_pipelines=shared_pipelines,
+   	all_other_users=all_other_users,
+   	pineline_modules=pineline_modules,
+   	pineline_source_analysis_modules=pineline_source_analysis_modules,
+   	pineline_mathematical_analysis_modules=pineline_mathematical_analysis_modules,
+   	saved_workflows=saved_workflows)
 
 
 

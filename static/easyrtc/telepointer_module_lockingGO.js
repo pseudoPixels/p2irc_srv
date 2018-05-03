@@ -126,9 +126,20 @@ myDiagram='';
     }
 
     function makeTemplate(typename, icon, background, inports, outports) {
-      var node = $$(go.Node, "Spot",
+      var node = $$(go.Node, "Spot", {
+            contextMenu:     // define a context menu for each node
+              $$(go.Adornment, "Vertical",  // that has one button
+                $$("ContextMenuButton",
+                  $$(go.TextBlock, "Lock This Sub-workflow"),
+                  { click: lockSubWorkflow }),
+                $$("ContextMenuButton",
+                  $$(go.TextBlock, "Lock Info"),
+                  { click: getThisLockInfo })
+                // more ContextMenuButtons would go here
+              )  // end Adornment
+            },
           $$(go.Panel, "Auto",
-            { width: 290, height: 130},
+            { width: 290, height: 130 },
             $$(go.Shape, "RoundedRectangle",
               {
                 fill: background, stroke: "black", strokeWidth: 2,
@@ -154,7 +165,7 @@ myDiagram='';
                   stroke: "black",
                   font: "bold 8pt sans-serif"
                 },
-                new go.Binding("text", "module_id").makeTwoWay())
+                new go.Binding("text", "module_id").makeTwoWay()),
             ),
               $$(go.Shape, "Circle",
                 { row: 3, fill: "white", strokeWidth: 0, name: "jobStatus", width: 13, height: 13 })
@@ -250,6 +261,7 @@ myDiagram='';
     $$(go.Overview, "myDiagramOverview",
       { observed: myDiagram });
     myOverview.grid.visible = false;
+
 
 
   //turn off undo/redo
@@ -385,8 +397,17 @@ $(document).on('click', '.close', function(){
   );
 
 
+  function lockSubWorkflow(e, obj) {
+    var node = obj.part.adornedPart;  // the Node with the context menu
+    alert("Sub-workflow Lock => " + node.data.key);
+  }
 
 
+
+  function getThisLockInfo(e, obj) {
+    var node = obj.part.adornedPart;  // the Node with the context menu
+    alert("Lock Info => " + node.data.key);
+  }
 /*
   myDiagram.model.addChangedListener(function(e) {
     if (e.isTransactionFinished) {
@@ -3615,7 +3636,7 @@ function get_workflow_outputs_list(workflow_id){
 
 				$("#workflow_outputs").append(visulaizationLink + "<a href='/file_download?workflow_id=" + thisWorkflowID +"&file_id=" + option['workflow_outputs_list'][i]+"' class='a_workflow_output' id='"+option['workflow_outputs_list'][i] +"'>"  + option['workflow_outputs_list'][i] + "</a><br/>");
 			}
-	    		
+
 		},
 		error: function (xhr, status, error) {
 	    		alert(xhr.responseText);
