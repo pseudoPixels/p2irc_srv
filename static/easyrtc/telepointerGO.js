@@ -2450,7 +2450,7 @@ $("#run_workflowNEW").click(function(){
             get_workflow_outputs_list('test_workflow');
             $("#pr_status").html("<span style='color:green;background-color:yellow;'>Pipeline Completed Running Successfully.</span>");
 
-            //alert('Pipeline Completed Running Successfully.');
+            //
             //$(this).prop("disabled", false);
 
             clearInterval(ref_getJobStatus);
@@ -2458,6 +2458,8 @@ $("#run_workflowNEW").click(function(){
 
             getJobStatus();
             showJobStatus();
+
+            alert('Pipeline Completed Running Successfully.');
 
         },
         error: function (xhr, status, error) {
