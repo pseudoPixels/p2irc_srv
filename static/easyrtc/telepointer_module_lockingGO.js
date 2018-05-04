@@ -121,11 +121,21 @@ myDiagram='';
       }
       return panel;
     }
-
-    function makeTemplate(typename, icon, background, inports, outports) {
-      var node = $$(go.Node, "Spot",
+        function makeTemplate(typename, icon, background, inports, outports) {
+      var node = $$(go.Node, "Spot", {
+            contextMenu:     // define a context menu for each node
+              $$(go.Adornment, "Vertical",  // that has one button
+                $$("ContextMenuButton",
+                  $$(go.TextBlock, "Lock This Sub-workflow"),
+                  { click: lockSubWorkflow }),
+                $$("ContextMenuButton",
+                  $$(go.TextBlock, "Lock Info"),
+                  { click: getThisLockInfo })
+                // more ContextMenuButtons would go here
+              )  // end Adornment
+            },
           $$(go.Panel, "Auto",
-            { width: 290, height: 130},
+            { width: 290, height: 130 },
             $$(go.Shape, "RoundedRectangle",
               {
                 fill: background, stroke: "black", strokeWidth: 2,
@@ -151,7 +161,7 @@ myDiagram='';
                   stroke: "black",
                   font: "bold 8pt sans-serif"
                 },
-                new go.Binding("text", "module_id").makeTwoWay())
+                new go.Binding("text", "module_id").makeTwoWay()),
             ),
               $$(go.Shape, "Circle",
                 { row: 3, fill: "white", strokeWidth: 0, name: "jobStatus", width: 13, height: 13 })
@@ -171,8 +181,6 @@ myDiagram='';
         );
       myDiagram.nodeTemplateMap.add(typename, node);
     }
-
-
 
     makeTemplate("Project","images/55x55.png", "white",
                  [makePort("xml","Potential Clones", true)],
@@ -381,6 +389,21 @@ $(document).on('click', '.close', function(){
       }
   );
 
+
+
+
+
+  function lockSubWorkflow(e, obj) {
+    var node = obj.part.adornedPart;  // the Node with the context menu
+    alert("Sub-workflow Lock => " + node.data.key);
+  }
+
+
+
+  function getThisLockInfo(e, obj) {
+    var node = obj.part.adornedPart;  // the Node with the context menu
+    alert("Lock Info => " + node.data.key);
+  }
 
 
 
