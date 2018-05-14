@@ -29,409 +29,6 @@ var THIS_WORKFLOW_NAME = 'test_workflow';
 
 
 
-//========================================================
-//================ GO CODES STARTS =======================
-//========================================================
-myDiagram='';
-//function init() {
-
-    var $$ = go.GraphObject.make;
-
-    myDiagram =
-      $$(go.Diagram, "myDiagramDiv",
-        {
-          initialContentAlignment: go.Spot.Center,
-          initialAutoScale: go.Diagram.UniformToFill,
-
-          "undoManager.isEnabled": true
-        }
-      );
- 	myDiagram.grid.visible = true;
-    // when the document is modified, add a "*" to the title and enable the "Save" button
-    /*myDiagram.addDiagramListener("Modified", function(e) {
-      var button = document.getElementById("SaveButton");
-      if (button) button.disabled = !myDiagram.isModified;
-      var idx = document.title.indexOf("*");
-      if (myDiagram.isModified) {
-        if (idx < 0) document.title += "*";
-      } else {
-        if (idx >= 0) document.title = document.title.substr(0, idx);
-      }
-    });*/
-
-
-  // validate if the linking modules have the same (compatible) data type
-  function validateSameDataTypeOfModules(fromnode, fromport, tonode, toport) {
-    //portID => port_identifier(portDataType)
-    //var portOneDataType = fromport.portId.split('(')[fromport.portId.split('(').length - 1]; // portDataType)
-    //portOneDataType = portOneDataType.split(')')[0]; // portDataType
-
-    //var portTwoDataType = toport.portId.split('(')[toport.portId.split('(').length - 1]; // portDataType)
-    //portTwoDataType = portTwoDataType.split(')')[0]; // portDataType
-
-    var portOneDataType = fromport.portId.split('.')[fromport.portId.split('.').length - 1];
-    var portTwoDataType = toport.portId.split('.')[toport.portId.split('.').length - 1];
-
-
-    if(portOneDataType == portTwoDataType)return true; //the linking datatype is same, so allow
-
-    return false;
-
-  }
-
-  // validate if the linking modules have the same (compatible) data type
-  myDiagram.toolManager.linkingTool.linkValidation = validateSameDataTypeOfModules;
-
-
-
-    function makePort(portDataType, portIdentifier, leftside) {
-      var port = $$(go.Shape, "Rectangle",
-                   {
-                     fill: "#FF5733", stroke: null,
-                     desiredSize: new go.Size(8, 8),
-                     //portId: portDataType,  // declare this object to be a "port"
-                     toMaxLinks: 1,  // don't allow more than one link into a port
-                     cursor: "pointer"  // show a different cursor to indicate potential link point
-                   });
-
-      var lab = $$(go.TextBlock, portIdentifier + ' ('+ portDataType +') ',  // the name of the port
-                  { font: "8pt sans-serif", stroke: "black", maxSize: new go.Size(130, 40),margin: 0 });
-
-      var panel =$$(go.Panel, "Horizontal",
-                    { margin: new go.Margin(2, 0) });
-
-      // set up the port/panel based on which side of the node it will be on
-      if (leftside) {
-        port.toSpot = go.Spot.Left;
-        port.toLinkable = true;
-        port.portId = portIdentifier + '.'+ portDataType;
-        port.fill = 'orange';
-        lab.margin = new go.Margin(1, 0, 0, 1);
-        panel.alignment = go.Spot.TopLeft;
-        panel.add(port);
-        panel.add(lab);
-      } else {
-        port.fromSpot = go.Spot.Right;
-        port.fromLinkable = true;
-        port.portId = portIdentifier+ '.'+ portDataType;
-        lab.margin = new go.Margin(1, 1, 0, 0);
-        panel.alignment = go.Spot.TopRight;
-        panel.add(lab);
-        panel.add(port);
-      }
-      return panel;
-    }
-        function makeTemplate(typename, icon, background, inports, outports) {
-      var node = $$(go.Node, "Spot", {
-            contextMenu:     // define a context menu for each node
-              $$(go.Adornment, "Vertical",  // that has one button
-                $$("ContextMenuButton",
-                  $$(go.TextBlock, "Lock This Sub-workflow"),
-                  { click: lockSubWorkflow }),
-                $$("ContextMenuButton",
-                  $$(go.TextBlock, "Lock Info"),
-                  { click: getThisLockInfo })
-                // more ContextMenuButtons would go here
-              )  // end Adornment
-            },
-          $$(go.Panel, "Auto",
-            { width: 290, height: 130 },
-            $$(go.Shape, "RoundedRectangle",
-              {
-                fill: background, stroke: "black", strokeWidth: 2,
-                spot1: go.Spot.TopLeft, spot2: go.Spot.BottomRight
-              }),
-            $$(go.Panel, "Table",
-              $$(go.TextBlock,
-                {
-                  row: 0,
-                  margin: 3,
-                  maxSize: new go.Size(150, 40),
-                  stroke: "black",
-                  font: "bold 11pt sans-serif"
-                },
-                new go.Binding("text", "name").makeTwoWay()),
-              $$(go.Picture, icon,
-                { row: 1, width: 55, height: 55 }),
-                $$(go.TextBlock,
-                {
-                  row: 2,
-                  margin: 3,
-                  maxSize: new go.Size(150, NaN),
-                  stroke: "black",
-                  font: "bold 8pt sans-serif"
-                },
-                new go.Binding("text", "module_id").makeTwoWay()),
-            ),
-              $$(go.Shape, "Circle",
-                { row: 3, fill: "white", strokeWidth: 0, name: "jobStatus", width: 13, height: 13 })
-          ),
-          $$(go.Panel, "Vertical",
-            {
-              alignment: go.Spot.Left,
-              alignmentFocus: new go.Spot(0, 0.5, -8, 0)
-            },
-            inports),
-          $$(go.Panel, "Vertical",
-            {
-              alignment: go.Spot.Right,
-              alignmentFocus: new go.Spot(1, 0.5, 8, 0)
-            },
-            outports)
-        );
-      myDiagram.nodeTemplateMap.add(typename, node);
-    }
-
-    makeTemplate("Project","images/55x55.png", "white",
-                 [makePort("xml","Potential Clones", true)],
-                 [makePort("xml", "XML ",false)]);
-
-
-
-    myDiagram.linkTemplate =
-      $$(go.Link,
-        {
-          routing: go.Link.AvoidsNodes, corner: 10,
-          relinkableFrom: false, relinkableTo: false, curve: go.Link.JumpGap
-        },
-        $$(go.Shape, { stroke: "#00bfff", name:"datalink", strokeWidth: 2.5 }),
-        $$(go.Shape, { stroke: "#00bfff", name:"datalinkArrow", fill: "#00bfff",  toArrow: "Standard" })
-      );
-
-    load();
-
-
-  // Show the diagram's model in JSON format that the user may edit
-  function save() {
-    document.getElementById("mySavedModel").value = myDiagram.model.toJson();
-    myDiagram.isModified = false;
-  }
-  function load() {
-    myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
-  }
-
-  function addNewLinkToWorkflowObject(newLinkInformation){
-    myDiagram.startTransaction("add link");
-    var newlink = { from: newLinkInformation.from, frompid: newLinkInformation.frompid, to: newLinkInformation.to, topid:newLinkInformation.topid};
-    myDiagram.model.addLinkData(newlink);
-    myDiagram.commitTransaction("add link");
-  }
-
-
-   function workflowObjSelectionMoved(selectionNewLocationInfo){
-     myDiagram.startTransaction('selection moved');
-     var movedNode = myDiagram.findNodeForKey(selectionNewLocationInfo.key);
-     movedNode.location = new go.Point(selectionNewLocationInfo.x, selectionNewLocationInfo.y);
-     myDiagram.commitTransaction('selection moved');
-   }
-
-
-   function workflowObjRemoveNode(nodeInfoForRemoval){
-     myDiagram.startTransaction('node removed');
-     var nodeTargetedForDeletion = myDiagram.findNodeForKey(nodeInfoForRemoval.key);
-     myDiagram.remove(nodeTargetedForDeletion);
-     myDiagram.commitTransaction('node removed');
-   }
-
-
-    function workflowObjRemoveLink(linkInfoForRemoval){
-         var linksTargetedForDeletion = myDiagram.findLinksByExample({ 'from': linkInfoForRemoval.from, 'frompid': linkInfoForRemoval.frompid, 'to': linkInfoForRemoval.to, 'topid':linkInfoForRemoval.topid});
-
-        for (var iter = linksTargetedForDeletion; iter.next(); ) {
-            aLink = iter.value;
-            myDiagram.startTransaction('link removed');
-            myDiagram.remove(aLink);
-            myDiagram.commitTransaction('link removed');
-        }
-
-    }
-
-
-
-
-  //init();
-  // create the Overview and initialize it to show the main Diagram
-  var myOverview =
-    $$(go.Overview, "myDiagramOverview",
-      { observed: myDiagram });
-    myOverview.grid.visible = false;
-
-
-  //turn off undo/redo
-  myDiagram.model.undoManager.isEnabled = false;
-  //make the diagram read only
-  //myDiagram.isReadOnly = true;
-
-//===========================>>>>>>>>>>>>>>>>>>>>>>>>
-// Diagram Events Start
-//===========================>>>>>>>>>>>>>>>>>>>>>>>>
-
-  //show the corresponding module details on any module click
-  myDiagram.addDiagramListener("ObjectSingleClicked",
-      function(e) {
-        var part = e.subject.part;
-        if (!(part instanceof go.Link)) {
-            var clickedModuleID = part.data.key; // Module_1
-            //clickedModuleID = clickedModuleID.split('_')[1]; // 1
-            $(".module").hide();
-            $("#"+clickedModuleID).show();
-        }
-      }
-  );
-
-
-    //show the corresponding module details on any module click
-  myDiagram.addDiagramListener("ObjectDoubleClicked",
-      function(e) {
-        var part = e.subject.part;
-        if (!(part instanceof go.Link)) {
-            var clickedModuleID = part.data.key; // Module_1
-            //clickedModuleID = clickedModuleID.split('_')[1]; // 1
-            $(".module").hide();
-            $("#"+clickedModuleID).show();
-
-            $("#modal_module_configs").css('display', 'block');
-        }
-      }
-  );
-
-
-
-
-
-
-
-  //remove all corresponding module details on background click
-  myDiagram.addDiagramListener("BackgroundSingleClicked",
-      function(e) {
-        //$(".module").hide();
-        $("#modal_module_configs").css('display', 'none');
-      }
-  );
-
-$(document).on('click', '.close', function(){
-    //alert('close clicked');
-    $("#modal_module_configs").css('display', 'none');
-    $("#myModal").css('display', 'none');
-});
-
-
-  //attempting Workflow Diagram Part (link/node) deletion.
-  myDiagram.addDiagramListener("SelectionDeleting",
-      function(e) {
-        //alert("SelectionDeleting");
-        for (var iter = myDiagram.selection.iterator; iter.next(); ) {
-            var part = iter.value;
-            if (part instanceof go.Node) {
-                //alert(part.data.key);
-                var nodeInfoForRemoval = {'key':part.data.key};
-                notifyAll("workflow_obj_selection_node_delete",nodeInfoForRemoval);
-            }
-            if (part instanceof go.Link) {
-                //alert(part.data.from);
-                //alert(part.data.topid);
-
-                 var thisPortInput = part.data.to + '_NO_INPUT_SOURCE_SELECTED_' + part.data.topid;
-                 var referenceVariable = part.data.topid.split('.')[part.data.topid.split('.').length - 2];
-                 thisPortInput = referenceVariable + '="' + WORKFLOW_OUTPUTS_PATH + THIS_WORKFLOW_NAME + '/' +thisPortInput + '"';
-
-                 $("#"+part.data.to + ' .' + referenceVariable).val(thisPortInput).trigger('change');
-
-
-                var linkInfoForRemoval = {'from': part.data.from, 'frompid': part.data.frompid, 'to': part.data.to, 'topid': part.data.topid};
-                notifyAll("workflow_obj_selection_link_delete",linkInfoForRemoval);
-            }
-        }
-      }
-  );
-
-  //event called on creating new link on the workflow object
-  myDiagram.addDiagramListener("LinkDrawn",
-      function(e) {
-        var part = e.subject.part;
-        if (part instanceof go.Link) {
-            //alert("Linked From: "+ part.data.from + " To: " + part.data.to);
-
-            //$("#module_id_1 ."+part.data.topid).val("var='this should be new value'");
-            //var toModuleId = part.data.to.split('_')[1]; // ie., x in Module_x
-            //toModuleId = '#module_id_'+ toModuleId;
-
-            var toPortClass = part.data.topid.split('.')[part.data.topid.split('.').length - 2];
-            //var fromPortClass = part.data.frompid.split('.')[part.data.frompid.split('.').length - 2];
-            //toPortClass = ' .' + toPortClass;
-
-            $('#'+part.data.to +' .'+toPortClass).val(toPortClass+"='"+ WORKFLOW_OUTPUTS_PATH + THIS_WORKFLOW_NAME + '/' + part.data.from+'_'+part.data.frompid+"'").trigger('change');
-
-
-            //alert("To " + part.data.to);
-            //alert(part.data.topid.split('(')[part.data.topid.split('(').length - 2]);
-
-            var newLinkInformation = {'from': part.data.from, 'frompid': part.data.frompid, 'to': part.data.to, 'topid': part.data.topid};
-            notifyAll("workflow_obj_new_link_drawn", newLinkInformation);
-
-        }
-      }
-  );
-
-  //event called on selection (Node) changes...
-  myDiagram.addDiagramListener("SelectionMoved",
-      function(e) {
-        //alert("Selection Moved");
-        for (var iter = myDiagram.selection.iterator; iter.next(); ) {
-            var part = iter.value;
-            if (part instanceof go.Node) {
-                //alert(part.data.key + " x: " + part.location.x + " y: " + part.location.y);
-                var nodeNewLocationInformation = {'key': part.data.key, 'x':part.location.x, 'y':part.location.y};
-                notifyAll('workflow_obj_selection_moved', nodeNewLocationInformation);
-            }
-        }
-
-      }
-  );
-
-
-
-
-
-  function lockSubWorkflow(e, obj) {
-    var node = obj.part.adornedPart;  // the Node with the context menu
-    alert("Sub-workflow Lock => " + node.data.key);
-  }
-
-
-
-  function getThisLockInfo(e, obj) {
-    var node = obj.part.adornedPart;  // the Node with the context menu
-    alert("Lock Info => " + node.data.key);
-  }
-
-
-
-/*
-  myDiagram.model.addChangedListener(function(e) {
-    if (e.isTransactionFinished) {
-
-      var tx = e.newValue;
-      window.console.log(tx);
-      //if (tx instanceof go.Transaction && window.console) {
-        //window.console.log(tx.name);
-        tx.changes.each(function(c) {
-          if (c.model) window.console.log("  " + c.toString());
-        });
-      //}
-    }
-  });*/
-//===========================>>>>>>>>>>>>>>>>>>>>>>>>
-// Diagram Events Ends
-//===========================>>>>>>>>>>>>>>>>>>>>>>>>
-
-
-
-
-//========================================================
-//================ GO CODES ENDS =========================
-//========================================================
-
 
 
 
@@ -740,9 +337,32 @@ function onMessageRecieved(who, msgType, content) {
         case "parentChanged":
             onModuleParentChange(content.moduleID, content.newParentID, content.parentIndex);
             break;
+        case "moduleSettingsChanged":
+            onModuleSettingsChanged(content);
+            break;
+
+        case "workflow_obj_new_link_drawn":
+            addNewLinkToWorkflowObject(content);
+            break;
+        case "workflow_obj_selection_moved":
+            workflowObjSelectionMoved(content);
+            break;
+        case "workflow_obj_selection_node_delete":
+            workflowObjRemoveNode(content);
+            break;
+        case "workflow_obj_selection_link_delete":
+            workflowObjRemoveLink(content);
+            break;
 
     }
 }
+
+
+
+function onModuleSettingsChanged(changeInfo){
+    $(changeInfo.elementInfo).eq(changeInfo.paramIndex).val(changeInfo.newParamValue).change();
+}
+
 
 
 //add the newly obtained client details to the list (e.g. like phonebook)
@@ -981,6 +601,624 @@ function loginFailure(errorCode, message) {
 
 
 //========================================================
+//================ GO CODES STARTS =======================
+//========================================================
+    myDiagram='';
+    //function init() {
+
+    var $$ = go.GraphObject.make;
+
+    myDiagram =
+      $$(go.Diagram, "myDiagramDiv",
+        {
+          initialContentAlignment: go.Spot.Center,
+          initialAutoScale: go.Diagram.UniformToFill,
+
+          "undoManager.isEnabled": true
+        }
+      );
+ 	myDiagram.grid.visible = true;
+    // when the document is modified, add a "*" to the title and enable the "Save" button
+    /*myDiagram.addDiagramListener("Modified", function(e) {
+      var button = document.getElementById("SaveButton");
+      if (button) button.disabled = !myDiagram.isModified;
+      var idx = document.title.indexOf("*");
+      if (myDiagram.isModified) {
+        if (idx < 0) document.title += "*";
+      } else {
+        if (idx >= 0) document.title = document.title.substr(0, idx);
+      }
+    });*/
+
+
+  // validate if the linking modules have the same (compatible) data type
+  function validateSameDataTypeOfModules(fromnode, fromport, tonode, toport) {
+    //portID => port_identifier(portDataType)
+    //var portOneDataType = fromport.portId.split('(')[fromport.portId.split('(').length - 1]; // portDataType)
+    //portOneDataType = portOneDataType.split(')')[0]; // portDataType
+
+    //var portTwoDataType = toport.portId.split('(')[toport.portId.split('(').length - 1]; // portDataType)
+    //portTwoDataType = portTwoDataType.split(')')[0]; // portDataType
+
+    var portOneDataType = fromport.portId.split('.')[fromport.portId.split('.').length - 1];
+    var portTwoDataType = toport.portId.split('.')[toport.portId.split('.').length - 1];
+
+
+    if(portOneDataType == portTwoDataType)return true; //the linking datatype is same, so allow
+
+    return false;
+
+  }
+
+  // validate if the linking modules have the same (compatible) data type
+  myDiagram.toolManager.linkingTool.linkValidation = validateSameDataTypeOfModules;
+
+
+
+    function makePort(portDataType, portIdentifier, leftside) {
+      var port = $$(go.Shape, "Rectangle",
+                   {
+                     fill: "#FF5733", stroke: null,
+                     desiredSize: new go.Size(8, 8),
+                     //portId: portDataType,  // declare this object to be a "port"
+                     toMaxLinks: 1,  // don't allow more than one link into a port
+                     cursor: "pointer"  // show a different cursor to indicate potential link point
+                   });
+
+      var lab = $$(go.TextBlock, portIdentifier + ' ('+ portDataType +') ',  // the name of the port
+                  { font: "8pt sans-serif", stroke: "black", maxSize: new go.Size(130, 40),margin: 0 });
+
+      var panel =$$(go.Panel, "Horizontal",
+                    { margin: new go.Margin(2, 0) });
+
+      // set up the port/panel based on which side of the node it will be on
+      if (leftside) {
+        port.toSpot = go.Spot.Left;
+        port.toLinkable = true;
+        port.portId = portIdentifier + '.'+ portDataType;
+        port.fill = 'orange';
+        lab.margin = new go.Margin(1, 0, 0, 1);
+        panel.alignment = go.Spot.TopLeft;
+        panel.add(port);
+        panel.add(lab);
+      } else {
+        port.fromSpot = go.Spot.Right;
+        port.fromLinkable = true;
+        port.portId = portIdentifier+ '.'+ portDataType;
+        lab.margin = new go.Margin(1, 1, 0, 0);
+        panel.alignment = go.Spot.TopRight;
+        panel.add(lab);
+        panel.add(port);
+      }
+      return panel;
+    }
+        function makeTemplate(typename, icon, background, inports, outports) {
+            var node = $$(go.Node, "Spot", {
+                contextMenu:     // define a context menu for each node
+              $$(go.Adornment, "Vertical",  // that has one button
+                $$("ContextMenuButton",
+                  $$(go.TextBlock, "Lock This Sub-workflow"),
+                  { click: lockSubWorkflow }),
+                $$("ContextMenuButton",
+                  $$(go.TextBlock, "Unlock This Sub-workflow"),
+                  { click: unlockSubWorkflow }),
+                $$("ContextMenuButton",
+                  $$(go.TextBlock, "Lock Info"),
+                  { click: getThisLockInfo })
+                // more ContextMenuButtons would go here
+              )  // end Adornment
+            , copyable:false}, new go.Binding("movable", "allowNodeMovability"), new go.Binding("deletable", "allowNodeDeletion"),
+          $$(go.Panel, "Auto",
+            { width: 290, height: 130},
+            $$(go.Shape, "RoundedRectangle",
+              {
+                fill: background, stroke: "black", strokeWidth: 2,
+                spot1: go.Spot.TopLeft, spot2: go.Spot.BottomRight
+              }, new go.Binding("fill", "lockStatus")),
+            $$(go.Panel, "Table",
+              $$(go.TextBlock,
+                {
+                  row: 0,
+                  margin: 3,
+                  maxSize: new go.Size(150, 40),
+                  stroke: "black",
+                  font: "bold 11pt sans-serif"
+                },
+                new go.Binding("text", "name").makeTwoWay()),
+              $$(go.Picture, icon,
+                { row: 1, width: 55, height: 55 }),
+                $$(go.TextBlock,
+                {
+                  row: 2,
+                  margin: 3,
+                  maxSize: new go.Size(150, NaN),
+                  stroke: "black",
+                  font: "bold 8pt sans-serif"
+                },
+                new go.Binding("text", "module_id").makeTwoWay())
+            ),
+              $$(go.Shape, "Circle",
+                { row: 3, fill: "white", strokeWidth: 0, name: "jobStatus", width: 13, height: 13 })
+          ),
+          $$(go.Panel, "Vertical",
+            {
+              alignment: go.Spot.Left,
+              alignmentFocus: new go.Spot(0, 0.5, -8, 0)
+            },
+            inports),
+          $$(go.Panel, "Vertical",
+            {
+              alignment: go.Spot.Right,
+              alignmentFocus: new go.Spot(1, 0.5, 8, 0)
+            },
+            outports)
+        );
+      myDiagram.nodeTemplateMap.add(typename, node);
+    }
+
+    makeTemplate("Project","images/55x55.png", "white",
+                 [makePort("xml","Potential Clones", true)],
+                 [makePort("xml", "XML ",false)]);
+
+
+
+    myDiagram.linkTemplate =
+      $$(go.Link,
+        {
+          routing: go.Link.AvoidsNodes, corner: 10,
+          relinkableFrom: false, relinkableTo: false, curve: go.Link.JumpGap
+        }, new go.Binding("deletable", "allowLinkDeletion"),
+        $$(go.Shape, { stroke: "#00bfff", name:"datalink", strokeWidth: 2.5 }),
+        $$(go.Shape, { stroke: "#00bfff", name:"datalinkArrow", fill: "#00bfff",  toArrow: "Standard" })
+      );
+
+    load();
+
+
+  // Show the diagram's model in JSON format that the user may edit
+  function save() {
+    document.getElementById("mySavedModel").value = myDiagram.model.toJson();
+    myDiagram.isModified = false;
+  }
+  function load() {
+    myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
+  }
+
+  function addNewLinkToWorkflowObject(newLinkInformation){
+    myDiagram.startTransaction("add link");
+    var newlink = { from: newLinkInformation.from, frompid: newLinkInformation.frompid, to: newLinkInformation.to, topid:newLinkInformation.topid};
+    myDiagram.model.addLinkData(newlink);
+    myDiagram.commitTransaction("add link");
+  }
+
+
+   function workflowObjSelectionMoved(selectionNewLocationInfo){
+     myDiagram.startTransaction('selection moved');
+     var movedNode = myDiagram.findNodeForKey(selectionNewLocationInfo.key);
+     movedNode.location = new go.Point(selectionNewLocationInfo.x, selectionNewLocationInfo.y);
+     myDiagram.commitTransaction('selection moved');
+   }
+
+
+   function workflowObjRemoveNode(nodeInfoForRemoval){
+     myDiagram.startTransaction('node removed');
+     var nodeTargetedForDeletion = myDiagram.findNodeForKey(nodeInfoForRemoval.key);
+     myDiagram.remove(nodeTargetedForDeletion);
+     myDiagram.commitTransaction('node removed');
+   }
+
+
+    function workflowObjRemoveLink(linkInfoForRemoval){
+         var linksTargetedForDeletion = myDiagram.findLinksByExample({ 'from': linkInfoForRemoval.from, 'frompid': linkInfoForRemoval.frompid, 'to': linkInfoForRemoval.to, 'topid':linkInfoForRemoval.topid});
+
+        for (var iter = linksTargetedForDeletion; iter.next(); ) {
+            aLink = iter.value;
+            myDiagram.startTransaction('link removed');
+            myDiagram.remove(aLink);
+            myDiagram.commitTransaction('link removed');
+        }
+
+    }
+
+
+
+
+  //init();
+  // create the Overview and initialize it to show the main Diagram
+  var myOverview =
+    $$(go.Overview, "myDiagramOverview",
+      { observed: myDiagram });
+    myOverview.grid.visible = false;
+
+
+  //turn off undo/redo
+  myDiagram.model.undoManager.isEnabled = false;
+  //make the diagram read only
+  //myDiagram.isReadOnly = true;
+
+  myDiagram.contextMenu =
+    $$(go.Adornment, "Vertical",
+      // no binding, always visible button:
+      $$("ContextMenuButton",
+        $$(go.TextBlock, "Toggle Grid View"),
+        { click: function(e, obj) {
+            myDiagram.grid.visible = !myDiagram.grid.visible;
+        } })
+    );
+
+
+
+
+
+
+//===========================>>>>>>>>>>>>>>>>>>>>>>>>
+// Diagram Events Start
+//===========================>>>>>>>>>>>>>>>>>>>>>>>>
+
+  //show the corresponding module details on any module click
+  //TODO: UNCOMMENT WHEN LOCK DEBUGGING IS DONE
+  /*myDiagram.addDiagramListener("ObjectSingleClicked",
+      function(e) {
+        var part = e.subject.part;
+        if (!(part instanceof go.Link)) {
+            var clickedModuleID = part.data.key; // Module_1
+            //clickedModuleID = clickedModuleID.split('_')[1]; // 1
+            $(".module").hide();
+            $("#"+clickedModuleID).show();
+        }
+      }
+  );*/
+
+
+    //show the corresponding module details on any module click
+  myDiagram.addDiagramListener("ObjectDoubleClicked",
+      function(e) {
+        var part = e.subject.part;
+        if (!(part instanceof go.Link)) {
+            var clickedModuleID = part.data.key; // Module_1
+            //clickedModuleID = clickedModuleID.split('_')[1]; // 1
+            $(".module").hide();
+            $("#"+clickedModuleID).show();
+
+            $("#modal_module_configs").css('display', 'block');
+        }
+      }
+  );
+
+
+
+
+
+
+
+  //remove all corresponding module details on background click
+  myDiagram.addDiagramListener("BackgroundSingleClicked",
+      function(e) {
+        //$(".module").hide();
+        $("#modal_module_configs").css('display', 'none');
+      }
+  );
+
+$(document).on('click', '.close', function(){
+    //alert('close clicked');
+    $("#modal_module_configs").css('display', 'none');
+    $("#myModal").css('display', 'none');
+});
+
+
+  //attempting Workflow Diagram Part (link/node) deletion.
+  myDiagram.addDiagramListener("SelectionDeleting",
+      function(e) {
+        //alert("SelectionDeleting");
+        for (var iter = myDiagram.selection.iterator; iter.next(); ) {
+            var part = iter.value;
+            if (part instanceof go.Node) {
+                //alert(part.data.key);
+                var nodeInfoForRemoval = {'key':part.data.key};
+                //delete operation is only successful if this is the current owner.
+                //inform other client if only this user is allowed to
+                if(part.data.currentOwner == user_email)
+                    notifyAll("workflow_obj_selection_node_delete",nodeInfoForRemoval);
+            }
+            if (part instanceof go.Link) {
+                //alert(part.data.from);
+                //alert(part.data.topid);
+                 var thisPortInput = part.data.to + '_NO_INPUT_SOURCE_SELECTED_' + part.data.topid;
+                 var referenceVariable = part.data.topid.split('.')[part.data.topid.split('.').length - 2];
+                 thisPortInput = referenceVariable + '="' + WORKFLOW_OUTPUTS_PATH + THIS_WORKFLOW_NAME + '/' +thisPortInput + '"';
+
+                 $("#"+part.data.to + ' .' + referenceVariable).val(thisPortInput).trigger('change');
+
+                alert("from data ->" +part.data.from);
+                var fromNode = myDiagram.findNodeForKey(part.data.from);
+                var toNode = myDiagram.findNodeForKey(part.data.to);
+
+
+                alert("Deleting Link... From Owner:" + fromNode.data.currentOwner + " To Owner: " + toNode.data.currentOwner);
+                //only allow and send this info in case its current owner (both from/to)...
+                if(fromNode.data.currentOwner == user_email && toNode.data.currentOwner == user_email){
+                    var linkInfoForRemoval = {'from': part.data.from, 'frompid': part.data.frompid, 'to': part.data.to, 'topid': part.data.topid};
+                    notifyAll("workflow_obj_selection_link_delete",linkInfoForRemoval);
+                }
+            }
+        }
+      }
+  );
+
+  //event called on creating new link on the workflow object
+  myDiagram.addDiagramListener("LinkDrawn",
+      function(e) {
+        var part = e.subject.part;
+        if (part instanceof go.Link) {
+            //alert("Linked From: "+ part.data.from + " To: " + part.data.to);
+
+            //$("#module_id_1 ."+part.data.topid).val("var='this should be new value'");
+            //var toModuleId = part.data.to.split('_')[1]; // ie., x in Module_x
+            //toModuleId = '#module_id_'+ toModuleId;
+
+            var toPortClass = part.data.topid.split('.')[part.data.topid.split('.').length - 2];
+            //var fromPortClass = part.data.frompid.split('.')[part.data.frompid.split('.').length - 2];
+            //toPortClass = ' .' + toPortClass;
+
+            $('#'+part.data.to +' .'+toPortClass).val(toPortClass+"='"+ WORKFLOW_OUTPUTS_PATH + THIS_WORKFLOW_NAME + '/' + part.data.from+'_'+part.data.frompid+"'").trigger('change');
+
+
+            //alert("To " + part.data.to);
+            //alert(part.data.topid.split('(')[part.data.topid.split('(').length - 2]);
+
+            var newLinkInformation = {'from': part.data.from, 'frompid': part.data.frompid, 'to': part.data.to, 'topid': part.data.topid};
+            notifyAll("workflow_obj_new_link_drawn", newLinkInformation);
+
+        }
+      }
+  );
+
+  //event called on selection (Node) changes...
+  myDiagram.addDiagramListener("SelectionMoved",
+      function(e) {
+        //alert("Selection Moved");
+        for (var iter = myDiagram.selection.iterator; iter.next(); ) {
+            var part = iter.value;
+            if (part instanceof go.Node) {
+                //alert(part.data.key + " x: " + part.location.x + " y: " + part.location.y);
+                var nodeNewLocationInformation = {'key': part.data.key, 'x':part.location.x, 'y':part.location.y};
+                notifyAll('workflow_obj_selection_moved', nodeNewLocationInformation);
+            }
+        }
+
+      }
+  );
+
+
+
+
+
+  function lockSubWorkflow(e, obj) {
+    var node = obj.part.adornedPart;  // the Node with the context menu
+    //alert("Sub-workflow Lock => " + node.data.currentOwner);
+
+    //update the self state
+    onNodeAccessRequest(user_email, node.data.key);
+
+
+
+    //inform all other clients of this node access
+    var requestInfo ={"nodeID":node.data.key, "requestedBy":user_email};
+    notifyAll("node_access_request", requestInfo);
+
+
+
+    /*
+    // compute and remember the distance of each node from the BEGIN node
+    distances = findDistances(node);
+
+    // show the distance on each node
+    var it = distances.iterator;
+    while (it.next()) {
+      var n = it.key;
+      var dist = it.value;
+      console.log(n.data.key +  " => " +  dist);
+      //myDiagram.model.setDataProperty(n.data, "distance", dist);
+      if(dist != Infinity){
+        myDiagram.startTransaction("changed color");
+        myDiagram.model.setDataProperty(n.data, "lockStatus", "lightgreen");
+        myDiagram.commitTransaction("changed color");
+      }
+
+
+    }*/
+
+  }
+
+
+  function unlockSubWorkflow(e, obj) {
+        var node_id =  obj.part.adornedPart.data.key;
+        if(onNodeAccessRelease(node_id, user_email)==true){
+            //inform all other clients of this node release
+            var requestInfo ={"nodeID":node_id, "requestedBy":user_email};
+            notifyAll("node_access_release", requestInfo);
+
+            //on this event change... try dispatching eligible requests
+            dispatchNodeRequests();
+
+        }else{
+            alert("Could not Release Child Node Access. Please remove the parent node access First!");
+        }
+
+  }
+
+
+
+  function getThisLockInfo(e, obj) {
+    var node = obj.part.adornedPart;  // the Node with the context menu
+    //alert("Lock Info => " + node.data.key);
+  }
+
+
+
+/*
+  myDiagram.model.addChangedListener(function(e) {
+    if (e.isTransactionFinished) {
+
+      var tx = e.newValue;
+      window.console.log(tx);
+      //if (tx instanceof go.Transaction && window.console) {
+        //window.console.log(tx.name);
+        tx.changes.each(function(c) {
+          if (c.model) window.console.log("  " + c.toString());
+        });
+      //}
+    }
+  });*/
+//===========================>>>>>>>>>>>>>>>>>>>>>>>>
+// Diagram Events Ends
+//===========================>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+// Returns a Map of Nodes with distance values from the given source Node.
+  // Assumes all links are unidirectional.
+  function findDistances(source) {
+    var diagram = source.diagram;
+    // keep track of distances from the source node
+    var distances = new go.Map(go.Node, "number");
+    // all nodes start with distance Infinity
+    var nit = diagram.nodes;
+    while (nit.next()) {
+      var n = nit.value;
+      distances.add(n, Infinity);
+    }
+    // the source node starts with distance 0
+    distances.add(source, 0);
+    // keep track of nodes for which we have set a non-Infinity distance,
+    // but which we have not yet finished examining
+    var seen = new go.Set(go.Node);
+    seen.add(source);
+
+    // keep track of nodes we have finished examining;
+    // this avoids unnecessary traversals and helps keep the SEEN collection small
+    var finished = new go.Set(go.Node);
+    while (seen.count > 0) {
+      // look at the unfinished node with the shortest distance so far
+      var least = leastNode(seen, distances);
+      var leastdist = distances.getValue(least);
+      // by the end of this loop we will have finished examining this LEAST node
+      seen.remove(least);
+      finished.add(least);
+      // look at all Links connected with this node
+      var it = least.findLinksOutOf();
+      while (it.next()) {
+        var link = it.value;
+        var neighbor = link.getOtherNode(least);
+        // skip nodes that we have finished
+        if (finished.contains(neighbor)) continue;
+        var neighbordist = distances.getValue(neighbor);
+        // assume "distance" along a link is unitary, but could be any non-negative number.
+        var dist = leastdist + 1;  //Math.sqrt(least.location.distanceSquaredPoint(neighbor.location));
+        if (dist < neighbordist) {
+          // if haven't seen that node before, add it to the SEEN collection
+          if (neighbordist === Infinity) {
+            seen.add(neighbor);
+          }
+          // record the new best distance so far to that node
+          distances.add(neighbor, dist);
+        }
+      }
+    }
+
+    return distances;
+  }
+
+  // This helper function finds a Node in the given collection that has the smallest distance.
+  function leastNode(coll, distances) {
+    var bestdist = Infinity;
+    var bestnode = null;
+    var it = coll.iterator;
+    while (it.next()) {
+      var n = it.value;
+      var dist = distances.getValue(n);
+      if (dist < bestdist) {
+        bestdist = dist;
+        bestnode = n;
+      }
+    }
+    return bestnode;
+  }
+
+//========================================================
+//================ GO CODES ENDS =========================
+//========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//========================================================
 //============= WORKFLOW CONTROL CODE STARTS =============
 //========================================================
 
@@ -1162,8 +1400,8 @@ function loginFailure(errorCode, message) {
 
   //check if the node or any of its descendants are locked currently.
   //if not, the node floor is available as per the client request.
-  Tree.prototype.isNodeFloorAvailable = function(nodeData,  traversal) {
-    var theNode = this.getNode(nodeData, traversal);
+  Tree.prototype.isNodeFloorAvailable = function(nodeData, requestedBy, traversal) {
+/*  var theNode = this.getNode(nodeData, traversal);
     if(theNode == null){
         throw new Error('The requested node for access does not exist!');
     }
@@ -1178,20 +1416,78 @@ function loginFailure(errorCode, message) {
         //if any of its descendants are locked currently, the node access is not available
         if(node.isLocked == true)nodeFloorAvailability = false;
     });
+*/
 
+    var node = myDiagram.findNodeForKey(nodeData);
+    // compute and remember the distance of each node from the BEGIN node
+    distances = findDistances(node);
+
+    var nodeFloorAvailability = true;
+
+
+    // show the distance on each node
+    var it = distances.iterator;
+    while (it.next()) {
+          var n = it.key;
+          var dist = it.value;
+
+          //myDiagram.model.setDataProperty(n.data, "distance", dist);
+          if(dist != Infinity){
+            //myDiagram.startTransaction("changed color");
+            //myDiagram.model.setDataProperty(n.data, "lockStatus", "lightgreen");
+            //myDiagram.commitTransaction("changed color");
+
+            //if any of the locked node in the subworkflow is not locked by this owner
+            //the node floor is not available
+            if( (n.data.isLocked == 'True') && (n.data.currentOwner != requestedBy) )nodeFloorAvailability = false;
+            //console.log(n.data.key +  " => " +  n.data.currentOwner);
+          }
+   }
 
     return nodeFloorAvailability;
 
   }
 
   //someone has got the access to this node, so lock it and all its descendants
-  Tree.prototype.lockThisNodeAndDescendants = function(newOwner,nodeData,  traversal) {
-    var theNode = this.getNode(nodeData, traversal);
+  Tree.prototype.lockThisNodeAndDescendants = function(newOwner, nodeData,  traversal) {
+    /*var theNode = this.getNode(nodeData, traversal);
     this.traverseDF_FromNode(theNode, function(node){
          //use helper function to load this node for the corresponding user
          lockNode(node, newOwner);
-    });
+    });*/
+
+
+        var node = myDiagram.findNodeForKey(nodeData);
+        // compute and remember the distance of each node from the BEGIN node
+        distances = findDistances(node);
+
+
+        // show the distance on each node
+        var it = distances.iterator;
+        while (it.next()) {
+              var n = it.key;
+              var dist = it.value;
+
+               //alert(n.data.key);
+
+              //myDiagram.model.setDataProperty(n.data, "distance", dist);
+              if(dist != Infinity){
+
+
+                    myDiagram.startTransaction("changed color");
+                        myDiagram.model.setDataProperty(n.data, "isLocked", "True");
+                        myDiagram.model.setDataProperty(n.data, "currentOwner", newOwner);
+
+                        if(newOwner == user_email)myDiagram.model.setDataProperty(n.data, "lockStatus", "lightgreen");
+                        else myDiagram.model.setDataProperty(n.data, "lockStatus", "#FFB2B2");
+                    myDiagram.commitTransaction("changed color");
+              }
+        }
+
   }
+
+
+
 
   //someone has released the access to this node, so UNLOCK it and all its descendants
   Tree.prototype.unlockThisNodeAndDescendants = function(nodeData,  traversal) {
@@ -1237,7 +1533,7 @@ function loginFailure(errorCode, message) {
 
 
 //create parent workflow at the starting
-var workflow = new Tree("workflow");
+var workflow = new Tree("workflow_root");
 
 //source code in pre tag... toggle show/hide
 $(document).on('click', ".code_show_hide", function () {//here
@@ -1257,7 +1553,7 @@ $(document).on('click', ".btn_edit_code" ,function () {//here
 });
 
 $(document).on('change', ".setting_param" ,function () {//here
-    //alert("you changed my value");
+    //alert("Value Changed: =>" + $(this).attr('class') + "<=");
     //var prev_code = $(this).parent().parent().siblings(".setting_section").children(".edit_code").find(".code_settings").val();
     //alert(prev_code);
     //$(this).parent().parent().siblings(".setting_section").children(".edit_code").find(".code_settings").val(prev_code + "\n" + $(this).val());
@@ -1279,12 +1575,12 @@ $(document).on('change', ".setting_param" ,function () {//here
 
     //inform of this change to all the other clients...
     //if(isItMyFloor() == true){
-        var myParent = $(this).closest(".module");
-        var elementInfo = "#" + myParent.attr('id') + "  .setting_param";
-        var paramIndex = $(this).index(elementInfo);
-        var newParamValue = $(this).val();
-        var changeInfo = {"elementInfo": elementInfo, "paramIndex": paramIndex, "newParamValue": newParamValue};
-        notifyAll("moduleSettingsChanged", changeInfo);
+    var myParent = $(this).closest(".module");
+    var elementInfo = "#" + myParent.attr('id') + "  .setting_param";
+    var paramIndex = $(this).index(elementInfo);
+    var newParamValue = $(this).val();
+    var changeInfo = {"elementInfo": elementInfo, "paramIndex": paramIndex, "newParamValue": newParamValue};
+    notifyAll("moduleSettingsChanged", changeInfo);
     //}
 
 });
@@ -1331,14 +1627,58 @@ function changeRequestBtnState(moduleID, newText, isDisabled, isVisible){
 //this node and its descendants has been locked by other client
 //so lock these nodes for this client and also change request btn state for later request by this client
 function updateView_lockThisNodeAndDescendants(parentNodeData){
-    var theNode = workflow.getNode(parentNodeData, workflow.traverseDF);
+    /*var theNode = workflow.getNode(parentNodeData, workflow.traverseDF);
     workflow.traverseDF_FromNode(theNode, function(node){
           lockParamsSettings(node.data);
 
           //change node access btn... so he can request the access for the node later
           changeRequestBtnState(node.data, "Request Node Access", false, true);
-    });
+    });*/
+
+
+    var node = myDiagram.findNodeForKey(parentNodeData);
+    // compute and remember the distance of each node from the BEGIN node
+    distances = findDistances(node);
+
+    var nodeFloorAvailability = true;
+
+
+    // show the distance on each node
+    var it = distances.iterator;
+    while (it.next()) {
+          var n = it.key;
+          var dist = it.value;
+
+          //myDiagram.model.setDataProperty(n.data, "distance", dist);
+          if(dist != Infinity){
+            //alert("@updateView_lockThisNodeAndDescendants");
+            myDiagram.startTransaction("nodeReadOnly");
+                myDiagram.model.setDataProperty(n.data, "allowNodeMovability", false);
+                myDiagram.model.setDataProperty(n.data, "allowNodeDeletion", false);
+
+                var it = n.findLinksOutOf();
+                while (it.next()) {
+                    var link = it.value;
+                    //alert("link " + link);
+                    myDiagram.model.setDataProperty(link.data, "allowLinkDeletion", false);
+                }
+
+            myDiagram.commitTransaction("nodeReadOnly");
+
+
+            //if any of the locked node in the subworkflow is not locked by this owner
+            //the node floor is not available
+            //if( (n.data.isLocked == 'True') && (n.data.currentOwner != requestedBy) )nodeFloorAvailability = false;
+            //console.log(n.data.key +  " => " +  n.data.currentOwner);
+          }
+   }
+
+
+
 }
+
+
+
 
 //This client has got the access for the node and its descendants
 //so unlock the nodes.... and change the request btn state as well
@@ -1455,7 +1795,7 @@ function addModuleToPipeline(whoAdded, moduleID, moduleName){
 
                 //append new module to the pipeline...
                 $("#img_processing_screen").append(
-                    '<div style="background-color:#EEE;width:100%;display:none;" class="module" id="module_id_'+ moduleID +'">' +
+                    '<div style="background-color:#EEE;width:100%;" class="module" id="module_id_'+ moduleID +'">' +
 
                 '<!-- Documentation -->' +
                 '<div style="margin:10px;font-size:17px;color:#000000;">' +
@@ -1586,7 +1926,7 @@ function addModuleToPipeline(whoAdded, moduleID, moduleName){
 
 
             //Update the DAG
-            //var newWorkflowModule = workflow.add("Module_"+moduleID, "Module_0", workflow.traverseDF);
+            //var newWorkflowModule = workflow.add("module_id_"+moduleID, "workflow_root", workflow.traverseDF);
             //newWorkflowModule.nodeName = moduleName;
             //redrawWorkflowStructure();
 
@@ -1594,10 +1934,10 @@ function addModuleToPipeline(whoAdded, moduleID, moduleName){
             //alert("Add");
             myDiagram.startTransaction("add node");
             // have the Model add the node data
-            var newnode = {"key":"module_id_" + moduleID, "type":moduleName, "name":moduleName, "module_id": "Module "+moduleID};
+            var newnode = {"key":"module_id_" + moduleID, "type":moduleName, "name":moduleName, "module_id": "Module "+moduleID, "isLocked":"True", "currentOwner": whoAdded};
             myDiagram.model.addNodeData(newnode);
             // locate the node initially where the parent node is
-           // diagram.findNodeForData(newnode).location = node.location;
+            //diagram.findNodeForData(newnode).location = node.location;
             // and then add a link data connecting the original node with the new one
             //var newlink = { from: node.data.key, to: newnode.key };
             //diagram.model.addLinkData(newlink);
@@ -1605,7 +1945,19 @@ function addModuleToPipeline(whoAdded, moduleID, moduleName){
             myDiagram.commitTransaction("add node");
 
 
+            var addedNode = myDiagram.findNodeForKey("module_id_" + moduleID);
 
+            myDiagram.startTransaction("change color");
+                if(whoAdded == user_email)myDiagram.model.setDataProperty(addedNode.data, "lockStatus", "lightgreen");
+                else myDiagram.model.setDataProperty(addedNode.data, "lockStatus", "#FFB2B2");
+            myDiagram.commitTransaction("change color");
+
+
+            if(whoAdded == user_email){
+                updateView_unlockThisNodeAndDescendants("module_id_" + moduleID);//unlock for this client
+            }else{
+                updateView_lockThisNodeAndDescendants("module_id_" + moduleID);//lock this node and its descendants for this client.
+            }
 
 
 
@@ -1674,7 +2026,7 @@ function dispatchNodeRequests(){
     for(var i=0;i<nodeAccessRequestsQueue.length; i++){
         var requestInfo = nodeAccessRequestsQueue[i];
 
-        if(workflow.isNodeFloorAvailable(requestInfo.nodeID, workflow.traverseDF)==true){
+        if(workflow.isNodeFloorAvailable(requestInfo.nodeID, requestInfo.requestedBy, workflow.traverseDF)==true){
             //the node access is now attainable... request to self
             onNodeAccessRequest(requestInfo.requestedBy, requestInfo.nodeID);
 
@@ -1717,7 +2069,8 @@ function onNodeAccessRelease(nodeID, releasedBy){
 function onNodeAccessRequest(requestedBy, nodeID){
 
     //if the requested node floor is available, give access to the requester
-    if(workflow.isNodeFloorAvailable(nodeID, workflow.traverseDF) == true){
+    if(workflow.isNodeFloorAvailable(nodeID, requestedBy, workflow.traverseDF) == true){
+        //alert("Node Access Available...");
         //lock this and all its descendants node for the requested client
         workflow.lockThisNodeAndDescendants(requestedBy, nodeID, workflow.traverseDF);
 
@@ -1805,8 +2158,8 @@ function onWorkflowModuleAdditionRequest(whoAdded, moduleID, moduleName){
         //if synchronization is ok... add this node to the workflow
         addModuleToPipeline(whoAdded,moduleID, moduleName);
 
-        //add the node to the workflow tree, default parent is 'workflow'
-        var addedNode = workflow.add("module_id_"+moduleID, "workflow", workflow.traverseDF);
+        //add the node to the workflow tree, default parent is 'workflow_root'
+        var addedNode = workflow.add("module_id_"+moduleID, "workflow_root", workflow.traverseDF);
         //by default the newly added node/module is locked by its creater (unless he releases it)
         lockNode(addedNode, whoAdded);
 
@@ -1848,6 +2201,7 @@ $(document).on("click", ".pipeline_modules" ,function(){
 //========================================================
 //============= WORKFLOW CONTROL CODE ENDS ===============
 //========================================================
+
 
 
 

@@ -459,6 +459,18 @@ jobStates = ''
 jobDefinitions = ''
 
 
+import logging
+import multiprocessing as mp
+from multiprocessing import Process, Value, Queue
+import re
+import os, platform
+import collections
+import tarfile
+import sys
+import hashlib
+#import datetime
+import zipfile
+
 
 @app_collaborative_sci_workflow.route('/workflow_job_manager/', methods=['POST'])
 def workflow_job_manager():
@@ -528,7 +540,7 @@ def workflow_job_manager():
 				workflowJobStatusDoc.store()
 				old_stdout = sys.stdout
 				redirected_output = sys.stdout = StringIO()
-				exec(request.get_json()['jobDefinition'][i]['sourceCode'])
+				exec(request.get_json()['jobDefinition'][i]['sourceCode'], globals())
 				sys.stdout = old_stdout
 				jobStates[i] = 2 #Finished
 				workflowJobStatusDoc.jobStatusList[c]['jobStatus'] = 2
