@@ -653,7 +653,7 @@ function loginFailure(errorCode, message) {
     //(fromNode.data.currentOwner == toNode.data.currentOwner) &&
 
     //check if this user has the access to both connecting nodes and also matches the datatypes.
-    if( (fromNode.data.currentOwner == toNode.data.currentOwner) && (portOneDataType == portTwoDataType) )return true;
+    if( (fromNode.data.currentOwner == toNode.data.currentOwner) && fromNode.data.currentOwner==user_email  && (portOneDataType == portTwoDataType) )return true;
 
     return false;
 

@@ -35,8 +35,8 @@
       <file leaf-file-name="telepointer_module_lockingGO.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointer_module_lockingGO.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
-              <caret line="653" column="0" selection-start-line="653" selection-start-column="0" selection-end-line="653" selection-end-column="0" />
+            <state relative-caret-position="514">
+              <caret line="655" column="108" selection-start-line="655" selection-start-column="108" selection-end-line="655" selection-end-column="108" />
               <folding />
             </state>
           </provider>
@@ -1032,8 +1032,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointer_module_lockingGO.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="653" column="0" selection-start-line="653" selection-start-column="0" selection-end-line="653" selection-end-column="0" />
+        <state relative-caret-position="514">
+          <caret line="655" column="108" selection-start-line="655" selection-start-column="108" selection-end-line="655" selection-end-column="108" />
           <folding />
         </state>
       </provider>
