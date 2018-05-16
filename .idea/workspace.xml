@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d67430e-b95a-44a6-ae46-52e63d6cf157" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/easyrtc/telepointerGO.js" afterPath="$PROJECT_DIR$/static/easyrtc/telepointerGO.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/easyrtc/telepointer_module_lockingGO.js" afterPath="$PROJECT_DIR$/static/easyrtc/telepointer_module_lockingGO.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/cloud_vision_pipeline_save_module_lockingGO.html" afterPath="$PROJECT_DIR$/templates/cloud_vision_pipeline_save_module_lockingGO.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views.py" afterPath="$PROJECT_DIR$/views.py" />
     </list>
     <ignored path="app_collaborative_sci_workflow.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,8 +35,8 @@
       <file leaf-file-name="telepointer_module_lockingGO.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointer_module_lockingGO.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="2163" column="37" selection-start-line="2163" selection-start-column="37" selection-end-line="2163" selection-end-column="37" />
+            <state relative-caret-position="484">
+              <caret line="653" column="0" selection-start-line="653" selection-start-column="0" selection-end-line="653" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -78,6 +74,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="fastqc_main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pipeline_modules/fastqc/fastqc_main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="24" column="66" selection-start-line="24" selection-start-column="66" selection-end-line="24" selection-end-column="66" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="MHI_tokenizer_html.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pipeline_modules/MHI_tokenizer/MHI_tokenizer_html.txt">
           <provider selected="true" editor-type-id="text-editor">
@@ -93,16 +99,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="555">
               <caret line="47" column="1" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NiCAD_filtering_main.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pipeline_modules/NiCAD_filtering/NiCAD_filtering_main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -348,6 +344,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="fastqc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_collaborative_sci_workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app_collaborative_sci_workflow" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pipeline_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Math_Subtraction" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -814,13 +828,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/Math_Subtraction/Math_Subtraction_main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/highlight/highlight/highlight.pack.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -842,16 +849,6 @@
         <state relative-caret-position="585">
           <caret line="39" column="10" selection-start-line="0" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pipeline_modules/fastqc/fastqc_main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding>
-            <element signature="e#3#20#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1017,10 +1014,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/Math_Subtraction/Math_Subtraction_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pipeline_modules/fastqc/fastqc_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="24" column="66" selection-start-line="24" selection-start-column="66" selection-end-line="24" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/static/easyrtc/telepointer_module_lockingGO.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="2163" column="37" selection-start-line="2163" selection-start-column="37" selection-end-line="2163" selection-end-column="37" />
+        <state relative-caret-position="484">
+          <caret line="653" column="0" selection-start-line="653" selection-start-column="0" selection-end-line="653" selection-end-column="0" />
           <folding />
         </state>
       </provider>

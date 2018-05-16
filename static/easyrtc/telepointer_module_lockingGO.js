@@ -632,7 +632,7 @@ function loginFailure(errorCode, message) {
 
 
   // validate if the linking modules have the same (compatible) data type
-  function validateSameDataTypeOfModules(fromnode, fromport, tonode, toport) {
+  function validateSameDataTypeOfModulesAndNodeAccessibility(fromnode, fromport, tonode, toport) {
     //portID => port_identifier(portDataType)
     //var portOneDataType = fromport.portId.split('(')[fromport.portId.split('(').length - 1]; // portDataType)
     //portOneDataType = portOneDataType.split(')')[0]; // portDataType
@@ -644,14 +644,29 @@ function loginFailure(errorCode, message) {
     var portTwoDataType = toport.portId.split('.')[toport.portId.split('.').length - 1];
 
 
-    if(portOneDataType == portTwoDataType)return true; //the linking datatype is same, so allow
+    //if(portOneDataType == portTwoDataType)return true; //the linking datatype is same, so allow
+
+    //alert("From Node: => " + fromnode.data.key);
+    var fromNode = myDiagram.findNodeForKey(fromnode.data.key);
+    var toNode = myDiagram.findNodeForKey(tonode.data.key);
+
+    //(fromNode.data.currentOwner == toNode.data.currentOwner) &&
+
+    //check if this user has the access to both connecting nodes and also matches the datatypes.
+    if( (fromNode.data.currentOwner == toNode.data.currentOwner) && (portOneDataType == portTwoDataType) )return true;
 
     return false;
 
   }
 
+
+
+
+
+
+
   // validate if the linking modules have the same (compatible) data type
-  myDiagram.toolManager.linkingTool.linkValidation = validateSameDataTypeOfModules;
+  myDiagram.toolManager.linkingTool.linkValidation = validateSameDataTypeOfModulesAndNodeAccessibility;
 
 
 
@@ -929,12 +944,12 @@ $(document).on('click', '.close', function(){
 
                  $("#"+part.data.to + ' .' + referenceVariable).val(thisPortInput).trigger('change');
 
-                alert("from data ->" +part.data.from);
+                //alert("from data ->" +part.data.from);
                 var fromNode = myDiagram.findNodeForKey(part.data.from);
                 var toNode = myDiagram.findNodeForKey(part.data.to);
 
 
-                alert("Deleting Link... From Owner:" + fromNode.data.currentOwner + " To Owner: " + toNode.data.currentOwner);
+                //alert("Deleting Link... From Owner:" + fromNode.data.currentOwner + " To Owner: " + toNode.data.currentOwner);
                 //only allow and send this info in case its current owner (both from/to)...
                 if(fromNode.data.currentOwner == user_email && toNode.data.currentOwner == user_email){
                     var linkInfoForRemoval = {'from': part.data.from, 'frompid': part.data.frompid, 'to': part.data.to, 'topid': part.data.topid};
@@ -1659,7 +1674,8 @@ function updateView_lockThisNodeAndDescendants(parentNodeData){
                 var it = n.findLinksOutOf();
                 while (it.next()) {
                     var link = it.value;
-                    //alert("link " + link);
+                    //alert("link data => " + link.data);
+                    //alert("link key => " + link.key);
                     myDiagram.model.setDataProperty(link.data, "allowLinkDeletion", false);
                 }
 
