@@ -801,9 +801,22 @@ function loginFailure(errorCode, message) {
 
   function addNewLinkToWorkflowObject(newLinkInformation){
     myDiagram.startTransaction("add link");
-    var newlink = { from: newLinkInformation.from, frompid: newLinkInformation.frompid, to: newLinkInformation.to, topid:newLinkInformation.topid};
-    myDiagram.model.addLinkData(newlink);
+        var newlink = { from: newLinkInformation.from, frompid: newLinkInformation.frompid, to: newLinkInformation.to, topid:newLinkInformation.topid};
+        myDiagram.model.addLinkData(newlink);
     myDiagram.commitTransaction("add link");
+
+    myDiagram.startTransaction("lock_unlock_link");
+        var startNode = myDiagram.findNodeForKey(newLinkInformation.from);
+        if(startNode.data.currentOwner != user_email){
+            var link_it = startNode.findLinksOutOf();
+            while (link_it.next()) {
+                var link = link_it.value;
+                myDiagram.model.setDataProperty(link.data, "allowLinkDeletion", false);
+            }
+        }
+    myDiagram.startTransaction("lock_unlock_link");
+
+
   }
 
 
@@ -1054,7 +1067,7 @@ $(document).on('click', '.close', function(){
             notifyAll("node_access_release", requestInfo);
 
             //on this event change... try dispatching eligible requests
-            //dispatchNodeRequests();
+            dispatchNodeRequests();
 
         }else{
             alert("Could not Release Child Node Access. Please remove the parent node access First!");
@@ -1686,39 +1699,36 @@ function updateView_lockThisNodeAndDescendants(parentNodeData){
     var nodeFloorAvailability = true;
 
     myDiagram.startTransaction("nodeReadOnly");
-    // show the distance on each node
-    var it2 = distances2.iterator;
-    while (it2.next()) {
-          var n = it2.key;
-          var dist = it2.value;
+        // show the distance on each node
+        var it2 = distances2.iterator;
+        while (it2.next()) {
+              var n = it2.key;
+              var dist = it2.value;
 
-          //myDiagram.model.setDataProperty(n.data, "distance", dist);
-          if(dist != Infinity){
-            //alert("@updateView_lockThisNodeAndDescendants");
-                //alert("READONLY =>" + n.data.key);
-                myDiagram.model.setDataProperty(n.data, "allowNodeMovability", false);
-                myDiagram.model.setDataProperty(n.data, "allowNodeDeletion", false);
+              //myDiagram.model.setDataProperty(n.data, "distance", dist);
+              if(dist != Infinity){
+                //alert("@updateView_lockThisNodeAndDescendants");
+                    //alert("READONLY =>" + n.data.key);
+                    myDiagram.model.setDataProperty(n.data, "allowNodeMovability", false);
+                    myDiagram.model.setDataProperty(n.data, "allowNodeDeletion", false);
 
-                if(n.data.currentOwner == "NULL")myDiagram.model.setDataProperty(n.data, "lockStatus", "white");//currently no one owns this node
-                else myDiagram.model.setDataProperty(n.data, "lockStatus", "#FFB2B2");//someone has the access to this node
+                    if(n.data.currentOwner == "NULL")myDiagram.model.setDataProperty(n.data, "lockStatus", "white");//currently no one owns this node
+                    else myDiagram.model.setDataProperty(n.data, "lockStatus", "#FFB2B2");//someone has the access to this node
 
-                var it = n.findLinksOutOf();
-                while (it.next()) {
-                    var link = it.value;
-                    //alert("link data => " + link.data);
-                    //alert("link key => " + link.key);
-                    myDiagram.model.setDataProperty(link.data, "allowLinkDeletion", false);
-                }
+                    var it = n.findLinksOutOf();
+                    while (it.next()) {
+                        var link = it.value;
+                        //alert("link data => " + link.data);
+                        //alert("link key => " + link.key);
+                        myDiagram.model.setDataProperty(link.data, "allowLinkDeletion", false);
+                    }
 
-
-
-
-            //if any of the locked node in the subworkflow is not locked by this owner
-            //the node floor is not available
-            //if( (n.data.isLocked == 'True') && (n.data.currentOwner != requestedBy) )nodeFloorAvailability = false;
-            //console.log(n.data.key +  " => " +  n.data.currentOwner);
-          }
-   }
+                //if any of the locked node in the subworkflow is not locked by this owner
+                //the node floor is not available
+                //if( (n.data.isLocked == 'True') && (n.data.currentOwner != requestedBy) )nodeFloorAvailability = false;
+                //console.log(n.data.key +  " => " +  n.data.currentOwner);
+              }
+        }
 
    myDiagram.commitTransaction("nodeReadOnly");
 
@@ -1780,9 +1790,6 @@ function updateView_unlockThisNodeAndDescendants(parentNodeData){
                     //alert("link key => " + link.key);
                     myDiagram.model.setDataProperty(link.data, "allowLinkDeletion", true);
                 }
-
-
-
 
             //if any of the locked node in the subworkflow is not locked by this owner
             //the node floor is not available
