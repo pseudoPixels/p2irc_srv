@@ -805,11 +805,12 @@ function loginFailure(errorCode, message) {
         myDiagram.model.addLinkData(newlink);
     myDiagram.commitTransaction("add link");
 
+    //on remote linking, disable the link deletion permission
     myDiagram.startTransaction("lock_unlock_link");
-        var startNode = myDiagram.findNodeForKey(newLinkInformation.from);
-        if(startNode.data.currentOwner != user_email){
+        var startNode = myDiagram.findNodeForKey(newLinkInformation.from);//the start node for this link
+        if(startNode.data.currentOwner != user_email){ //confirming this node is not owned by this user
             var link_it = startNode.findLinksOutOf();
-            while (link_it.next()) {
+            while (link_it.next()) {//for double check remove permission for the outgoing links
                 var link = link_it.value;
                 myDiagram.model.setDataProperty(link.data, "allowLinkDeletion", false);
             }
