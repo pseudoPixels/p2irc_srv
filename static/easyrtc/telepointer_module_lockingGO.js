@@ -299,6 +299,19 @@ function notifyAll(messageType, message){
 
 
 
+function sendP2pTextMsg(toEmail, message){
+    var telegram = {"fromID": convertEmailToID(user_email),"fromName":user_name ,"message":message};
+    easyrtc.sendDataWS(getEasyRtcidFromEmail(toEmail), "P2P_MSG", telegram);
+    //alert("conv->"+getEasyRtcidFromEmail('gm_gmail_com'));
+    //alert("norm->"+getEasyRtcidFromEmail('gm@gmail.com'));
+}
+
+
+function onP2pMsgReceived(telegram){
+    chatWith($.trim(convertEmailToID(telegram.fromID) ), $.trim(telegram.fromName));
+    //alert("fromID->"+telegram.fromID+"<->fromName"+telegram.fromName+"<-");
+    addToChat($.trim(convertEmailToID(telegram.fromID) ), $.trim(telegram.fromName), telegram.message);
+}
 
 
 
@@ -496,6 +509,20 @@ function informMyDetailsToAllOtherClients(occupants){
 
 
 
+//get easyrtcid for an email
+function getEasyRtcidFromEmail(userEmail){
+    //console.log('User Email ==>' + userEmail);
+    for(var i=0; i<all_occupants_details.length; i++){
+        //convert both to the same format for comparison
+        if($.trim(convertEmailToID( all_occupants_details[i].email )) == $.trim(convertEmailToID(userEmail)))return all_occupants_details[i].easyrtcid;
+        //console.log("->"+all_occupants_details[i].email + "<->" + all_occupants_details[i].easyrtcid);
+    }
+
+    if( $.trim(convertEmailToID(user_email)) == $.trim(convertEmailToID(userEmail)))return selfEasyrtcid;
+
+    return 'NONE';
+}
+
 
 
 
@@ -603,6 +630,11 @@ function loginFailure(errorCode, message) {
 //========================================================
 //================ GO CODES STARTS =======================
 //========================================================
+    //$('#myDiagramDiv').css('height', $(window).height());
+    /*$(window).resize(function(){
+        $('#myDiagramDiv').css('height', $(window).height());
+    });*/
+
     myDiagram='';
     //function init() {
 
@@ -921,12 +953,12 @@ function loginFailure(errorCode, message) {
 
 
   //remove all corresponding module details on background click
-  myDiagram.addDiagramListener("BackgroundSingleClicked",
+  /*myDiagram.addDiagramListener("BackgroundSingleClicked",
       function(e) {
         //$(".module").hide();
         $("#modal_module_configs").css('display', 'none');
       }
-  );
+  );*/
 
 $(document).on('click', '.close', function(){
     //alert('close clicked');
@@ -1610,7 +1642,7 @@ $(document).on('click', ".btn_edit_code" ,function () {//here
 });
 
 $(document).on('change', ".setting_param" ,function () {//here
-    //alert("Value Changed: =>" + $(this).attr('class') + "<=");
+    //alert("you changed my value");
     //var prev_code = $(this).parent().parent().siblings(".setting_section").children(".edit_code").find(".code_settings").val();
     //alert(prev_code);
     //$(this).parent().parent().siblings(".setting_section").children(".edit_code").find(".code_settings").val(prev_code + "\n" + $(this).val());
@@ -1632,13 +1664,350 @@ $(document).on('change', ".setting_param" ,function () {//here
 
     //inform of this change to all the other clients...
     //if(isItMyFloor() == true){
-    var myParent = $(this).closest(".module");
-    var elementInfo = "#" + myParent.attr('id') + "  .setting_param";
-    var paramIndex = $(this).index(elementInfo);
-    var newParamValue = $(this).val();
-    var changeInfo = {"elementInfo": elementInfo, "paramIndex": paramIndex, "newParamValue": newParamValue};
-    notifyAll("moduleSettingsChanged", changeInfo);
+        var myParent = $(this).closest(".module");
+        var elementInfo = "#" + myParent.attr('id') + "  .setting_param";
+        var paramIndex = $(this).index(elementInfo);
+        var newParamValue = $(this).val();
+        var changeInfo = {"elementInfo": elementInfo, "paramIndex": paramIndex, "newParamValue": newParamValue};
+        notifyAll("moduleSettingsChanged", changeInfo);
     //}
+
+});
+
+
+
+//FOR DAG UPDATE
+//Module parent change...
+$(document).on('change', ".setting_param_parent" ,function () {//here
+
+    //this Module id
+    var thisModuleID = $(this).closest(".module").attr('id'); //of format module_id_n
+    var thisModuleIndex = thisModuleID.split('_')[2]; //n from the format module_id_n
+
+    //THis module ID (for workflow tree)
+    var thisModuleID = "Module_"+thisModuleIndex;//for workflow tree
+
+    //New parent ID
+    var newParentSelected = $(this).val(); // module_1='/home/ubuntu/Webpage/app_collaborative_sci_workflow/workflow_outputs/test_workflow/Module_1.txt'
+    var fileNameIndex = newParentSelected.lastIndexOf("/") + 1;
+    var filename = newParentSelected.substr(fileNameIndex); // Module_1.txt'
+    var newParentModuleID = filename.split('.')[0];  // Module_1
+
+
+    //alert("This -> " + thisModuleID);
+    //alert("Parent -> " + newParentModuleID);
+
+    //update the workflow tree
+    workflow.changeParent(thisModuleID, newParentModuleID, workflow.traverseDF);
+
+     //redraw the workflow structure based on this update
+     redrawWorkflowStructure();
+
+
+
+
+    //alert(thisModuleID);
+
+
+    //myPar.attr('id');
+    //var parentIndex = $(this).index("#" + myPar.attr('id') + "  .setting_param_parent");
+
+});
+
+//For Dynamic Resource Discovery
+$(document).on("focus",".enableResourceDiscovery", function(){
+
+    $(this).html('');
+
+    discoverResources(this, $(this).attr('referenceVariable'), THIS_WORKFLOW_NAME);
+    /*$(this).append($('<option>', {
+            value: $(this).attr('referenceVariable'),
+            text: 'My option'
+    }));*/
+
+});
+
+
+
+
+
+function discoverResources(domElement,referenceVariable,workflow_id){
+	var thisWorkflowID = workflow_id;
+
+	//get the ouput list via async call
+    	$.ajax({
+		type: "POST",
+		cache: false,
+		url: "/get_workflow_outputs_list/",
+		data: "workflow_id="+thisWorkflowID,
+		success: function (option) {
+			//$("#workflow_outputs").html("");
+			for(var i=0;i<option['workflow_outputs_list'].length;i++){
+				//var k = i+1;
+				//$("#workflow_outputs").html("");
+				$(domElement).append($('<option>', {
+                    value: referenceVariable+'="'+WORKFLOW_OUTPUTS_PATH+workflow_id+'/'+option['workflow_outputs_list'][i]+'"',
+                    text: option['workflow_outputs_list'][i]
+                }));
+
+				//$("#workflow_outputs").append("<a href='/file_download?workflow_id=" + thisWorkflowID +"&file_id=" + option['workflow_outputs_list'][i]+"' class='a_workflow_output' id='"+option['workflow_outputs_list'][i] +"'>"  + option['workflow_outputs_list'][i] + "</a><br/>");
+			}
+
+		},
+		error: function (xhr, status, error) {
+	    		alert(xhr.responseText);
+		}
+
+    	});
+
+
+}
+
+
+var jobStatus_activeNode = '';//IMPORTANT for job status SHOWING
+
+ref_getJobStatus = '';
+function getJobStatus(){
+
+    var thisWorkflowID = 'test_workflow';
+    $.ajax({
+    type: "POST",
+    cache: false,
+    url: "/workflow_get_job_states/",
+    data: "workflow_id="+thisWorkflowID,
+    success: function (option) {
+        //alert(option.jobStates);
+        for(var i=0;i<option.jobStates.length;i++){
+
+            var jobNode = myDiagram.findNodeForKey(option.jobStates[i]['jobID']);
+            jobNodeShape = jobNode.findObject("jobStatus");
+
+            if(parseInt(option.jobStates[i]['jobStatus']) == 0){
+                jobNodeShape.fill = "#FFFFFF";
+            }else if(parseInt(option.jobStates[i]['jobStatus']) == 1){
+                jobNodeShape.fill = "#FF8C00";
+                jobStatus_activeNode = jobNodeShape;
+
+            }else if(parseInt(option.jobStates[i]['jobStatus']) == 2){
+                jobNodeShape.fill = "#008800";
+            }else{
+                jobNodeShape.fill = "#880000";
+            }
+        }
+    },
+    error: function (xhr, status, error) {
+            alert(xhr.responseText);
+    }
+
+    });
+
+}
+
+ref_showJobStatus = ''
+var odd = false;
+function showJobStatus(){
+    if(odd == false){
+        jobStatus_activeNode.height = 15;
+        jobStatus_activeNode.width = 15;
+        odd = true;
+    }
+    else{
+        jobStatus_activeNode.height = 13;
+        jobStatus_activeNode.width = 13;
+        odd = false;
+    }
+}
+
+
+
+
+$("#run_workflowNEW").click(function(){
+    //alert("new workflow run");
+
+
+    //ref_getAndShowJobStatus = setInterval(getAndShowJobStatus, 500);
+
+    $("#pr_status").html("<span style='color:orange'>Running Pipeline...</span>");
+    //$(this).prop("disabled", true);
+
+    var jobDefinition = [];
+
+    $('.module').each(function(){
+        var thisModID = $(this).attr('id');
+        var dataDependecnyList = [];
+        var sourceCode = '';
+
+        $('#'+thisModID+' .module_input').each(function(){
+            //alert($(this).val().split('=')[1]);
+            dataDependecnyList.push($(this).val().split('=')[1]);
+        });
+
+        $('#'+thisModID+' textarea').each(function(){
+            sourceCode = sourceCode + "\n" +$(this).val();
+        });
+        //sourceCode = encodeURIComponent(String(sourceCode));
+
+        var thisJobDefinition = {'moduleID': thisModID, 'dataDependecnyList': dataDependecnyList, 'sourceCode': sourceCode};
+
+        jobDefinition.push(thisJobDefinition);
+
+    });
+
+
+    //alert(JSON.stringify(jobDefinition));
+    $.ajax({
+        type: "POST",
+        cache: false,
+        url: "/workflow_job_manager/",
+        data: JSON.stringify({ 'jobDefinition' : jobDefinition }),
+        dataType: "json",
+        contentType: 'application/json;charset=UTF-8',
+        success: function (option) {
+
+            //alert(option);
+            //get_workflow_outputs_list('test_workflow');
+            //$("#pr_status").html("<span style='color:green'>Pipeline Completed Running Successfully.</span>");
+
+            //alert('Success');
+            //alert(option);
+            get_workflow_outputs_list('test_workflow');
+            $("#pr_status").html("<span style='color:green;background-color:yellow;'>Pipeline Completed Running Successfully.</span>");
+
+            //
+            //$(this).prop("disabled", false);
+
+            clearInterval(ref_getJobStatus);
+            clearInterval(ref_showJobStatus);
+
+            getJobStatus();
+            showJobStatus();
+
+            alert('Pipeline Completed Running Successfully.');
+
+        },
+        error: function (xhr, status, error) {
+            //alert(xhr.responseText);
+            //clearInterval(ref_getAndShowJobStatus);
+            //$(this).prop("disabled", false);
+            $("#pr_status").html("<span style='color:red'>Pipeline Running Failed!!!</span>");
+        }
+
+    });
+
+
+    ref_getAndShowJobStatus = setInterval(getJobStatus, 500);
+    ref_showJobStatus = setInterval(showJobStatus, 300);
+
+
+
+
+
+});
+
+
+
+
+
+$("#run_pipeline").click(function () {
+    $("#pr_status").html("<span style='color:orange'>Running Pipeline...</span>");
+
+    var sourceCode = ''
+    $('textarea').each(
+        function () {
+            //alert($(this).val());
+            sourceCode = sourceCode + "\n" +$(this).val();
+        }
+    );
+
+    //encode the source code for any special characters like '+' , '/' etc
+    sourceCode = encodeURIComponent(String(sourceCode));
+
+    //alert(sourceCode);
+
+    //send the code for running in pythoncom
+    $.ajax({
+        type: "POST",
+        cache: false,
+        url: "/pythoncom/",
+        data: 'textarea_source_code=' + sourceCode,
+        success: function (option) {
+
+            //alert(option);
+            get_workflow_outputs_list('test_workflow');
+            $("#pr_status").html("<span style='color:green'>Pipeline Completed Running Successfully.</span>");
+
+            alert('Pipeline Completed Running Successfully.');
+
+        },
+        error: function (xhr, status, error) {
+            //alert(xhr.responseText);
+            $("#pr_status").html("<span style='color:red'>Pipeline Running Failed!!!</span>");
+        }
+
+    });
+
+
+
+
+});
+
+
+$("#save_pipeline").click(function () {
+    var pipelineName = $("#save_pipeline_name").val();
+
+
+
+    //alert($("#img_processing_screen").html());
+    //var workflowToSave = encodeURIComponent(String($("#img_processing_screen").clone()))
+
+    //update the DOM
+    $('#img_processing_screen input').each(function(){
+	    $(this).attr('value', $(this).val());
+    });
+
+
+    $('#img_processing_screen select').each(function(){
+	    $(this).find('option:selected').attr('selected', 'selected');
+    });
+
+
+    var workflowToSave = encodeURIComponent(String($("#img_processing_screen").html()))
+
+
+/*
+    var sourceCode = ''
+    $('textarea').each(
+        function () {
+            //alert($(this).val());
+            sourceCode = sourceCode + $(this).val();
+        }
+    );
+
+    //encode the source code for any special characters like '+' , '/' etc
+    sourceCode = encodeURIComponent(String(sourceCode));
+
+
+    //alert(sourceCode);
+*/
+    $.ajax({
+        type: "POST",
+        cache: false,
+        url: "/save_pipeline/",
+        data: 'textarea_source_code=' + workflowToSave + '&pipelineName='+pipelineName,
+        success: function (option) {
+            alert('Workflow Saved Successfully.');
+
+            $("#savedWorkflows").append("    <li><a href='#' class='aSavedWorkflow' id='" + pipelineName + ".wc'>" + pipelineName + ".wc</a></li>       ");
+
+        },
+        error: function (xhr, status, error) {
+            alert(xhr.responseText);
+        }
+
+    });
+
+
+
 
 });
 
@@ -2329,6 +2698,665 @@ $(document).on("click", ".pipeline_modules" ,function(){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+Copyright (c) 2009 Anant Garg (anantgarg.com | inscripts.com)
+
+This script may be used for non-commercial purposes only. For any
+commercial purposes, please contact the author at
+anant.garg@inscripts.com
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+*/
+
+var windowFocus = true;
+var username;
+var chatHeartbeatCount = 0;
+var minChatHeartbeat = 1000;
+var maxChatHeartbeat = 33000;
+var chatHeartbeatTime = minChatHeartbeat;
+var originalTitle;
+var blinkOrder = 0;
+
+var chatboxFocus = new Array();
+var newMessages = new Array();
+var newMessagesWin = new Array();
+var chatBoxes = new Array();
+
+//$(document).ready(function(){
+	originalTitle = document.title;
+	//startChatSession();
+
+	$([window, document]).blur(function(){
+		windowFocus = false;
+	}).focus(function(){
+		windowFocus = true;
+		document.title = originalTitle;
+	});
+//});
+
+function restructureChatBoxes() {
+	align = 0;
+	for (x in chatBoxes) {
+		chatboxtitle = chatBoxes[x];
+
+		if ($("#chatbox_"+chatboxtitle).css('display') != 'none') {
+			if (align == 0) {
+				$("#chatbox_"+chatboxtitle).css('right', '20px');
+			} else {
+				width = (align)*(225+7)+20;
+				$("#chatbox_"+chatboxtitle).css('right', width+'px');
+			}
+			align++;
+		}
+	}
+}
+
+
+//createChatBox('golamMostaeen', false);
+function createChatBox(chatboxtitle,minimizeChatBox, displayTitle='User Name') {
+	if ($("#chatbox_"+chatboxtitle).length > 0) {
+		if ($("#chatbox_"+chatboxtitle).css('display') == 'none') {
+			$("#chatbox_"+chatboxtitle).css('display','block');
+			restructureChatBoxes();
+		}
+		$("#chatbox_"+chatboxtitle+" .chatboxtextarea").focus();
+		return;
+	}
+
+	$(" <div />" ).attr("id","chatbox_"+chatboxtitle)
+	.addClass("chatbox")
+	.html('<div class="chatboxhead"><div class="chatboxtitle">'+displayTitle+'</div><div class="chatboxoptions"><a style="font-size: 9px;" href="javascript:void(0)" class="chatBoxCall" chatboxtitle="'+ chatboxtitle +'">Call  </a> <a href="javascript:void(0)" class="minimizeChatBox" chatboxtitle="'+chatboxtitle+'">-</a> <a href="javascript:void(0)" class="closeChatBox" chatboxtitle="'+chatboxtitle+'">X</a></div><br clear="all"/></div><div class="chatboxcontent"></div><div class="chatboxinput"><textarea class="chatboxtextarea" chatboxtitle="'+chatboxtitle+'"></textarea></div>')
+	.appendTo($( "body" ));
+
+	$("#chatbox_"+chatboxtitle).css('bottom', '0px');
+
+	chatBoxeslength = 0;
+
+	for (x in chatBoxes) {
+		if ($("#chatbox_"+chatBoxes[x]).css('display') != 'none') {
+			chatBoxeslength++;
+		}
+	}
+
+	if (chatBoxeslength == 0) {
+		$("#chatbox_"+chatboxtitle).css('right', '20px');
+	} else {
+		width = (chatBoxeslength)*(225+7)+20;
+		$("#chatbox_"+chatboxtitle).css('right', width+'px');
+	}
+
+	chatBoxes.push(chatboxtitle);
+
+/*
+	if (minimizeChatBox == 1) {
+		minimizedChatBoxes = new Array();
+
+		if ($.cookie('chatbox_minimized')) {
+			minimizedChatBoxes = $.cookie('chatbox_minimized').split(/\|/);
+		}
+		minimize = 0;
+		for (j=0;j<minimizedChatBoxes.length;j++) {
+			if (minimizedChatBoxes[j] == chatboxtitle) {
+				minimize = 1;
+			}
+		}
+
+		if (minimize == 1) {
+			$('#chatbox_'+chatboxtitle+' .chatboxcontent').css('display','none');
+			$('#chatbox_'+chatboxtitle+' .chatboxinput').css('display','none');
+		}
+	}
+*/
+	chatboxFocus[chatboxtitle] = false;
+
+	$("#chatbox_"+chatboxtitle+" .chatboxtextarea").blur(function(){
+		chatboxFocus[chatboxtitle] = false;
+		$("#chatbox_"+chatboxtitle+" .chatboxtextarea").removeClass('chatboxtextareaselected');
+	}).focus(function(){
+		chatboxFocus[chatboxtitle] = true;
+		newMessages[chatboxtitle] = false;
+		$('#chatbox_'+chatboxtitle+' .chatboxhead').removeClass('chatboxblink');
+		$("#chatbox_"+chatboxtitle+" .chatboxtextarea").addClass('chatboxtextareaselected');
+	});
+
+	$("#chatbox_"+chatboxtitle).click(function() {
+		if ($('#chatbox_'+chatboxtitle+' .chatboxcontent').css('display') != 'none') {
+			$("#chatbox_"+chatboxtitle+" .chatboxtextarea").focus();
+		}
+	});
+
+	$("#chatbox_"+chatboxtitle).show();
+}
+
+
+function chatHeartbeat(){
+
+	var itemsfound = 0;
+
+	if (windowFocus == false) {
+
+		var blinkNumber = 0;
+		var titleChanged = 0;
+		for (x in newMessagesWin) {
+			if (newMessagesWin[x] == true) {
+				++blinkNumber;
+				if (blinkNumber >= blinkOrder) {
+					document.title = x+' says...';
+					titleChanged = 1;
+					break;
+				}
+			}
+		}
+
+		if (titleChanged == 0) {
+			document.title = originalTitle;
+			blinkOrder = 0;
+		} else {
+			++blinkOrder;
+		}
+
+	} else {
+		for (x in newMessagesWin) {
+			newMessagesWin[x] = false;
+		}
+	}
+
+	for (x in newMessages) {
+		if (newMessages[x] == true) {
+			if (chatboxFocus[x] == false) {
+				//FIXME: add toggle all or none policy, otherwise it looks funny
+				$('#chatbox_'+x+' .chatboxhead').toggleClass('chatboxblink');
+			}
+		}
+	}
+
+	$.ajax({
+	  url: "chat.php?action=chatheartbeat",
+	  cache: false,
+	  dataType: "json",
+	  success: function(data) {
+
+		$.each(data.items, function(i,item){
+			if (item)	{ // fix strange ie bug
+
+				chatboxtitle = item.f;
+
+				if ($("#chatbox_"+chatboxtitle).length <= 0) {
+					createChatBox(chatboxtitle);
+				}
+				if ($("#chatbox_"+chatboxtitle).css('display') == 'none') {
+					$("#chatbox_"+chatboxtitle).css('display','block');
+					restructureChatBoxes();
+				}
+
+				if (item.s == 1) {
+					item.f = username;
+				}
+
+				if (item.s == 2) {
+					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxinfo">'+item.m+'</span></div>');
+				} else {
+					newMessages[chatboxtitle] = true;
+					newMessagesWin[chatboxtitle] = true;
+					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+item.f+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+item.m+'</span></div>');
+				}
+
+				$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
+				itemsfound += 1;
+			}
+		});
+
+		chatHeartbeatCount++;
+
+		if (itemsfound > 0) {
+			chatHeartbeatTime = minChatHeartbeat;
+			chatHeartbeatCount = 1;
+		} else if (chatHeartbeatCount >= 10) {
+			chatHeartbeatTime *= 2;
+			chatHeartbeatCount = 1;
+			if (chatHeartbeatTime > maxChatHeartbeat) {
+				chatHeartbeatTime = maxChatHeartbeat;
+			}
+		}
+
+		//setTimeout('chatHeartbeat();',chatHeartbeatTime);
+	}});
+}
+
+function closeChatBox(chatboxtitle) {
+	$('#chatbox_'+chatboxtitle).css('display','none');
+	restructureChatBoxes();
+
+
+
+}
+
+function toggleChatBoxGrowth(chatboxtitle) {
+	if ($('#chatbox_'+chatboxtitle+' .chatboxcontent').css('display') == 'none') {
+
+		$('#chatbox_'+chatboxtitle+' .chatboxcontent').css('display','block');
+		$('#chatbox_'+chatboxtitle+' .chatboxinput').css('display','block');
+		$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
+	} else {
+
+		$('#chatbox_'+chatboxtitle+' .chatboxcontent').css('display','none');
+		$('#chatbox_'+chatboxtitle+' .chatboxinput').css('display','none');
+	}
+
+}
+
+
+
+function addToChat(fromID, fromName, msg){
+    $("#chatbox_" +fromID +" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+ fromName +':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+msg+'</span></div>');
+}
+
+
+
+
+
+function checkChatBoxInputKey(event,chatboxtextarea,chatboxtitle) {
+
+	if(event.keyCode == 13 && event.shiftKey == 0)  {
+		message = $(chatboxtextarea).val();
+		message = message.replace(/^\s+|\s+$/g,"");
+
+		$(chatboxtextarea).val('');
+		$(chatboxtextarea).focus();
+		$(chatboxtextarea).css('height','44px');
+		if (message != '') {
+
+				message = message.replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;");
+				$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+user_name+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+message+'</span></div>');
+				$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
+
+
+
+                sendP2pTextMsg(chatboxtitle, message);
+
+
+		}
+		chatHeartbeatTime = minChatHeartbeat;
+		chatHeartbeatCount = 1;
+
+		return false;
+	}
+
+	var adjustedHeight = chatboxtextarea.clientHeight;
+	var maxHeight = 94;
+
+	if (maxHeight > adjustedHeight) {
+		adjustedHeight = Math.max(chatboxtextarea.scrollHeight, adjustedHeight);
+		if (maxHeight)
+			adjustedHeight = Math.min(maxHeight, adjustedHeight);
+		if (adjustedHeight > chatboxtextarea.clientHeight)
+			$(chatboxtextarea).css('height',adjustedHeight+8 +'px');
+	} else {
+		$(chatboxtextarea).css('overflow','auto');
+	}
+
+}
+
+function startChatSession(){
+	$.ajax({
+	  url: "chat.php?action=startchatsession",
+	  cache: false,
+	  dataType: "json",
+	  success: function(data) {
+
+		username = data.username;
+
+		$.each(data.items, function(i,item){
+			if (item)	{ // fix strange ie bug
+
+				chatboxtitle = item.f;
+
+				if ($("#chatbox_"+chatboxtitle).length <= 0) {
+					createChatBox(chatboxtitle,1);
+				}
+
+				if (item.s == 1) {
+					item.f = username;
+				}
+
+				if (item.s == 2) {
+					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxinfo">'+item.m+'</span></div>');
+				} else {
+					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+item.f+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+item.m+'</span></div>');
+				}
+			}
+		});
+
+		for (i=0;i<chatBoxes.length;i++) {
+			chatboxtitle = chatBoxes[i];
+			$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);
+			setTimeout('$("#chatbox_"+chatboxtitle+" .chatboxcontent").scrollTop($("#chatbox_"+chatboxtitle+" .chatboxcontent")[0].scrollHeight);', 100); // yet another strange ie bug
+		}
+
+	//setTimeout('chatHeartbeat();',chatHeartbeatTime);
+
+	}});
+}
+
+/**
+ * Cookie plugin
+ *
+ * Copyright (c) 2006 Klaus Hartl (stilbuero.de)
+ * Dual licensed under the MIT and GPL licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl.html
+ *
+ */
+
+
+
+
+
+function chatWith(chatuser, displayTitle) {
+	createChatBox(chatuser, 1, displayTitle);
+	$("#chatbox_"+chatuser+" .chatboxtextarea").focus();
+}
+
+
+$(".userThumb").on('click', function(){
+    chatWith($(this).attr('userEmail'), $(this).attr('userName'));
+    //alert($(this).attr('userEmail'));
+});
+
+$(document).on('keydown', ".chatboxtextarea" ,function(event){//here
+    checkChatBoxInputKey(event, this, $(this).attr('chatboxtitle'));
+    //alert($(this).attr('chatboxtitle'));
+});
+
+$(document).on('click',".closeChatBox", function(){//here
+    closeChatBox($(this).attr('chatboxtitle'));
+});
+
+$(document).on('click', ".minimizeChatBox" ,function(){//here
+    toggleChatBoxGrowth($(this).attr('chatboxtitle'));
+});
+
+$(document).on('click',".chatBoxCall" ,function(){//here
+    //alert("Call->" + $(this).attr('chatboxtitle') + "<-");
+    //alert("EasyRTCid->"+getEasyRtcidFromEmail($.trim($(this).attr('chatboxtitle')))+"<-");
+    performCall(getEasyRtcidFromEmail( $.trim($(this).attr('chatboxtitle')) ));
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+//======================================================
+//= WORKFLOW Visualization AND Outputs STARTS ==========
+//======================================================
+function get_workflow_outputs_list(workflow_id){
+	var thisWorkflowID = workflow_id;
+
+	//get the ouput list via async call
+    	$.ajax({
+		type: "POST",
+		cache: false,
+		url: "/get_workflow_outputs_list/",
+		data: "workflow_id="+thisWorkflowID,
+		success: function (option) {
+			$("#workflow_outputs").html("");
+			for(var i=0;i<option['workflow_outputs_list'].length;i++){
+				var k = i+1;
+				//$("#workflow_outputs").html("");
+				var thisFileName = option['workflow_outputs_list'][i];
+				var visulaizationLink = '';
+				if(thisFileName.split('.').length>0){
+				    var thisFileType = thisFileName.split('.')[thisFileName.split('.').length - 1];
+				    if(thisFileType == 'html' || thisFileType == 'htm' || thisFileType == 'xml' || thisFileType == 'txt' || thisFileType == 'java' || thisFileType == 'token'){//currently supported file types for visualization.
+				        visulaizationLink = "<a style='color:white;font-size:11px;' href='#' class='output_vis' viewid='"+ option['workflow_outputs_list'][i] +"'> (View) </a>";
+				    }
+				}
+
+
+
+				$("#workflow_outputs").append(visulaizationLink + "<a href='/file_download?workflow_id=" + thisWorkflowID +"&file_id=" + option['workflow_outputs_list'][i]+"' class='a_workflow_output' id='"+option['workflow_outputs_list'][i] +"'>"  + option['workflow_outputs_list'][i] + "</a><br/>");
+			}
+
+		},
+		error: function (xhr, status, error) {
+	    		alert(xhr.responseText);
+		}
+
+    	});
+
+
+}
+
+get_workflow_outputs_list('test_workflow');
+
+function showTab(tabID){
+
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(tabID).style.display = "block";
+    //evt.currentTarget.className += " active";
+    document.getElementById(tabID).click();
+}
+
+
+
+$(document).on('click', '.output_vis', function(){
+    $("#tool_vis_file_title").text(">>Loading...");
+
+    $('.tool_vis_content').hide();
+
+    var fileName = $(this).attr('viewid');
+
+    showTab('tool_vis');
+
+    $("#myModal").css('display', 'block');
+
+    var fileType = fileName.split('.')[fileName.split('.').length - 1];
+
+    $.ajax({
+        type: "POST",
+        cache: false,
+        url: "/load_output_for_visualization",
+        data: 'fileName=' + fileName,
+        success: function (option) {
+            $("#tool_vis_file_title").text(">>" + fileName);
+
+            if(fileType=='png' || fileType=='jpg'){
+                $("#pre_id").hide();
+                $("#tool_vis_image").attr('src', 'data:image/png;base64,' + option.output );
+                $("#tool_vis_image").show();
+            }
+            else if(fileType=='xml' || fileType=='txt' || fileType=='java' || fileType=='token'){
+                $("#tool_vis_txt").text(option.output);
+                $('pre code').each(function (i, block) {
+                    hljs.highlightBlock(block);
+                });
+                $("#pre_id").show();
+                $("#tool_vis_txt").show();
+            }
+            else if(fileType=='htm' || fileType=='html'){
+                $("#pre_id").hide();
+                $("#tool_vis_iframe").attr('src', 'data:text/html;charset=utf-8,' + encodeURIComponent(option.output));
+                $("#tool_vis_iframe").show();
+            }
+
+
+        },
+        error: function (xhr, status, error) {
+            alert(xhr.responseText);
+        }
+
+    });
+
+
+
+});
+
+
+
+
+//AJAX file upload
+$('#upload-file-btn').click(function() {
+        var form_data = new FormData($('#upload-file')[0]);
+        $.ajax({
+            type: 'POST',
+            url: '/uploadajax',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
+            async: false,
+            success: function(data) {
+                console.log('Success!');
+                alert("dataset upload success");
+            },
+        });
+});
+
+
+
+$('#add_tool_plugin').click(function(){
+            var formdata = new FormData(); //FormData object
+            //console.log($("#form_tool_plugin"));
+            //console.log($("#id_tool_p_doc")[0].files[0].name);
+            formdata.append('tool_name_inp', $("#id_tool_name_inp").val());
+            formdata.append('tool_doc', $("#id_tool_plugin_doc")[0].files[0], $("#id_tool_plugin_doc")[0].files[0].name);
+            formdata.append('tool_script', $("#id_tool_plugin_script")[0].files[0], $("#id_tool_plugin_script")[0].files[0].name);
+            formdata.append('tool_setting', $("#id_tool_plugin_setting")[0].files[0], $("#id_tool_plugin_setting")[0].files[0].name);
+            formdata.append('tool_setting_ui', $("#id_tool_plugin_ui")[0].files[0], $("#id_tool_plugin_ui")[0].files[0].name);
+
+
+        //console.log(form_data);
+        $.ajax({
+            type: 'POST',
+            url: '/uploader',
+            data: formdata,
+            contentType: false,
+            cache: false,
+            processData: false,
+            async: false,
+            success: function(data) {
+                //console.log('Success!');
+                $("#bio_tools").append('<li><a href="#" class="pipeline_modules" id="' + $("#id_tool_name_inp").val() +'"> '+ $("#id_tool_name_inp").val() +'</a></li>');
+                alert("Tool Plugged-in Successfully.");
+            },
+		error: function (xhr, status, error) {
+	    		alert(xhr.responseText);
+		}
+        });
+
+});
+
+
+
+/*
+$(".a_workflow_output").live('click', function(){
+	var output_id = $(this).attr('id');
+	var thisWorkflowID = 'test_workflow';
+	//alert(output_id);
+	//let user download the selected file
+    	$.ajax({
+		type: "GET",
+		cache: false,
+		url: "/file_download/",
+		data: "workflow_id="+thisWorkflowID+'&file_id='+output_id,
+		success: function (option) {
+	    		alert("Done");
+		},
+		error: function (xhr, status, error) {
+	    		alert(xhr.responseText);
+		}
+    	});
+});
+*/
+
+
+
+
+//======================================================
+//= WORKFLOW Visualization AND Outputs ENDS ============
+//======================================================
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+/////////// TMPORARY: FOR USER STUDY //////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+
+$("#test_pipeline").click(function () {
+
+    	var savedWorkflowName = 'mySavedPipeline.gom';
+
+    	$.ajax({
+		type: "POST",
+		cache: false,
+		url: "/get_saved_workflow",
+		data: "workflow_id="+savedWorkflowName,
+		success: function (option) {
+            $("#img_processing_screen").html(option.savedWorkflow)
+
+            $("#img_processing_screen input").trigger('change');
+
+		},
+		error: function (xhr, status, error) {
+	    		alert(xhr.responseText);
+		}
+
+    	});
+
+
+});
 
 
 

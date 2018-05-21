@@ -724,8 +724,8 @@ def cvs():
 
 
 
-@app_collaborative_sci_workflow.route('/cvs_module_locking')
-def cvs_module_locking():
+@app_collaborative_sci_workflow.route('/proposed_system')
+def proposed_system():
 
 	#TODO: REMOVE WHEN DEBUGGLING FOR LOCKING DONE
 	#Remove all existing documents
@@ -980,8 +980,8 @@ def p2irc_turnBased():
 
 
 #Login and Sign Ups for MODULE LOCKING COLLABORATION
-@app_collaborative_sci_workflow.route('/p2irc_moduleLocking')
-def p2irc_moduleLocking():
+@app_collaborative_sci_workflow.route('/proposed')
+def proposed():
 	return render_template('login_moduleLocking.html')
 
 
@@ -1075,7 +1075,7 @@ def p2irc_login_moduleLocking():
 		#email = p2irc_user.email
 		session['p2irc_user_email'] = email
 		#return redirect(url_for('app_collaborative_sci_workflow.cvs')) #turn based collaboration... uncomment for this feature
-		return redirect(url_for('app_collaborative_sci_workflow.cvs_module_locking')) #modular locking based collaboration... uncomment for this feature
+		return redirect(url_for('app_collaborative_sci_workflow.proposed_system')) #modular locking based collaboration... uncomment for this feature
 		#return redirect(url_for('app_collaborative_sci_workflow.cvs_atrr_level_locking')) #attr level locking based collaboration... uncomment for this feature
 
 	#if not row or list(row)[0].value != password:

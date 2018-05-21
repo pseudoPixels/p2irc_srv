@@ -3703,15 +3703,6 @@ $(document).on('click', '.output_vis', function(){
 
 
 
-
-
-
-
-
-
-
-
-
 });
 
 
