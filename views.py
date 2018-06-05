@@ -974,7 +974,7 @@ def get_saved_workflow():
 
 
 #Login and Sign Ups for TURN BASED COLLABORATION
-@app_collaborative_sci_workflow.route('/p2irc_turnBased_')
+@app_collaborative_sci_workflow.route('/p2irc_turnBased')
 def p2irc_turnBased():
 	return render_template('login_turnBased.html')
 
@@ -1441,6 +1441,15 @@ def init_locking_server():
 	for row in views_by_workflow_locking_turn(g.couch):
 		tmp = WorkflowLockingTurn.load(row.value)
 		g.couch.delete(tmp)
+
+
+	#### Remove all Users
+	# for tRow in views_by_email(g.couch):
+	# 	ttmp = P2IRC_User.load(tRow.value)
+	# 	g.couch.delete(ttmp)
+
+
+
 
 	#Add one doc
 	turnBasedLocking = WorkflowLockingTurn(workflow_id='workflow_turn_id_1')

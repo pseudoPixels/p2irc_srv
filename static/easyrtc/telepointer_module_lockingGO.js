@@ -97,7 +97,9 @@ var THIS_WORKFLOW_NAME = 'test_workflow';
     user_email = $("#user_email").text();
 
 
-
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //@UserStudy
+    //console.log('@USER_STUDY::'+$.trim(user_email)+"::JOINED");
 
 
 //========================================================
@@ -337,6 +339,9 @@ function onMessageRecieved(who, msgType, content) {
         case "chat_room_msg":
             addToChatRoomConversation(content);
             break;
+        case "P2P_MSG":
+            onP2pMsgReceived(content);
+            break;
         case "remote_module_addition":
             onWorkflowModuleAdditionRequest(content.whoAdded, content.newModuleID, content.newModuleName);
             break;
@@ -554,14 +559,6 @@ function spawnTelepointers(occupants){
 
 
 
-
-
-
-
-
-
-
-
 //update the telepointer for the other clients
 //the 'content' should contain the required info for telepointer update
 //along with other client easyrtcid; which is used for selecting the specific
@@ -571,7 +568,6 @@ function updateTelepointer(content){
     //telepointer selected first and then updatee the css for rendering
     $('#telepointer_name_'+content.rtcid).css({position:'absolute',left:parseInt(content.left), top:parseInt(content.top)});
     if($('#telepointer_name_'+content.rtcid).text()=="")$('#telepointer_name_'+content.rtcid).html(content.user_name);
-
 }
 
 
@@ -591,6 +587,7 @@ function sendStuffWS(otherEasyrtcid) {
     addToConversation("Me", "message", text);
     document.getElementById('sendMessageText').value = "";
 }
+
 
 
 
@@ -964,6 +961,10 @@ $(document).on('click', '.close', function(){
     //alert('close clicked');
     $("#modal_module_configs").css('display', 'none');
     $("#myModal").css('display', 'none');
+
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //@UserStudy
+    //console.log('@USER_STUDY::'+$.trim(user_email)+"::MODAL_CLOSED");
 });
 
 
@@ -1631,10 +1632,17 @@ $(document).on('click', ".code_show_hide", function () {//here
 
 $(document).on('click', ".documentation_show_hide", function () {//here
     $(this).siblings('.documentation').toggle(300);
+
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //@UserStudy
+    //console.log('@USER_STUDY::'+$.trim(user_email)+"::DOCUMENTATION_TOGGLED");
 });
 
 $(document).on('click', ".settings_show_hide" ,function () {//here
     $(this).siblings('.settings').toggle(300);
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //@UserStudy
+    //console.log('@USER_STUDY::'+$.trim(user_email)+"::SETTINGS_TOGGLED");
 });
 
 $(document).on('click', ".btn_edit_code" ,function () {//here
@@ -1671,6 +1679,10 @@ $(document).on('change', ".setting_param" ,function () {//here
         var changeInfo = {"elementInfo": elementInfo, "paramIndex": paramIndex, "newParamValue": newParamValue};
         notifyAll("moduleSettingsChanged", changeInfo);
     //}
+
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //@UserStudy
+    //console.log('@USER_STUDY::'+$.trim(user_email)+"::SETTINGS_CHANGED");
 
 });
 
@@ -1824,6 +1836,9 @@ function showJobStatus(){
 $("#run_workflowNEW").click(function(){
     //alert("new workflow run");
 
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //@UserStudy
+    //console.log('@USER_STUDY::'+$.trim(user_email)+"::RUN_WORKFLOW");
 
     //ref_getAndShowJobStatus = setInterval(getAndShowJobStatus, 500);
 
@@ -1899,9 +1914,6 @@ $("#run_workflowNEW").click(function(){
     ref_showJobStatus = setInterval(showJobStatus, 300);
 
 
-
-
-
 });
 
 
@@ -1953,6 +1965,10 @@ $("#run_pipeline").click(function () {
 
 
 $("#save_pipeline").click(function () {
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //@UserStudy
+    //console.log('@USER_STUDY::'+$.trim(user_email)+"::WORKFLOW_SAVED");
+
     var pipelineName = $("#save_pipeline_name").val();
 
 
@@ -2670,6 +2686,10 @@ function onWorkflowModuleAdditionRequest(whoAdded, moduleID, moduleName){
 
 $(document).on("click", ".pipeline_modules" ,function(){
         //alert("New Module");
+        //@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        //@UserStudy
+        //console.log('@USER_STUDY::'+$.trim(user_email)+"::MODULE_ADDED");
+
         var newModuleID = getNextUniqueModuleID();
         var newModuleName = $(this).attr("id"); //'biodatacleaning';
 

@@ -13,6 +13,7 @@
     <toolConfigurations>
         Set Input Dataset: <select  class="setting_param enableResourceDiscovery" resFileType="*" referenceVariable='inputDataset'>
             <option value="inputDataset = ''" >Select Input Data</option>
+            <option value="test">test</option>
         </select>
     </toolConfigurations>
 
