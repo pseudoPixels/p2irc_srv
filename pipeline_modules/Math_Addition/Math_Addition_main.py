@@ -19,7 +19,7 @@ with open(second_number) as module_2_inp:
 num2 = float(lines[0])
 
 #calculation
-res = num1 + num2
+res = num1 + num2 # res = Provmod.Tools.Add(num1, num2)
 
 
 #write out this module Output

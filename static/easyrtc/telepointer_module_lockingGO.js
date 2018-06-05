@@ -358,7 +358,6 @@ function onMessageRecieved(who, msgType, content) {
         case "moduleSettingsChanged":
             onModuleSettingsChanged(content);
             break;
-
         case "workflow_obj_new_link_drawn":
             addNewLinkToWorkflowObject(content);
             break;
@@ -378,7 +377,40 @@ function onMessageRecieved(who, msgType, content) {
 
 
 function onModuleSettingsChanged(changeInfo){
-    $(changeInfo.elementInfo).eq(changeInfo.paramIndex).val(changeInfo.newParamValue).change();
+    if(changeInfo.isResourceDiscoveryField==true){
+        discoverResources($(changeInfo.elementInfo).eq(changeInfo.paramIndex), $(changeInfo.elementInfo).eq(changeInfo.paramIndex).attr('referenceVariable'), THIS_WORKFLOW_NAME);
+
+        //On any pending AJAX Request Success...
+        $(document).ajaxSuccess(function() {
+            $(changeInfo.elementInfo).eq(changeInfo.paramIndex).val(changeInfo.newParamValue).change();
+
+  /*
+            //changed the corresponding source (it was previously on change triggering, modified to reduce ajax call)
+            $(changeInfo.elementInfo).eq(changeInfo.paramIndex).parent().parent().siblings(".setting_section").children(".edit_code").find(".code_settings").val('');
+            $(changeInfo.elementInfo).eq(changeInfo.paramIndex).siblings(".setting_param").each(function () {
+                //alert($(this).val());
+                var prev_code = $(changeInfo.elementInfo).eq(changeInfo.paramIndex).parent().parent().siblings(".setting_section").children(".edit_code").find(".code_settings").val();
+                $(changeInfo.elementInfo).eq(changeInfo.paramIndex).parent().parent().siblings(".setting_section").children(".edit_code").find(".code_settings").val("\n"+prev_code + "\n\n" + $(changeInfo.elementInfo).eq(changeInfo.paramIndex).val());
+            });
+            var prev_code = $(changeInfo.elementInfo).eq(changeInfo.paramIndex).parent().parent().siblings(".setting_section").children(".edit_code").find(".code_settings").val();
+            $(changeInfo.elementInfo).eq(changeInfo.paramIndex).parent().parent().siblings(".setting_section").children(".edit_code").find(".code_settings").val("\n"+prev_code + "\n\n" + $(changeInfo.elementInfo).eq(changeInfo.paramIndex).val());
+*/
+            //alert($(changeInfo.elementInfo).eq(changeInfo.paramIndex).parent().parent().siblings(".setting_section").children(".edit_code").find(".code_settings").val());
+
+
+            //alert("Ajax Success...");
+        });
+
+    }else{ //no dynamic resource discovery in this field
+
+        //simply change the attribute
+        $(changeInfo.elementInfo).eq(changeInfo.paramIndex).val(changeInfo.newParamValue).change();
+    }
+
+
+
+    //alert("Remote Module Setting Changed !!! + New Val::" + changeInfo.newParamValue);
+    //$("#module_id_1 .setting_param").eq(changeInfo.paramIndex).val("test");
 }
 
 
@@ -1672,12 +1704,29 @@ $(document).on('change', ".setting_param" ,function () {//here
 
     //inform of this change to all the other clients...
     //if(isItMyFloor() == true){
-        var myParent = $(this).closest(".module");
-        var elementInfo = "#" + myParent.attr('id') + "  .setting_param";
-        var paramIndex = $(this).index(elementInfo);
-        var newParamValue = $(this).val();
-        var changeInfo = {"elementInfo": elementInfo, "paramIndex": paramIndex, "newParamValue": newParamValue};
-        notifyAll("moduleSettingsChanged", changeInfo);
+
+    //var node = myDiagram.findNodeForKey(nodeData);
+
+    var myParent = $(this).closest(".module");
+
+    var node = myDiagram.findNodeForKey(myParent.attr('id'));
+
+
+    if(node != null) {
+        //this user is the owner of this particular node
+        if(node.data.currentOwner == user_email){
+            var elementInfo = "#" + myParent.attr('id') + "  .setting_param";
+            var paramIndex = $(this).index(elementInfo);
+            var newParamValue = $(this).val();
+            var changeInfo = {"elementInfo": elementInfo, "paramIndex": paramIndex, "newParamValue": newParamValue, "isResourceDiscoveryField": $(this).hasClass('enableResourceDiscovery') };
+            notifyAll("moduleSettingsChanged", changeInfo);
+        }
+
+    } //alert(node.data.currentOwner);
+
+
+
+
     //}
 
     //@@@@@@@@@@@@@@@@@@@@@@@@@@@
